@@ -8,14 +8,14 @@ import 'package:fuoday/core/constants/app_route_constants.dart';
 import 'package:fuoday/core/themes/app_colors.dart';
 import 'package:go_router/go_router.dart';
 
-class ProfileScreen extends StatefulWidget {
-  const ProfileScreen({super.key});
+class HomeEmployeeScreen extends StatefulWidget {
+  const HomeEmployeeScreen({super.key});
 
   @override
-  State<ProfileScreen> createState() => _ProfileScreenState();
+  State<HomeEmployeeScreen> createState() => _HomeEmployeeScreenState();
 }
 
-class _ProfileScreenState extends State<ProfileScreen> {
+class _HomeEmployeeScreenState extends State<HomeEmployeeScreen> {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
   void _openDrawer() {
@@ -27,12 +27,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
     return Scaffold(
       key: _scaffoldKey,
       appBar: KAppBar(
-        showUserInfo: true,
+        showUserInfo: false,
         onDrawerPressed: () {
           _openDrawer();
         },
         onNotificationPressed: () {},
       ),
+
       drawer: Drawer(
         backgroundColor: AppColors.secondaryColor,
         child: Column(
@@ -169,8 +170,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
           ],
         ),
       ),
-
-      body: Center(child: Text("hi profile")),
+      body: Center(child: Text("hi")),
     );
   }
 }

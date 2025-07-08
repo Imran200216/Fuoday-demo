@@ -217,7 +217,19 @@ class _AuthLoginScreenState extends State<AuthLoginScreen> {
                             KAuthFilledBtn(
                               fontSize: 10.sp,
                               text: "Login",
-                              onPressed: () {},
+                              onPressed: _sliding == 0
+                                  ? () {
+                                      // Home Employee
+                                      GoRouter.of(context).pushReplacementNamed(
+                                        AppRouteConstants.employeeBottomNav,
+                                      );
+                                    }
+                                  : () {
+                                      // Home Employee
+                                      GoRouter.of(context).pushReplacementNamed(
+                                        AppRouteConstants.recruiterBottomNav,
+                                      );
+                                    },
                               height: 22.h,
                               width: double.infinity,
                             ),

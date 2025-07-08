@@ -3,8 +3,12 @@ import 'package:fuoday/features/approval/presentation/screens/approval_screen.da
 import 'package:fuoday/features/auth/presentation/screens/auth_forget_password_screen.dart';
 import 'package:fuoday/features/auth/presentation/screens/auth_login_screen.dart';
 import 'package:fuoday/features/auth/presentation/screens/auth_otp_screen.dart';
+import 'package:fuoday/features/bottom_nav/presentation/employee_bottom_nav.dart';
+import 'package:fuoday/features/bottom_nav/presentation/recruiter_bottom_nav.dart';
+import 'package:fuoday/features/calendar/presentation/screens/calendar_screen.dart';
 import 'package:fuoday/features/feeds/presentation/screens/feeds_screen.dart';
-import 'package:fuoday/features/home/presentation/screens/home_screen.dart';
+import 'package:fuoday/features/home/presentation/screens/home_employee_screen.dart';
+import 'package:fuoday/features/home/presentation/screens/home_recruiter_screen.dart';
 import 'package:fuoday/features/leave_tracker/presentation/screens/leave_tracker_screen.dart';
 import 'package:fuoday/features/notification/presentation/screens/notification_screen.dart';
 import 'package:fuoday/features/on_boarding/presentation/screens/on_boarding_screen.dart';
@@ -57,12 +61,21 @@ final GoRouter appRouter = GoRouter(
       },
     ),
 
-    // Home screen
+    // Home Employee screen
     GoRoute(
-      path: "/home",
-      name: AppRouteConstants.home,
+      path: "/homeEmployee",
+      name: AppRouteConstants.homeEmployee,
       builder: (context, state) {
-        return HomeScreen();
+        return HomeEmployeeScreen();
+      },
+    ),
+
+    // Home Employee screen
+    GoRoute(
+      path: "/homeRecruiter",
+      name: AppRouteConstants.homeRecruiter,
+      builder: (context, state) {
+        return HomeRecruiterScreen();
       },
     ),
 
@@ -117,6 +130,33 @@ final GoRouter appRouter = GoRouter(
       name: AppRouteConstants.work,
       builder: (context, state) {
         return WorkScreen();
+      },
+    ),
+
+    // Calendar Screen
+    GoRoute(
+      path: "/calendar",
+      name: AppRouteConstants.calendar,
+      builder: (context, state) {
+        return CalendarScreen();
+      },
+    ),
+
+    // employee bottom nav
+    GoRoute(
+      path: "/employeeBottomNav",
+      name: AppRouteConstants.employeeBottomNav,
+      builder: (context, state) {
+        return EmployeeBottomNav();
+      },
+    ),
+
+    // recruiter bottom nav
+    GoRoute(
+      path: "/employeeBottomNav",
+      name: AppRouteConstants.recruiterBottomNav,
+      builder: (context, state) {
+        return RecruiterBottomNav();
       },
     ),
   ],

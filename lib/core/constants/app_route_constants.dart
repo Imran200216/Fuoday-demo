@@ -1,3 +1,5 @@
+import 'package:fuoday/features/calendar/presentation/screens/calendar_screen.dart';
+
 class AppRouteConstants {
   // Splash Screen
   static const String splash = "splash";
@@ -16,6 +18,8 @@ class AppRouteConstants {
 
   // Home Screen
   static const String home = "home";
+  static const String homeEmployee = "homeEmployee";
+  static const String homeRecruiter = "homeRecruiter";
 
   // Profile Screen
   static const String profile = "profile";
@@ -34,4 +38,11 @@ class AppRouteConstants {
 
   // Work Screen
   static const String work = "work";
+
+  // Calendar Screen
+  static const calendar = "calendar";
+
+  // Bottom Nav
+  static const employeeBottomNav = "employeeBottomNav";
+  static const recruiterBottomNav = "recruiterBottomNav";
 }
