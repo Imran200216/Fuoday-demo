@@ -53,6 +53,9 @@ dependencies:
   # cached_network_image:
   cached_network_image:
 
+  # stop watch timer
+  stop_watch_timer: ^3.2.2
+
 
 
 
@@ -74,3 +77,4 @@ flutter:
   assets:
     - assets/images/svg/
     - assets/images/png/
+    - assets/images/jpg/

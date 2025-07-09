@@ -15,6 +15,8 @@ class AppColors {
     Color(0xFF4756A5), // rgba(71, 86, 165, 1.0)
   ];
 
+  static const Color transparentColor = Colors.transparent;
+
   // Primary Color
   static const Color primaryColor = Color(0xFF8B5CB7);
 
@@ -44,4 +46,13 @@ class AppColors {
   // authBtnColor
   static const Color authBtnColor = Color(0xFF5584FF);
   static const Color authBackToLoginColor = Color(0xFFAACBED);
+
+  // Card hint color
+  static const Color cardBorderColor = Color(0xFFD9D9D9);
+  static const Color organizationalColor = Color(0xFFDFC148);
+  static const Color announcementColor = Color(0xFF6DC57A);
+
+  // check in color
+  static const Color checkInColor = Color(0xFF009F00);
+  static const Color locationOnSiteColor = Color(0xFF0043FF);
 }

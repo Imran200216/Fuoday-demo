@@ -44,7 +44,8 @@ class KAppBar extends StatelessWidget implements PreferredSizeWidget {
       backgroundColor: backgroundColor ?? AppColors.primaryColor,
       leading: IconButton(
         onPressed: onDrawerPressed ?? () {},
-        icon: Icon(Icons.list, color: iconColor ?? AppColors.secondaryColor),
+        icon:
+        Icon(Icons.menu, color: iconColor ?? AppColors.secondaryColor),
       ),
       title: showUserInfo
           ? Row(
