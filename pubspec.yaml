@@ -56,6 +56,14 @@ dependencies:
   # stop watch timer
   stop_watch_timer: ^3.2.2
 
+  # intl
+  intl: ^0.20.2
+
+  # graphite
+  graphite: ^1.2.1
+
+  # Data Table
+  data_table_2: ^2.6.0
 
 
 

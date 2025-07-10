@@ -6,10 +6,11 @@ import 'package:fuoday/features/notification/presentation/screens/notification_s
 import 'package:fuoday/features/profile/presentation/screens/profile_screen.dart';
 
 class BottomNavProvider extends ChangeNotifier {
-  int _currentIndex = 0;
+  int _currentIndex = 2;
 
   int get currentIndex => _currentIndex;
 
+  // Pages
   final List<Widget> _pages = [
     const NotificationScreen(),
 

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:fuoday/commons/widgets/k_circular_cache_image.dart';
@@ -14,7 +15,8 @@ class KHomeActivitiesCard extends StatelessWidget {
   final String count;
   final Color bgChipColor;
   final bool isBirthdayCard;
-  final List<String> avatarUrls; // 👈 New: List of image URLs
+  final List<String> avatarUrls;
+  final VoidCallback onTap;
 
   const KHomeActivitiesCard({
     super.key,
@@ -25,101 +27,111 @@ class KHomeActivitiesCard extends StatelessWidget {
     required this.count,
     required this.bgChipColor,
     this.isBirthdayCard = false,
-    this.avatarUrls = const [], // default empty
+    this.avatarUrls = const [],
+    required this.onTap, // default empty
   });
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: 180.h,
-      width: 180.w,
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(10.r),
-        color: AppColors.secondaryColor,
-        border: Border.all(color: AppColors.cardBorderColor, width: 1.w),
-      ),
-      child: Column(
-        spacing: 8.h,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        mainAxisAlignment: MainAxisAlignment.start,
-        children: [
-          // Image
-          Container(
-            height: 0.16.sh,
-            width: double.infinity,
-            decoration: BoxDecoration(
-              color: cardImgBgColor,
-              borderRadius: BorderRadius.vertical(top: Radius.circular(10.r)),
-            ),
-            child: Center(
-              child: SvgPicture.asset(
-                svgImage,
-                height: 80.h,
-                width: 80.w,
-                fit: BoxFit.cover,
+    return GestureDetector(
+      onTap: () {
+        HapticFeedback.mediumImpact();
+
+        onTap();
+      },
+      child: Container(
+        height: 180.h,
+        width: 180.w,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(10.r),
+          color: AppColors.secondaryColor,
+          border: Border.all(color: AppColors.cardBorderColor, width: 1.w),
+        ),
+        child: Column(
+          spacing: 8.h,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            // Image
+            Container(
+              height: 0.16.sh,
+              width: double.infinity,
+              decoration: BoxDecoration(
+                color: cardImgBgColor,
+                borderRadius: BorderRadius.vertical(top: Radius.circular(10.r)),
+              ),
+              child: Center(
+                child: SvgPicture.asset(
+                  svgImage,
+                  height: 80.h,
+                  width: 80.w,
+                  fit: BoxFit.cover,
+                ),
               ),
             ),
-          ),
 
-          // Title
-          Padding(
-            padding: EdgeInsets.symmetric(horizontal: 12.w),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                KText(
-                  text: cardTitle,
-                  fontWeight: FontWeight.w600,
-                  fontSize: 12.sp,
-                ),
+            // Title
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 12.w),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  KText(
+                    text: cardTitle,
+                    fontWeight: FontWeight.w600,
+                    fontSize: 12.sp,
+                  ),
 
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    // Members
-                    Chip(
-                      label: Text(members),
-                      backgroundColor: bgChipColor,
-                      labelStyle: GoogleFonts.sora(
-                        fontWeight: FontWeight.w500,
-                        color: AppColors.secondaryColor,
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      // Members
+                      Chip(
+                        label: Text(members),
+                        backgroundColor: bgChipColor,
+                        labelStyle: GoogleFonts.sora(
+                          fontWeight: FontWeight.w500,
+                          color: AppColors.secondaryColor,
+                        ),
                       ),
-                    ),
 
-                    // Avatars or Count
-                    isBirthdayCard
-                        ? SizedBox(
-                            height: 30.h,
-                            width: 70.w,
-                            child: Stack(
-                              children: avatarUrls.asMap().entries.map((entry) {
-                                int index = entry.key;
-                                String url = entry.value;
+                      // Avatars or Count
+                      isBirthdayCard
+                          ? SizedBox(
+                              height: 30.h,
+                              width: 70.w,
+                              child: Stack(
+                                children: avatarUrls.asMap().entries.map((
+                                  entry,
+                                ) {
+                                  int index = entry.key;
+                                  String url = entry.value;
 
-                                return Positioned(
-                                  left: (index * 20).w,
-                                  child: KCircularCachedImage(
-                                    imageUrl: url,
-                                    size: 20.w,
-                                  ),
-                                );
-                              }).toList(),
+                                  return Positioned(
+                                    left: (index * 20).w,
+                                    child: KCircularCachedImage(
+                                      imageUrl: url,
+                                      size: 20.w,
+                                    ),
+                                  );
+                                }).toList(),
+                              ),
+                            )
+                          : Chip(
+                              label: Text(count),
+                              backgroundColor: bgChipColor,
+                              labelStyle: GoogleFonts.sora(
+                                fontWeight: FontWeight.w500,
+                                color: AppColors.secondaryColor,
+                              ),
                             ),
-                          )
-                        : Chip(
-                            label: Text(count),
-                            backgroundColor: bgChipColor,
-                            labelStyle: GoogleFonts.sora(
-                              fontWeight: FontWeight.w500,
-                              color: AppColors.secondaryColor,
-                            ),
-                          ),
-                  ],
-                ),
-              ],
+                    ],
+                  ),
+                ],
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

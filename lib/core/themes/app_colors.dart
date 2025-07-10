@@ -54,5 +54,11 @@ class AppColors {
 
   // check in color
   static const Color checkInColor = Color(0xFF009F00);
+  static const Color checkOutColor = Colors.red;
   static const Color locationOnSiteColor = Color(0xFF0043FF);
+
+  static const Color greyColor = Color(0xFF636364);
+  static const Color chipColor = Color(0xFFD1D7E8);
+  static const Color approvedColor = Color(0xFF009F00);
+  static const Color pendingColor = Color(0xFFFFCF28);
 }

@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:fuoday/commons/widgets/k_text.dart';
@@ -6,6 +7,8 @@ import 'package:fuoday/core/constants/app_assets_constants.dart';
 import 'package:fuoday/core/themes/app_colors.dart';
 import 'package:fuoday/features/auth/presentation/widgets/k_auth_filled_btn.dart';
 import 'package:fuoday/features/home/presentation/widgets/k_home_activities_card.dart';
+import 'package:fuoday/features/home/presentation/widgets/k_home_activity_alert_dialog_box.dart';
+import 'package:intl/intl.dart';
 import 'package:stop_watch_timer/stop_watch_timer.dart';
 
 class HomeEmployeeActivities extends StatefulWidget {
@@ -16,7 +19,40 @@ class HomeEmployeeActivities extends StatefulWidget {
 }
 
 class _HomeEmployeeActivitiesState extends State<HomeEmployeeActivities> {
-  final StopWatchTimer _stopWatchTimer = StopWatchTimer();
+  final StopWatchTimer _stopWatchTimer = StopWatchTimer(
+    mode: StopWatchMode.countUp,
+  );
+
+  bool isCheckedIn = false;
+  String status = "Not Checked In";
+  String? checkInTime;
+  String? checkOutTime;
+  Timer? checkInTimer;
+  DateTime? checkInStartTime;
+  Duration elapsedTime = Duration.zero;
+
+  String _formatTime(DateTime time) {
+    return DateFormat('h:mm a').format(time);
+  }
+
+  void handleCheckIn() {
+    setState(() {
+      isCheckedIn = true;
+      status = "Checked In";
+      checkInTime = _formatTime(DateTime.now());
+    });
+    _stopWatchTimer.onStartTimer();
+  }
+
+  void handleCheckOut() {
+    setState(() {
+      isCheckedIn = false;
+      status = "Checked Out";
+      checkOutTime = _formatTime(DateTime.now());
+    });
+    _stopWatchTimer.onResetTimer(); // Reset stopwatch
+    _stopWatchTimer.onStopTimer(); // Stop the stopwatch
+  }
 
   @override
   void dispose() {
@@ -70,7 +106,6 @@ class _HomeEmployeeActivitiesState extends State<HomeEmployeeActivities> {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    // Display timer with hours, minutes, and seconds only
                     StreamBuilder<int>(
                       stream: _stopWatchTimer.rawTime,
                       initialData: 0,
@@ -92,29 +127,23 @@ class _HomeEmployeeActivitiesState extends State<HomeEmployeeActivities> {
                       },
                     ),
 
-                    // Hrs / Mins / Sec
                     Row(
-                      spacing: 12.w,
-                      crossAxisAlignment: CrossAxisAlignment.center,
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        // Hrs
                         KText(
                           text: "HRS",
                           fontWeight: FontWeight.w500,
                           fontSize: 10.sp,
                           color: AppColors.secondaryColor,
                         ),
-
-                        // Mins
+                        SizedBox(width: 12.w),
                         KText(
                           text: "MINS",
                           fontWeight: FontWeight.w500,
                           fontSize: 10.sp,
                           color: AppColors.secondaryColor,
                         ),
-
-                        // Sec
+                        SizedBox(width: 12.w),
                         KText(
                           text: "SEC",
                           fontWeight: FontWeight.w500,
@@ -126,21 +155,21 @@ class _HomeEmployeeActivitiesState extends State<HomeEmployeeActivities> {
 
                     KVerticalSpacer(height: 8.h),
 
-                    // Check In Color
                     KAuthFilledBtn(
-                      text: "Check In",
+                      text: isCheckedIn ? "Check Out" : "Check In",
                       fontSize: 8.sp,
-                      onPressed: () {},
-                      backgroundColor: AppColors.checkInColor,
+                      onPressed: isCheckedIn ? handleCheckOut : handleCheckIn,
+                      backgroundColor: isCheckedIn
+                          ? AppColors.checkOutColor
+                          : AppColors.checkInColor,
                       height: 25.h,
                       width: 100.w,
                     ),
 
                     KVerticalSpacer(height: 8.h),
 
-                    // Status Checked In
                     KText(
-                      text: "Status : Not Checked in",
+                      text: "Status : $status",
                       fontWeight: FontWeight.w500,
                       fontSize: 10.sp,
                       color: AppColors.secondaryColor,
@@ -148,7 +177,6 @@ class _HomeEmployeeActivitiesState extends State<HomeEmployeeActivities> {
 
                     KVerticalSpacer(height: 8.h),
 
-                    // Location
                     KAuthFilledBtn(
                       text: "Location onSite",
                       fontSize: 8.sp,
@@ -162,37 +190,29 @@ class _HomeEmployeeActivitiesState extends State<HomeEmployeeActivities> {
 
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         Column(
-                          spacing: 4.h,
                           children: [
                             Icon(
-                              Icons.person_outline,
+                              Icons.person_2_outlined,
                               color: AppColors.secondaryColor,
                             ),
-
-                            // Login in
                             KText(
-                              text: "9:10 AM",
+                              text: checkInTime ?? "00:00:00",
                               fontWeight: FontWeight.w500,
                               fontSize: 10.sp,
                               color: AppColors.secondaryColor,
                             ),
                           ],
                         ),
-
                         Column(
-                          spacing: 4.h,
                           children: [
                             Icon(
-                              Icons.person_outline,
+                              Icons.person_2_outlined,
                               color: AppColors.secondaryColor,
                             ),
-
-                            // Login in
                             KText(
-                              text: "9:10 AM",
+                              text: checkOutTime ?? "00:00:00",
                               fontWeight: FontWeight.w500,
                               fontSize: 10.sp,
                               color: AppColors.secondaryColor,
@@ -213,7 +233,7 @@ class _HomeEmployeeActivitiesState extends State<HomeEmployeeActivities> {
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 KText(
-                  text: "Events",
+                  text: "Events All",
                   fontWeight: FontWeight.w600,
                   fontSize: 14.sp,
                   color: AppColors.titleColor,
@@ -227,15 +247,45 @@ class _HomeEmployeeActivitiesState extends State<HomeEmployeeActivities> {
               child: Row(
                 spacing: 12.w,
                 children: [
+                  // Celebrations
                   KHomeActivitiesCard(
+                    onTap: () {
+                      showDialog(
+                        context: context,
+                        builder: (context) {
+                          return KHomeActivityAlertDialogBox(
+                            activityType: "Celebrations",
+                            date: "12/12/2025",
+                            title: "Happy Birthday Saravan 🎂",
+                            subtitle:
+                                "Wish you many more happy returns of the day.",
+                          );
+                        },
+                      );
+                    },
                     svgImage: AppAssetsConstants.birthdayImg,
                     cardImgBgColor: AppColors.primaryColor,
                     cardTitle: "Celebrations",
                     members: "15 members",
-                    count: "15+",
+                    count: "12",
                     bgChipColor: AppColors.primaryColor,
                   ),
+
+                  // Organizational Program
                   KHomeActivitiesCard(
+                    onTap: () {
+                      showDialog(
+                        context: context,
+                        builder: (context) {
+                          return KHomeActivityAlertDialogBox(
+                            activityType: "Organizational Program",
+                            date: "12/12/2025",
+                            title: "Team Meet up",
+                            subtitle: "Enzopy meet up in chennai",
+                          );
+                        },
+                      );
+                    },
                     svgImage: AppAssetsConstants.organizationalProgramImg,
                     cardImgBgColor: AppColors.organizationalColor,
                     cardTitle: "Organizational Program",
@@ -243,7 +293,22 @@ class _HomeEmployeeActivitiesState extends State<HomeEmployeeActivities> {
                     count: "15+",
                     bgChipColor: AppColors.organizationalColor,
                   ),
+
+                  // Announcement
                   KHomeActivitiesCard(
+                    onTap: () {
+                      showDialog(
+                        context: context,
+                        builder: (context) {
+                          return KHomeActivityAlertDialogBox(
+                            activityType: "Announcements",
+                            date: "12/12/2025",
+                            title: "New Joiners Announcements",
+                            subtitle: "Enzopy meet up in chennai",
+                          );
+                        },
+                      );
+                    },
                     svgImage: AppAssetsConstants.announcementsImg,
                     cardImgBgColor: AppColors.announcementColor,
                     cardTitle: "Announcement",

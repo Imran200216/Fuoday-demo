@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:fuoday/commons/widgets/k_app_%20bar.dart';
@@ -7,13 +6,10 @@ import 'package:fuoday/commons/widgets/k_drawer_list_tile.dart';
 import 'package:fuoday/commons/widgets/k_linear_gradient_bg.dart';
 import 'package:fuoday/commons/widgets/k_text.dart';
 import 'package:fuoday/commons/widgets/k_vertical_spacer.dart';
-import 'package:fuoday/core/constants/app_assets_constants.dart';
 import 'package:fuoday/core/constants/app_route_constants.dart';
 import 'package:fuoday/core/themes/app_colors.dart';
-import 'package:fuoday/features/auth/presentation/widgets/k_auth_filled_btn.dart';
 import 'package:fuoday/features/home/presentation/screens/home_employee_activities.dart';
 import 'package:fuoday/features/home/presentation/screens/home_employee_feeds.dart';
-import 'package:fuoday/features/home/presentation/widgets/k_home_activities_card.dart';
 import 'package:go_router/go_router.dart';
 import 'package:stop_watch_timer/stop_watch_timer.dart';
 
@@ -86,18 +82,17 @@ class _HomeEmployeeScreenState extends State<HomeEmployeeScreen> {
                 child: ListView(
                   scrollDirection: Axis.vertical,
                   children: [
-                    KDrawerListTile(
-                      drawerTitle: "My Zone",
-                      drawerListTileOnTap: () {},
-                      drawerLeadingIcon: Icons.person,
-                    ),
-
+                    // Teams
                     KDrawerListTile(
                       drawerTitle: "Teams",
-                      drawerListTileOnTap: () {},
+                      drawerListTileOnTap: () {
+                        // Teams Screen
+                        GoRouter.of(context).pushNamed(AppRouteConstants.teams);
+                      },
                       drawerLeadingIcon: Icons.group,
                     ),
 
+                    // Organization
                     KDrawerListTile(
                       drawerTitle: "Organization",
                       drawerListTileOnTap: () {},
@@ -111,18 +106,21 @@ class _HomeEmployeeScreenState extends State<HomeEmployeeScreen> {
                       ),
                     ),
 
+                    // Attendance
                     KDrawerListTile(
                       drawerTitle: "Attendance",
                       drawerListTileOnTap: () {},
                       drawerLeadingIcon: Icons.add_chart,
                     ),
 
+                    // Leave Tracker
                     KDrawerListTile(
                       drawerTitle: "Leave Tracker",
                       drawerListTileOnTap: () {},
                       drawerLeadingIcon: Icons.account_tree,
                     ),
 
+                    // Time Tracker
                     KDrawerListTile(
                       drawerTitle: "Time Tracker",
                       drawerListTileOnTap: () {},
@@ -143,7 +141,7 @@ class _HomeEmployeeScreenState extends State<HomeEmployeeScreen> {
                       drawerLeadingIcon: Icons.payment_rounded,
                     ),
 
-                    // Pay Slip
+                    // Performance
                     KDrawerListTile(
                       drawerTitle: "Performance",
                       drawerListTileOnTap: () {},
@@ -157,21 +155,14 @@ class _HomeEmployeeScreenState extends State<HomeEmployeeScreen> {
                       ),
                     ),
 
-                    // Pay Slip
-                    KDrawerListTile(
-                      drawerTitle: "Settings",
-                      drawerListTileOnTap: () {},
-                      drawerLeadingIcon: Icons.settings,
-                    ),
-
-                    // Pay Slip
+                    // Support
                     KDrawerListTile(
                       drawerTitle: "Support",
                       drawerListTileOnTap: () {},
                       drawerLeadingIcon: Icons.support_agent,
                     ),
 
-                    // Pay Slip
+                    // Logout
                     KDrawerListTile(
                       drawerTitle: "Logout",
                       drawerListTileOnTap: () {
@@ -264,7 +255,7 @@ class _HomeEmployeeScreenState extends State<HomeEmployeeScreen> {
                             dividerColor: AppColors.transparentColor,
                             indicator: BoxDecoration(
                               color: AppColors.primaryColor,
-                              borderRadius: BorderRadius.circular(25),
+                              borderRadius: BorderRadius.circular(15),
                             ),
                             indicatorColor: AppColors.transparentColor,
                             indicatorSize: TabBarIndicatorSize.tab,
@@ -279,8 +270,26 @@ class _HomeEmployeeScreenState extends State<HomeEmployeeScreen> {
                               fontWeight: FontWeight.normal,
                             ),
                             tabs: const [
-                              Tab(text: 'Home'),
-                              Tab(text: 'Feeds'),
+                              Tab(
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Icon(Icons.local_activity),
+                                    SizedBox(width: 8),
+                                    Text("Activity"),
+                                  ],
+                                ),
+                              ),
+                              Tab(
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Icon(Icons.feed),
+                                    SizedBox(width: 8),
+                                    Text("Feeds"),
+                                  ],
+                                ),
+                              ),
                             ],
                           ),
                         ),
@@ -291,7 +300,7 @@ class _HomeEmployeeScreenState extends State<HomeEmployeeScreen> {
                             children: [
                               HomeEmployeeActivities(),
 
-                              Center(child: Text("feeds ")),
+                              HomeEmployeeFeeds(),
                             ],
                           ),
                         ),
