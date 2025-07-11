@@ -1,5 +1,10 @@
 import 'package:fuoday/core/constants/app_route_constants.dart';
 import 'package:fuoday/features/approval/presentation/screens/approval_screen.dart';
+import 'package:fuoday/features/attendance/presentation/screens/attendance_absent_days_details_screen.dart';
+import 'package:fuoday/features/attendance/presentation/screens/attendance_early_arrivals_details_screen.dart';
+import 'package:fuoday/features/attendance/presentation/screens/attendance_late_arrival_details_screen.dart';
+import 'package:fuoday/features/attendance/presentation/screens/attendance_punctual_arrival_details_screen.dart';
+import 'package:fuoday/features/attendance/presentation/screens/attendance_screen.dart';
 import 'package:fuoday/features/auth/presentation/screens/auth_forget_password_screen.dart';
 import 'package:fuoday/features/auth/presentation/screens/auth_login_screen.dart';
 import 'package:fuoday/features/auth/presentation/screens/auth_otp_screen.dart';
@@ -177,6 +182,51 @@ final GoRouter appRouter = GoRouter(
       name: AppRouteConstants.organizations,
       builder: (context, state) {
         return OrganizationsScreen();
+      },
+    ),
+
+    // Attendance Screen
+    GoRoute(
+      path: "/attendance",
+      name: AppRouteConstants.attendance,
+      builder: (context, state) {
+        return AttendanceScreen();
+      },
+    ),
+
+    // Attendance Punctual Arrival Details Screen
+    GoRoute(
+      path: "/attendancePunctualArrivalsDetails",
+      name: AppRouteConstants.attendancePunctualArrivalsDetails,
+      builder: (context, state) {
+        return AttendancePunctualArrivalDetailsScreen();
+      },
+    ),
+
+    // Attendance Absent Details
+    GoRoute(
+      path: "/attendanceAbsentDetails",
+      name: AppRouteConstants.attendanceAbsentDetails,
+      builder: (context, state) {
+        return AttendanceAbsentDaysDetailsScreen();
+      },
+    ),
+
+    // Attendance Late Arrival Details
+    GoRoute(
+      path: "/attendanceLateArrivalDetails",
+      name: AppRouteConstants.attendanceLateArrivalDetails,
+      builder: (context, state) {
+        return AttendanceLateArrivalDetailsScreen();
+      },
+    ),
+
+    // Attendance Early Arrival Details
+    GoRoute(
+      path: "/attendanceEarlyArrivalDetails",
+      name: AppRouteConstants.attendanceEarlyArrivalDetails,
+      builder: (context, state) {
+        return AttendanceEarlyArrivalsDetailsScreen();
       },
     ),
   ],

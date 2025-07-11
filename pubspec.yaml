@@ -71,6 +71,12 @@ dependencies:
   # smooth page indicator
   smooth_page_indicator: ^1.2.1
 
+  # flutter expandable fab
+  flutter_expandable_fab: ^2.5.2
+
+  # fl chart
+  fl_chart: ^1.0.0
+
 
 
 dev_dependencies:

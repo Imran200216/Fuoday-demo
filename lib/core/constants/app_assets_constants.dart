@@ -11,6 +11,8 @@ class AppAssetsConstants {
       "assets/images/svg/organizational-program.svg";
   static const String announcementsImg = "assets/images/svg/announcements.svg";
   static const String fuodayLogoImg = "assets/images/png/fuoday-logo.png";
+  static const String attendanceImg = "assets/images/svg/attendance-timing.svg";
+  static const String sunImg = "assets/images/svg/sun.svg";
 
   // Icons
 }

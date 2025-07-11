@@ -114,7 +114,12 @@ class _HomeEmployeeScreenState extends State<HomeEmployeeScreen> {
                     // Attendance
                     KDrawerListTile(
                       drawerTitle: "Attendance",
-                      drawerListTileOnTap: () {},
+                      drawerListTileOnTap: () {
+                        // Attendance Screen
+                        GoRouter.of(
+                          context,
+                        ).pushNamed(AppRouteConstants.attendance);
+                      },
                       drawerLeadingIcon: Icons.add_chart,
                     ),
 

@@ -10,6 +10,12 @@ class AppColors {
     Color(0xCC4D0CC5),
   ];
 
+  static const List<Color> cardGradientColor = [
+    Color(0xFFD1D7E8),
+    Color(0xFFEFF1F7),
+    Colors.white,
+  ];
+
   static const List<Color> recruiterGradientColor = [
     Color(0xFF2B57F1), // rgba(43, 87, 241, 1.0)
     Color(0xFF4756A5), // rgba(71, 86, 165, 1.0)
@@ -61,4 +67,7 @@ class AppColors {
   static const Color chipColor = Color(0xFFD1D7E8);
   static const Color approvedColor = Color(0xFF009F00);
   static const Color pendingColor = Color(0xFFFFCF28);
+
+  // attendance card light color
+  static const Color attendanceCardTextLightColor = Color(0xFFC6CEE4);
 }
