@@ -12,6 +12,7 @@ import 'package:fuoday/features/home/presentation/screens/home_recruiter_screen.
 import 'package:fuoday/features/leave_tracker/presentation/screens/leave_tracker_screen.dart';
 import 'package:fuoday/features/notification/presentation/screens/notification_screen.dart';
 import 'package:fuoday/features/on_boarding/presentation/screens/on_boarding_screen.dart';
+import 'package:fuoday/features/organizations/presentation/screens/organizations_screen.dart';
 import 'package:fuoday/features/profile/presentation/screens/profile_screen.dart';
 import 'package:fuoday/features/splash/presentation/screens/splash_screen.dart';
 import 'package:fuoday/features/teams/presentation/screens/teams_screen.dart';
@@ -148,7 +149,6 @@ final GoRouter appRouter = GoRouter(
       path: "/employeeBottomNav",
       name: AppRouteConstants.employeeBottomNav,
       builder: (context, state) {
-
         return EmployeeBottomNav();
       },
     ),
@@ -168,6 +168,15 @@ final GoRouter appRouter = GoRouter(
       name: AppRouteConstants.teams,
       builder: (context, state) {
         return TeamsScreen();
+      },
+    ),
+
+    // Organization Screen
+    GoRoute(
+      path: "/organizations",
+      name: AppRouteConstants.organizations,
+      builder: (context, state) {
+        return OrganizationsScreen();
       },
     ),
   ],

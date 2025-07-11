@@ -10,6 +10,7 @@ class AppAssetsConstants {
   static const String organizationalProgramImg =
       "assets/images/svg/organizational-program.svg";
   static const String announcementsImg = "assets/images/svg/announcements.svg";
+  static const String fuodayLogoImg = "assets/images/png/fuoday-logo.png";
 
   // Icons
 }

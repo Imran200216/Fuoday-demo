@@ -47,5 +47,8 @@ class AppRouteConstants {
   static const recruiterBottomNav = "recruiterBottomNav";
 
   // Teams
- static const teams = "teams";
+  static const teams = "teams";
+
+  // organizations
+  static const organizations = "organizations";
 }

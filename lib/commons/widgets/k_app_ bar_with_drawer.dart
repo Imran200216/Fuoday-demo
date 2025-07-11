@@ -5,7 +5,7 @@ import 'package:fuoday/commons/widgets/k_circular_cache_image.dart';
 import 'package:fuoday/commons/widgets/k_text.dart';
 import 'package:fuoday/core/themes/app_colors.dart';
 
-class KAppBar extends StatelessWidget implements PreferredSizeWidget {
+class KAppBarWithDrawer extends StatelessWidget implements PreferredSizeWidget {
   final VoidCallback onDrawerPressed;
   final Color? backgroundColor;
   final Color? iconColor;
@@ -15,7 +15,7 @@ class KAppBar extends StatelessWidget implements PreferredSizeWidget {
   final String? userDesignation;
   final bool showUserInfo; // New boolean parameter
 
-  const KAppBar({
+  const KAppBarWithDrawer({
     super.key,
     required this.onDrawerPressed,
     this.backgroundColor,

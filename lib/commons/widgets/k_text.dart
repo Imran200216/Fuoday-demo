@@ -6,8 +6,9 @@ class KText extends StatelessWidget {
   final TextAlign? textAlign;
   final FontWeight fontWeight;
   final double fontSize;
-
   final Color? color;
+  final bool isUnderline;
+  final Color? underlineColor;
 
   const KText({
     super.key,
@@ -15,8 +16,9 @@ class KText extends StatelessWidget {
     this.textAlign,
     required this.fontWeight,
     required this.fontSize,
-
     this.color,
+    this.isUnderline = false,
+    this.underlineColor,
   });
 
   @override
@@ -28,8 +30,9 @@ class KText extends StatelessWidget {
       style: GoogleFonts.sora(
         fontWeight: fontWeight,
         fontSize: fontSize,
-
         color: color,
+        decoration: isUnderline ? TextDecoration.underline : null,
+        decorationColor: underlineColor,
       ),
     );
   }
