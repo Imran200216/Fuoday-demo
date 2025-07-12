@@ -26,8 +26,8 @@ class OnBoardingScreen extends StatelessWidget {
 
             KSvg(
               svgPath: AppAssetsConstants.splashLogo,
-              height: 100.h,
-              width: 100.w,
+              height: 140.h,
+              width: 140.w,
               boxFit: BoxFit.cover,
             ),
 
@@ -44,13 +44,14 @@ class OnBoardingScreen extends StatelessWidget {
                     text:
                         "Welcome to FUODay! Streamline your day and track everything in one place.",
                     fontWeight: FontWeight.w500,
-                    fontSize: 14.sp,
+                    fontSize: 13.sp,
                     color: AppColors.secondaryColor,
                   ),
 
                   // Get Stated Btn
                   OnBoardingBtn(
                     btnText: "Get Started",
+                    btnTextFontSize: 13.sp,
                     bgColor: AppColors.onBoardingBgColor,
                     textColor: AppColors.onBoardingTextColor,
                     onTap: () {
@@ -59,8 +60,8 @@ class OnBoardingScreen extends StatelessWidget {
                         context,
                       ).pushReplacementNamed(AppRouteConstants.login);
                     },
-                    btnHeight: 42.h,
-                    btnWidth: 200.w,
+                    btnHeight: 36.h,
+                    btnWidth: double.infinity,
                     borderRadius: 12.r,
                   ),
 

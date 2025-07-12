@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:fuoday/commons/widgets/k_vertical_spacer.dart';
+import 'package:fuoday/core/constants/app_route_constants.dart';
 import 'package:fuoday/core/themes/app_colors.dart';
 import 'package:fuoday/features/attendance/presentation/widgets/attendance_card.dart';
 import 'package:fuoday/features/attendance/presentation/widgets/attendance_welcoming_card.dart';
+import 'package:go_router/go_router.dart';
 
 class AttendanceOverview extends StatelessWidget {
   const AttendanceOverview({super.key});
@@ -21,7 +23,12 @@ class AttendanceOverview extends StatelessWidget {
             attendanceCardTimeMessage: "Good Morning",
             attendanceDay: "Today",
             attendanceDate: "26 July 2025",
-            onViewAttendance: () {},
+            onViewAttendance: () {
+              // Total Attendance View Screen
+              GoRouter.of(
+                context,
+              ).pushNamed(AppRouteConstants.totalAttendanceView);
+            },
           ),
 
           KVerticalSpacer(height: 20.h),

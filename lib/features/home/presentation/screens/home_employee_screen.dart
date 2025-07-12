@@ -126,7 +126,12 @@ class _HomeEmployeeScreenState extends State<HomeEmployeeScreen> {
                     // Leave Tracker
                     KDrawerListTile(
                       drawerTitle: "Leave Tracker",
-                      drawerListTileOnTap: () {},
+                      drawerListTileOnTap: () {
+                        // Leave Tracker screen
+                        // GoRouter.of(
+                        //   context,
+                        // ).pushNamed(AppRouteConstants.leaveTracker);
+                      },
                       drawerLeadingIcon: Icons.account_tree,
                     ),
 
@@ -168,7 +173,12 @@ class _HomeEmployeeScreenState extends State<HomeEmployeeScreen> {
                     // Support
                     KDrawerListTile(
                       drawerTitle: "Support",
-                      drawerListTileOnTap: () {},
+                      drawerListTileOnTap: () {
+                        // Support Screen
+                        GoRouter.of(
+                          context,
+                        ).pushNamed(AppRouteConstants.support);
+                      },
                       drawerLeadingIcon: Icons.support_agent,
                     ),
 

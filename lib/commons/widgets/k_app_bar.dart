@@ -28,7 +28,7 @@ class KAppBar extends StatelessWidget implements PreferredSizeWidget {
       title: Text(title),
       titleTextStyle: GoogleFonts.sora(
         color: AppColors.secondaryColor,
-        fontSize: 14.sp,
+        fontSize: 13.sp,
         fontWeight: FontWeight.w600,
       ),
       leading: IconButton(

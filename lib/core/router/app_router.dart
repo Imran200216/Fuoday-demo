@@ -5,6 +5,7 @@ import 'package:fuoday/features/attendance/presentation/screens/attendance_early
 import 'package:fuoday/features/attendance/presentation/screens/attendance_late_arrival_details_screen.dart';
 import 'package:fuoday/features/attendance/presentation/screens/attendance_punctual_arrival_details_screen.dart';
 import 'package:fuoday/features/attendance/presentation/screens/attendance_screen.dart';
+import 'package:fuoday/features/attendance/presentation/screens/total_attendance_view_screen.dart';
 import 'package:fuoday/features/auth/presentation/screens/auth_forget_password_screen.dart';
 import 'package:fuoday/features/auth/presentation/screens/auth_login_screen.dart';
 import 'package:fuoday/features/auth/presentation/screens/auth_otp_screen.dart';
@@ -20,6 +21,7 @@ import 'package:fuoday/features/on_boarding/presentation/screens/on_boarding_scr
 import 'package:fuoday/features/organizations/presentation/screens/organizations_screen.dart';
 import 'package:fuoday/features/profile/presentation/screens/profile_screen.dart';
 import 'package:fuoday/features/splash/presentation/screens/splash_screen.dart';
+import 'package:fuoday/features/support/persentation/screens/support_screen.dart';
 import 'package:fuoday/features/teams/presentation/screens/teams_screen.dart';
 import 'package:fuoday/features/work/presentation/screens/work_screen.dart';
 import 'package:go_router/go_router.dart';
@@ -227,6 +229,24 @@ final GoRouter appRouter = GoRouter(
       name: AppRouteConstants.attendanceEarlyArrivalDetails,
       builder: (context, state) {
         return AttendanceEarlyArrivalsDetailsScreen();
+      },
+    ),
+
+    // Total Attendance View
+    GoRoute(
+      path: "/totalAttendanceView",
+      name: AppRouteConstants.totalAttendanceView,
+      builder: (context, state) {
+        return TotalAttendanceViewScreen();
+      },
+    ),
+
+    // Support Screen
+    GoRoute(
+      path: "/support",
+      name: AppRouteConstants.support,
+      builder: (context, state) {
+        return SupportScreen();
       },
     ),
   ],

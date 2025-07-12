@@ -99,12 +99,6 @@ class _LeaveTrackerScreenState extends State<LeaveTrackerScreen> {
                   ),
 
                   KDrawerListTile(
-                    drawerTitle: "Leave Tracker",
-                    drawerListTileOnTap: () {},
-                    drawerLeadingIcon: Icons.account_tree,
-                  ),
-
-                  KDrawerListTile(
                     drawerTitle: "Time Tracker",
                     drawerListTileOnTap: () {},
                     drawerLeadingIcon: Icons.timelapse,

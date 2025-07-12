@@ -10,6 +10,7 @@ class OnBoardingBtn extends StatelessWidget {
   final double btnWidth;
   final bool isLoading;
   final double borderRadius;
+  final double btnTextFontSize;
 
   const OnBoardingBtn({
     super.key,
@@ -21,7 +22,7 @@ class OnBoardingBtn extends StatelessWidget {
     required this.btnWidth,
     required this.borderRadius,
 
-    this.isLoading = false,
+    this.isLoading = false, required this.btnTextFontSize,
   });
 
   @override
@@ -52,7 +53,7 @@ class OnBoardingBtn extends StatelessWidget {
                 style: GoogleFonts.sora(
                   color: textColor,
                   fontWeight: FontWeight.bold,
-                  fontSize: 16,
+                  fontSize: btnTextFontSize,
                 ),
               ),
       ),

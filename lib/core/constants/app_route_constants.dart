@@ -55,6 +55,12 @@ class AppRouteConstants {
   static const String attendancePunctualArrivalsDetails =
       "attendancePunctualArrivalDetails";
   static const String attendanceAbsentDetails = " attendanceAbsentDetails";
-  static const String attendanceLateArrivalDetails = "attendanceLateArrivalDetails";
-  static const String attendanceEarlyArrivalDetails = "attendanceEarlyArrivalDetails";
+  static const String attendanceLateArrivalDetails =
+      "attendanceLateArrivalDetails";
+  static const String attendanceEarlyArrivalDetails =
+      "attendanceEarlyArrivalDetails";
+  static const String totalAttendanceView = "totalAttendanceView";
+
+  // support
+  static const String support = "support";
 }

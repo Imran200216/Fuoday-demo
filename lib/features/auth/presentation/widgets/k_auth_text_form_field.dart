@@ -10,6 +10,9 @@ class KAuthTextFormField extends StatelessWidget {
   final bool obscureText;
   final TextInputType keyboardType;
   final String? Function(String?)? validator;
+  final VoidCallback? onTap;
+  final int? maxLines;
+  final bool isReadOnly;
 
   const KAuthTextFormField({
     super.key,
@@ -19,11 +22,17 @@ class KAuthTextFormField extends StatelessWidget {
     this.obscureText = false,
     this.keyboardType = TextInputType.text,
     this.validator,
+    this.onTap,
+    this.maxLines,
+    this.isReadOnly = false, // default false
   });
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      onTap: onTap,
+      readOnly: isReadOnly,
+      maxLines: maxLines ?? 1,
       validator: validator,
       style: GoogleFonts.sora(
         fontSize: 12.sp,
@@ -41,20 +50,16 @@ class KAuthTextFormField extends StatelessWidget {
           borderSide: BorderSide(color: AppColors.authUnderlineBorderColor),
         ),
         focusedBorder: UnderlineInputBorder(
-          borderSide: BorderSide(color: Colors.blue, width: 2.w),
+          borderSide: BorderSide(color: AppColors.primaryColor, width: 2.w),
         ),
         errorBorder: UnderlineInputBorder(
-          borderSide: BorderSide(color: Colors.red, width: 1.w),
+          borderSide: BorderSide(color: AppColors.checkOutColor, width: 1.w),
         ),
         focusedErrorBorder: UnderlineInputBorder(
-          borderSide: BorderSide(color: Colors.red, width: 2.w),
+          borderSide: BorderSide(color: AppColors.checkOutColor, width: 2.w),
         ),
-        errorStyle: GoogleFonts.sora(
-          fontSize: 10.sp,
-          color: Colors.red,
-        ),
+        errorStyle: GoogleFonts.sora(fontSize: 10.sp, color: Colors.red),
       ),
     );
   }
 }
-

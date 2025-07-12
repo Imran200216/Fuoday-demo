@@ -19,153 +19,155 @@ class AuthOtpScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: true,
       body: KLinearGradientBg(
         gradientColor: AppColors.employeeGradientColor,
-        child: Container(
-          margin: EdgeInsets.only(top: 40.h),
-          child: SingleChildScrollView(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                // App Logo
-                KSvg(
-                  svgPath: AppAssetsConstants.splashLogo,
-                  height: 80.h,
-                  width: 80.w,
-                  boxFit: BoxFit.cover,
+        child: SafeArea(
+          child: LayoutBuilder(
+            builder: (context, constraints) {
+              return SingleChildScrollView(
+                padding: EdgeInsets.only(
+                  bottom: MediaQuery.of(context).viewInsets.bottom,
                 ),
-
-                Expanded(
-                  child: Container(
-                    padding: EdgeInsets.symmetric(horizontal: 20.w),
-                    width: double.infinity,
-                    decoration: BoxDecoration(
-                      color: AppColors.authBgColor,
-                      borderRadius: BorderRadius.circular(30.r),
-                    ),
+                child: ConstrainedBox(
+                  constraints: BoxConstraints(minHeight: constraints.maxHeight),
+                  child: IntrinsicHeight(
                     child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      mainAxisAlignment: MainAxisAlignment.start,
                       children: [
-                        // Start your experience
-                        Padding(
-                          padding: EdgeInsets.only(top: 30),
-                          child: KText(
-                            text: "Start Your Experience",
-                            fontWeight: FontWeight.w500,
-                            fontSize: 16.sp,
-                          ),
-                        ),
+                        SizedBox(height: 40.h),
 
-                        KVerticalSpacer(height: 10.h),
-
-                        // Login Now
-                        KText(
-                          text: "Login Now",
-                          fontWeight: FontWeight.w500,
-                          color: AppColors.subTitleColor,
-                          fontSize: 14.sp,
-                        ),
-
-                        KVerticalSpacer(height: 20.h),
-
-                        // Otp path
+                        // App Logo
                         KSvg(
-                          svgPath: AppAssetsConstants.otpImg,
-                          height: 0.2.sh,
-                          boxFit: BoxFit.contain,
+                          svgPath: AppAssetsConstants.splashLogo,
+                          height: 100.h,
+                          width: 100.w,
+                          boxFit: BoxFit.cover,
                         ),
 
-                        KVerticalSpacer(height: 30.h),
-
-                        // Verification Code Text
-                        KText(
-                          text: "Enter Verification Code",
-                          fontWeight: FontWeight.w600,
-                          color: AppColors.titleColor,
-                          fontSize: 16.sp,
-                        ),
-
-                        KVerticalSpacer(height: 20.h),
-
-                        // Verification Code Description
-                        KText(
-                          text: "We Sent a code to yoga******@gmail.com",
-                          fontWeight: FontWeight.w400,
-                          color: AppColors.titleColor,
-                          fontSize: 12.sp,
-                        ),
-
-                        KVerticalSpacer(height: 20.h),
-
-                        // Otp
-                        Pinput(
-                          length: 6,
-                          keyboardType: TextInputType.number,
-                          autofocus: true,
-                          obscureText: true,
-                          defaultPinTheme: PinTheme(
-                            width: 56,
-                            height: 56,
-                            textStyle: GoogleFonts.sora(
-                              fontSize: 20,
-                              color: Colors.black, // Text color
-                              fontWeight: FontWeight.w600,
-                            ),
-                            decoration: BoxDecoration(
-                              color: Colors.grey[100],
-                              // Background color
-                              border: Border.all(color: Colors.grey[300]!),
-                              // Border color
-                              borderRadius: BorderRadius.circular(10),
+                        Container(
+                          padding: EdgeInsets.symmetric(horizontal: 20.w),
+                          width: double.infinity,
+                          decoration: BoxDecoration(
+                            color: AppColors.authBgColor,
+                            borderRadius: BorderRadius.vertical(
+                              top: Radius.circular(30.r),
                             ),
                           ),
-                        ),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              KVerticalSpacer(height: 30.h),
 
-                        KVerticalSpacer(height: 20.h),
+                              KText(
+                                text: "Start Your Experience",
+                                fontWeight: FontWeight.w500,
+                                fontSize: 16.sp,
+                              ),
 
-                        // Verify Btn
-                        KAuthFilledBtn(
-                          backgroundColor: AppColors.authBtnColor,
-                          fontSize: 10.sp,
-                          text: "Verify",
-                          onPressed: () {
-                            // Login
-                            GoRouter.of(
-                              context,
-                            ).pushNamed(AppRouteConstants.login);
-                          },
-                          height: 22.h,
-                          width: double.infinity,
-                        ),
+                              KVerticalSpacer(height: 10.h),
 
-                        KVerticalSpacer(height: 20.h),
+                              KText(
+                                text: "Login Now",
+                                fontWeight: FontWeight.w500,
+                                color: AppColors.subTitleColor,
+                                fontSize: 14.sp,
+                              ),
 
-                        // Text
-                        KText(
-                          text: "Don’t receive OTP code ?",
-                          fontWeight: FontWeight.w500,
-                          fontSize: 10.sp,
-                          color: AppColors.textBtnColor,
-                        ),
+                              KVerticalSpacer(height: 20.h),
 
-                        // Text Btn
-                        KAuthTextBtn(
-                          onTap: () {},
-                          text: "Resend code now",
-                          fontWeight: FontWeight.w600,
-                          fontSize: 12.sp,
-                          textAlign: TextAlign.center,
-                          textColor: AppColors.textBtnColor,
-                          showUnderline: true,
+                              KSvg(
+                                svgPath: AppAssetsConstants.otpImg,
+                                height: 0.2.sh,
+                                boxFit: BoxFit.contain,
+                              ),
+
+                              KVerticalSpacer(height: 30.h),
+
+                              KText(
+                                text: "Enter Verification Code",
+                                fontWeight: FontWeight.w600,
+                                color: AppColors.titleColor,
+                                fontSize: 16.sp,
+                              ),
+
+                              KVerticalSpacer(height: 20.h),
+
+                              KText(
+                                text: "We Sent a code to yoga******@gmail.com",
+                                fontWeight: FontWeight.w400,
+                                color: AppColors.titleColor,
+                                fontSize: 12.sp,
+                              ),
+
+                              KVerticalSpacer(height: 20.h),
+
+                              Pinput(
+                                length: 6,
+                                keyboardType: TextInputType.number,
+                                autofocus: true,
+                                obscureText: true,
+                                defaultPinTheme: PinTheme(
+                                  width: 56,
+                                  height: 56,
+                                  textStyle: GoogleFonts.sora(
+                                    fontSize: 20,
+                                    color: Colors.black,
+                                    fontWeight: FontWeight.w600,
+                                  ),
+                                  decoration: BoxDecoration(
+                                    color: Colors.grey[100],
+                                    border: Border.all(
+                                      color: Colors.grey[300]!,
+                                    ),
+                                    borderRadius: BorderRadius.circular(10),
+                                  ),
+                                ),
+                              ),
+
+                              KVerticalSpacer(height: 20.h),
+
+                              KAuthFilledBtn(
+                                backgroundColor: AppColors.primaryColor,
+                                fontSize: 10.sp,
+                                text: "Verify",
+                                onPressed: () {
+                                  GoRouter.of(
+                                    context,
+                                  ).pushNamed(AppRouteConstants.login);
+                                },
+                                height: 22.h,
+                                width: double.infinity,
+                              ),
+
+                              KVerticalSpacer(height: 20.h),
+
+                              KText(
+                                text: "Don’t receive OTP code ?",
+                                fontWeight: FontWeight.w500,
+                                fontSize: 10.sp,
+                                color: AppColors.textBtnColor,
+                              ),
+
+                              KAuthTextBtn(
+                                onTap: () {},
+                                text: "Resend code now",
+                                fontWeight: FontWeight.w600,
+                                fontSize: 12.sp,
+                                textAlign: TextAlign.center,
+                                textColor: AppColors.textBtnColor,
+                                showUnderline: true,
+                              ),
+
+                              KVerticalSpacer(height: 20.h),
+                            ],
+                          ),
                         ),
                       ],
                     ),
                   ),
                 ),
-              ],
-            ),
+              );
+            },
           ),
         ),
       ),

@@ -39,7 +39,6 @@ dependencies:
   # hive
   hive: ^2.2.3
 
-
   # flutter secure storage
   flutter_secure_storage: ^9.2.4
 
@@ -76,6 +75,12 @@ dependencies:
 
   # fl chart
   fl_chart: ^1.0.0
+
+  # month picker dialog
+  month_picker_dialog: ^6.3.0
+
+  # drop down button 2
+  dropdown_button2: ^2.3.9
 
 
 

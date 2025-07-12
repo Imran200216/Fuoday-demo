@@ -125,12 +125,12 @@ class _TeamsScreenState extends State<TeamsScreen> {
                             indicatorSize: TabBarIndicatorSize.tab,
                             unselectedLabelColor: AppColors.primaryColor,
                             labelColor: AppColors.secondaryColor,
-                            labelStyle: TextStyle(
-                              fontSize: 16,
-                              fontWeight: FontWeight.bold,
+                            labelStyle: GoogleFonts.sora(
+                              fontSize: 12.sp,
+                              fontWeight: FontWeight.w600,
                             ),
-                            unselectedLabelStyle: TextStyle(
-                              fontSize: 16,
+                            unselectedLabelStyle: GoogleFonts.sora(
+                              fontSize: 12.sp,
                               fontWeight: FontWeight.normal,
                             ),
                             tabs: const [
