@@ -4,8 +4,10 @@ import 'package:fuoday/commons/widgets/k_app_%20bar_with_drawer.dart';
 import 'package:fuoday/commons/widgets/k_circular_cache_image.dart';
 import 'package:fuoday/commons/widgets/k_text.dart';
 import 'package:fuoday/commons/widgets/k_vertical_spacer.dart';
+import 'package:fuoday/core/constants/app_route_constants.dart';
 import 'package:fuoday/core/themes/app_colors.dart';
 import 'package:fuoday/features/profile/presentation/widgets/profile_list_tile.dart';
+import 'package:go_router/go_router.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
@@ -105,35 +107,60 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
               // Personal Details
               ProfileListTile(
-                onTap: () {},
+                onTap: () {
+                  // Personal Details Screen
+                  GoRouter.of(
+                    context,
+                  ).pushNamed(AppRouteConstants.profilePersonalDetails);
+                },
                 leadingIcon: Icons.person,
                 title: "Personal Details",
               ),
 
               // Employment Details
               ProfileListTile(
-                onTap: () {},
+                onTap: () {
+                  // Employment Details Screen
+                  GoRouter.of(
+                    context,
+                  ).pushNamed(AppRouteConstants.profileEmploymentDetails);
+                },
                 leadingIcon: Icons.person,
                 title: "Employment Details",
               ),
 
               // Educational Details
               ProfileListTile(
-                onTap: () {},
+                onTap: () {
+                  // Educational Details
+                  GoRouter.of(
+                    context,
+                  ).pushNamed(AppRouteConstants.profileEducationalBackground);
+                },
                 leadingIcon: Icons.school,
                 title: "Educational Background",
               ),
 
               // On boarding
               ProfileListTile(
-                onTap: () {},
+                onTap: () {
+                  // On Boarding
+                  GoRouter.of(
+                    context,
+                  ).pushNamed(AppRouteConstants.profileOnBoarding);
+                },
                 leadingIcon: Icons.departure_board,
                 title: "On boarding",
               ),
 
               // Professional Experience
               ProfileListTile(
-                onTap: () {},
+                onTap: () {
+                  // Professional Experience
+                  GoRouter.of(
+                    context,
+                  ).pushNamed(AppRouteConstants.profileProfessionalExperience);
+                },
                 leadingIcon: Icons.scale,
                 title: "Professional Experience",
               ),

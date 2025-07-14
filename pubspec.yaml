@@ -82,6 +82,9 @@ dependencies:
   # drop down button 2
   dropdown_button2: ^2.3.9
 
+  # dotted border
+  dotted_border: ^3.1.0
+
 
 
 dev_dependencies:

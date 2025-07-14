@@ -21,6 +21,13 @@ class AppRouteConstants {
 
   // Profile Screen
   static const String profile = "profile";
+  static const String profileEducationalBackground =
+      "profileEducationalBackground";
+  static const String profileEmploymentDetails = "profileEmploymentDetails";
+  static const String profileOnBoarding = "profileOnBoarding";
+  static const String profilePersonalDetails = "profilePersonalDetails";
+  static const String profileProfessionalExperience =
+      "profileProfessionalExperience";
 
   // Approval screen
   static const String approval = "approval";
@@ -50,7 +57,7 @@ class AppRouteConstants {
   // organizations
   static const String organizations = "organizations";
 
-  // attendance
+  // attendance Screen
   static const String attendance = "attendance";
   static const String attendancePunctualArrivalsDetails =
       "attendancePunctualArrivalDetails";

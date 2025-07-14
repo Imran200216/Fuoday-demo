@@ -19,6 +19,11 @@ import 'package:fuoday/features/leave_tracker/presentation/screens/leave_tracker
 import 'package:fuoday/features/notification/presentation/screens/notification_screen.dart';
 import 'package:fuoday/features/on_boarding/presentation/screens/on_boarding_screen.dart';
 import 'package:fuoday/features/organizations/presentation/screens/organizations_screen.dart';
+import 'package:fuoday/features/profile/presentation/screens/profile_educational_background_screen.dart';
+import 'package:fuoday/features/profile/presentation/screens/profile_employment_details_screen.dart';
+import 'package:fuoday/features/profile/presentation/screens/profile_on_boarding_screen.dart';
+import 'package:fuoday/features/profile/presentation/screens/profile_personal_details_screen.dart';
+import 'package:fuoday/features/profile/presentation/screens/profile_professional_experience_screen.dart';
 import 'package:fuoday/features/profile/presentation/screens/profile_screen.dart';
 import 'package:fuoday/features/splash/presentation/screens/splash_screen.dart';
 import 'package:fuoday/features/support/persentation/screens/support_screen.dart';
@@ -94,6 +99,51 @@ final GoRouter appRouter = GoRouter(
       name: AppRouteConstants.profile,
       builder: (context, state) {
         return ProfileScreen();
+      },
+    ),
+
+    // Profile educational background screen
+    GoRoute(
+      path: "/profileEducationalBackground",
+      name: AppRouteConstants.profileEducationalBackground,
+      builder: (context, state) {
+        return ProfileEducationalBackgroundScreen();
+      },
+    ),
+
+    // Profile Employment Details Screen
+    GoRoute(
+      path: "/profileEmploymentDetails",
+      name: AppRouteConstants.profileEmploymentDetails,
+      builder: (context, state) {
+        return ProfileEmploymentDetailsScreen();
+      },
+    ),
+
+    // Profile On Boarding Screen
+    GoRoute(
+      path: "/profileOnBoarding",
+      name: AppRouteConstants.profileOnBoarding,
+      builder: (context, state) {
+        return ProfileOnBoardingScreen();
+      },
+    ),
+
+    // Profile Personal Details Screen
+    GoRoute(
+      path: "/profilePersonalDetails",
+      name: AppRouteConstants.profilePersonalDetails,
+      builder: (context, state) {
+        return ProfilePersonalDetailsScreen();
+      },
+    ),
+
+    // Profile Professional Experience Screen
+    GoRoute(
+      path: "/profileProfessionalExperience",
+      name: AppRouteConstants.profileProfessionalExperience,
+      builder: (context, state) {
+        return ProfileProfessionalExperienceScreen();
       },
     ),
 
