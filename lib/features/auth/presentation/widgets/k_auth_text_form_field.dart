@@ -45,17 +45,17 @@ class KAuthTextFormField extends StatelessWidget {
       decoration: InputDecoration(
         hintText: hintText,
         suffixIcon: suffixIcon != null ? Icon(suffixIcon) : null,
-        border: const UnderlineInputBorder(),
-        enabledBorder: UnderlineInputBorder(
+        border: const OutlineInputBorder(),
+        enabledBorder: OutlineInputBorder(
           borderSide: BorderSide(color: AppColors.authUnderlineBorderColor),
         ),
-        focusedBorder: UnderlineInputBorder(
+        focusedBorder: OutlineInputBorder(
           borderSide: BorderSide(color: AppColors.primaryColor, width: 2.w),
         ),
-        errorBorder: UnderlineInputBorder(
+        errorBorder: OutlineInputBorder(
           borderSide: BorderSide(color: AppColors.checkOutColor, width: 1.w),
         ),
-        focusedErrorBorder: UnderlineInputBorder(
+        focusedErrorBorder: OutlineInputBorder(
           borderSide: BorderSide(color: AppColors.checkOutColor, width: 2.w),
         ),
         errorStyle: GoogleFonts.sora(fontSize: 10.sp, color: Colors.red),

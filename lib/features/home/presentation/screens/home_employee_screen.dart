@@ -123,18 +123,6 @@ class _HomeEmployeeScreenState extends State<HomeEmployeeScreen> {
                       drawerLeadingIcon: Icons.add_chart,
                     ),
 
-                    // Leave Tracker
-                    KDrawerListTile(
-                      drawerTitle: "Leave Tracker",
-                      drawerListTileOnTap: () {
-                        // Leave Tracker screen
-                        // GoRouter.of(
-                        //   context,
-                        // ).pushNamed(AppRouteConstants.leaveTracker);
-                      },
-                      drawerLeadingIcon: Icons.account_tree,
-                    ),
-
                     // Time Tracker
                     KDrawerListTile(
                       drawerTitle: "Time Tracker",

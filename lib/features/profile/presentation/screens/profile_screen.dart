@@ -2,11 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:fuoday/commons/widgets/k_app_%20bar_with_drawer.dart';
 import 'package:fuoday/commons/widgets/k_circular_cache_image.dart';
-import 'package:fuoday/commons/widgets/k_drawer_list_tile.dart';
 import 'package:fuoday/commons/widgets/k_text.dart';
-import 'package:fuoday/core/constants/app_route_constants.dart';
+import 'package:fuoday/commons/widgets/k_vertical_spacer.dart';
 import 'package:fuoday/core/themes/app_colors.dart';
-import 'package:go_router/go_router.dart';
+import 'package:fuoday/features/profile/presentation/widgets/profile_list_tile.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
@@ -33,144 +32,115 @@ class _ProfileScreenState extends State<ProfileScreen> {
         },
         onNotificationPressed: () {},
       ),
-      drawer: Drawer(
-        backgroundColor: AppColors.secondaryColor,
-        child: Column(
-          children: [
-            // Profile Header
-            UserAccountsDrawerHeader(
-              decoration: BoxDecoration(color: AppColors.primaryColor),
-              accountName: KText(
-                text: "Irfan",
-                color: AppColors.secondaryColor,
-                fontWeight: FontWeight.w600,
-                fontSize: 14.sp,
-              ),
 
-              accountEmail: KText(
-                text: "irfanmohammed@gmail.com",
-                color: AppColors.secondaryColor,
-                fontWeight: FontWeight.w500,
-                fontSize: 12.sp,
-              ),
-
-              currentAccountPicture: KCircularCachedImage(
+      body: SingleChildScrollView(
+        scrollDirection: Axis.vertical,
+        physics: const BouncingScrollPhysics(),
+        child: Container(
+          margin: EdgeInsets.symmetric(horizontal: 20.w, vertical: 20.h),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              // profile image
+              KCircularCachedImage(
+                size: 90.h,
                 imageUrl:
-                    "https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=1288&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-                size: 200.h,
+                    "https://images.unsplash.com/photo-1499996860823-5214fcc65f8f?q=80&w=2566&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
               ),
-            ),
 
-            // Menu Items
-            Expanded(
-              child: ListView(
-                scrollDirection: Axis.vertical,
+              SizedBox(height: 24.h),
 
-                children: [
-                  KDrawerListTile(
-                    drawerTitle: "My Zone",
-                    drawerListTileOnTap: () {},
-                    drawerLeadingIcon: Icons.person,
+              Container(
+                padding: EdgeInsets.symmetric(horizontal: 14.w, vertical: 14.h),
+                width: double.infinity,
+                decoration: BoxDecoration(
+                  border: Border.all(
+                    width: 1.w,
+                    color: AppColors.greyColor.withOpacity(0.3),
                   ),
-
-                  KDrawerListTile(
-                    drawerTitle: "Teams",
-                    drawerListTileOnTap: () {},
-                    drawerLeadingIcon: Icons.group,
+                  borderRadius: BorderRadius.circular(8.r),
+                  gradient: const LinearGradient(
+                    begin: Alignment.topCenter,
+                    end: Alignment.bottomCenter,
+                    colors: AppColors.cardGradientColor,
                   ),
-
-                  KDrawerListTile(
-                    drawerTitle: "Organization",
-                    drawerListTileOnTap: () {},
-                    drawerLeadingIcon: Icons.location_city,
-                  ),
-
-                  Container(
-                    margin: EdgeInsets.symmetric(horizontal: 40.w),
-                    child: Divider(
-                      color: AppColors.subTitleColor.withOpacity(0.2),
+                ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    // name
+                    KText(
+                      text: "Mohammed Irfan",
+                      fontWeight: FontWeight.w600,
+                      fontSize: 14.sp,
+                      color: AppColors.titleColor,
                     ),
-                  ),
 
-                  KDrawerListTile(
-                    drawerTitle: "Attendance",
-                    drawerListTileOnTap: () {},
-                    drawerLeadingIcon: Icons.add_chart,
-                  ),
+                    KVerticalSpacer(height: 6.h),
 
-                  KDrawerListTile(
-                    drawerTitle: "Leave Tracker",
-                    drawerListTileOnTap: () {},
-                    drawerLeadingIcon: Icons.account_tree,
-                  ),
-
-                  KDrawerListTile(
-                    drawerTitle: "Time Tracker",
-                    drawerListTileOnTap: () {},
-                    drawerLeadingIcon: Icons.timelapse,
-                  ),
-
-                  // HR
-                  KDrawerListTile(
-                    drawerTitle: "HR",
-                    drawerListTileOnTap: () {},
-                    drawerLeadingIcon: Icons.hail_rounded,
-                  ),
-
-                  // Pay Slip
-                  KDrawerListTile(
-                    drawerTitle: "Pay Slip",
-                    drawerListTileOnTap: () {},
-                    drawerLeadingIcon: Icons.payment_rounded,
-                  ),
-
-                  // Pay Slip
-                  KDrawerListTile(
-                    drawerTitle: "Performance",
-                    drawerListTileOnTap: () {},
-                    drawerLeadingIcon: Icons.quick_contacts_dialer,
-                  ),
-
-                  Container(
-                    margin: EdgeInsets.symmetric(horizontal: 40.w),
-                    child: Divider(
-                      color: AppColors.subTitleColor.withOpacity(0.2),
+                    // emp Id
+                    KText(
+                      text: "Employee ID: 1043",
+                      fontWeight: FontWeight.w500,
+                      fontSize: 12.sp,
+                      color: AppColors.greyColor,
                     ),
-                  ),
 
-                  // Pay Slip
-                  KDrawerListTile(
-                    drawerTitle: "Settings",
-                    drawerListTileOnTap: () {},
-                    drawerLeadingIcon: Icons.settings,
-                  ),
+                    KVerticalSpacer(height: 3.h),
 
-                  // Pay Slip
-                  KDrawerListTile(
-                    drawerTitle: "Support",
-                    drawerListTileOnTap: () {},
-                    drawerLeadingIcon: Icons.support_agent,
-                  ),
-
-                  // Pay Slip
-                  KDrawerListTile(
-                    drawerTitle: "Logout",
-                    drawerListTileOnTap: () {
-                      // Login Page
-                      GoRouter.of(
-                        context,
-                      ).pushReplacementNamed(AppRouteConstants.login);
-                    },
-                    drawerLeadingIcon: Icons.logout,
-                  ),
-                ],
+                    // Phone No
+                    KText(
+                      text: "Phone No: 636909876",
+                      fontWeight: FontWeight.w500,
+                      fontSize: 12.sp,
+                      color: AppColors.greyColor,
+                    ),
+                  ],
+                ),
               ),
-            ),
-          ],
+
+              SizedBox(height: 24.h),
+
+              // Personal Details
+              ProfileListTile(
+                onTap: () {},
+                leadingIcon: Icons.person,
+                title: "Personal Details",
+              ),
+
+              // Employment Details
+              ProfileListTile(
+                onTap: () {},
+                leadingIcon: Icons.person,
+                title: "Employment Details",
+              ),
+
+              // Educational Details
+              ProfileListTile(
+                onTap: () {},
+                leadingIcon: Icons.school,
+                title: "Educational Background",
+              ),
+
+              // On boarding
+              ProfileListTile(
+                onTap: () {},
+                leadingIcon: Icons.departure_board,
+                title: "On boarding",
+              ),
+
+              // Professional Experience
+              ProfileListTile(
+                onTap: () {},
+                leadingIcon: Icons.scale,
+                title: "Professional Experience",
+              ),
+            ],
+          ),
         ),
       ),
-
-      body: Center(child: Text("hi profile")),
     );
   }
 }

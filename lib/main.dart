@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:fuoday/commons/providers/dropdown_provider.dart';
 import 'package:fuoday/core/di/injection.dart';
 import 'package:fuoday/core/router/app_router.dart';
 import 'package:fuoday/features/auth/presentation/providers/sliding_segmented_provider.dart';
@@ -28,6 +29,9 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(
           create: (context) => getIt<SlidingSegmentedProvider>(),
         ),
+
+        // Drop Down Provider
+        ChangeNotifierProvider(create: (context) => getIt<DropdownProvider>()),
       ],
       child: ScreenUtilInit(
         designSize: const Size(360, 690),

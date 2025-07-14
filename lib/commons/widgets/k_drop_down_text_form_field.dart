@@ -35,21 +35,21 @@ class KDropdownTextFormField<T> extends StatelessWidget {
           color: AppColors.titleColor.withOpacity(0.6),
         ),
 
-        border: const UnderlineInputBorder(),
-        enabledBorder: UnderlineInputBorder(
+        border: const OutlineInputBorder(),
+        enabledBorder: OutlineInputBorder(
           borderSide: BorderSide(color: AppColors.authUnderlineBorderColor),
         ),
-        focusedBorder: UnderlineInputBorder(
+        focusedBorder: OutlineInputBorder(
           borderSide: BorderSide(color: AppColors.primaryColor, width: 2.w),
         ),
-        errorBorder: UnderlineInputBorder(
+        errorBorder: OutlineInputBorder(
           borderSide: BorderSide(color: AppColors.checkOutColor, width: 1.w),
         ),
-        focusedErrorBorder: UnderlineInputBorder(
+        focusedErrorBorder: OutlineInputBorder(
           borderSide: BorderSide(color: AppColors.checkOutColor, width: 2.w),
         ),
         errorStyle: GoogleFonts.sora(fontSize: 10.sp, color: Colors.red),
-        contentPadding: EdgeInsets.symmetric(horizontal: 0, vertical: 8.h),
+        contentPadding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 8.h),
       ),
       validator: validator,
       items: items
