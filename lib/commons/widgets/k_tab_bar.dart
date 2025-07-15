@@ -52,6 +52,9 @@ class KTabBar extends StatelessWidget {
       unselectedLabelStyle:
           unselectedLabelStyle ??
           GoogleFonts.sora(fontSize: 10.sp, fontWeight: FontWeight.normal),
+      labelPadding: EdgeInsets.symmetric(horizontal: 8.w),
+      tabAlignment: TabAlignment.center,
+      isScrollable: true,
     );
   }
 }

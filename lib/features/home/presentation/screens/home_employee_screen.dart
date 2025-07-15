@@ -104,6 +104,18 @@ class _HomeEmployeeScreenState extends State<HomeEmployeeScreen> {
                       drawerLeadingIcon: Icons.location_city,
                     ),
 
+                    // Team Tree
+                    KDrawerListTile(
+                      drawerTitle: "Team Tree",
+                      drawerListTileOnTap: () {
+                        // Team Tree Screen
+                        GoRouter.of(
+                          context,
+                        ).pushNamed(AppRouteConstants.teamTree);
+                      },
+                      drawerLeadingIcon: Icons.straight_rounded,
+                    ),
+
                     Container(
                       margin: EdgeInsets.symmetric(horizontal: 40.w),
                       child: Divider(
@@ -157,7 +169,12 @@ class _HomeEmployeeScreenState extends State<HomeEmployeeScreen> {
                     // Performance
                     KDrawerListTile(
                       drawerTitle: "Performance",
-                      drawerListTileOnTap: () {},
+                      drawerListTileOnTap: () {
+                        // Performance Screen
+                        GoRouter.of(
+                          context,
+                        ).pushNamed(AppRouteConstants.performance);
+                      },
                       drawerLeadingIcon: Icons.quick_contacts_dialer,
                     ),
 

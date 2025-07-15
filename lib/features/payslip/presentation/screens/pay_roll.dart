@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:fuoday/commons/widgets/k_text.dart';
 import 'package:fuoday/commons/widgets/k_vertical_spacer.dart';
+import 'package:fuoday/core/themes/app_colors.dart';
 import 'package:fuoday/features/attendance/presentation/widgets/attendance_line_chart.dart';
 import 'package:fuoday/features/payslip/presentation/widgets/pay_slip_card.dart';
 
@@ -79,6 +81,28 @@ class PayRoll extends StatelessWidget {
           ),
 
           KVerticalSpacer(height: 20.h),
+
+          // Bonus and Incentives
+          KText(
+            text: "Deduction",
+            fontWeight: FontWeight.w600,
+            fontSize: 14.sp,
+          ),
+
+          KVerticalSpacer(height: 20.h),
+
+          // Bonus and Incentives
+          Align(
+            alignment: Alignment.center,
+            child: KText(
+              text: "Coming soon",
+              fontWeight: FontWeight.w500,
+              color: AppColors.greyColor,
+              fontSize: 14.sp,
+            ),
+          ),
+
+          KVerticalSpacer(height: 60.h),
         ],
       ),
     );

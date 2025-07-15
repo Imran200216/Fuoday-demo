@@ -8,7 +8,6 @@ import 'package:fuoday/core/themes/app_colors.dart';
 import 'package:fuoday/features/teams/presentation/screens/teams_list.dart';
 import 'package:fuoday/features/teams/presentation/screens/teams_projects.dart';
 import 'package:fuoday/features/teams/presentation/screens/teams_reportees.dart';
-import 'package:fuoday/features/teams/presentation/screens/teams_tree.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -140,8 +139,6 @@ class _TeamsScreenState extends State<TeamsScreen> {
                               // Projects
                               Tab(text: "Projects"),
 
-                              // Department
-                              Tab(text: "Team Tree"),
 
                               // Department
                               Tab(text: "Team List"),
@@ -159,8 +156,6 @@ class _TeamsScreenState extends State<TeamsScreen> {
                               // Projects
                               TeamsProjects(),
 
-                              // Teams Tree
-                              TeamsTree(),
 
                               // Team List
                               TeamsList(),

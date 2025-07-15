@@ -13,108 +13,61 @@ class TeamsTree extends StatefulWidget {
 }
 
 class _TeamsTreeState extends State<TeamsTree> {
-  Graph graph = Graph()..isTree = true;
-  BuchheimWalkerConfiguration builder = BuchheimWalkerConfiguration();
+  final Graph graph = Graph();
+  final BuchheimWalkerConfiguration builder = BuchheimWalkerConfiguration();
 
   @override
   void initState() {
     super.initState();
-    setupGraph();
-    setupGraphConfiguration();
-  }
 
-  void setupGraph() {
-    // Create nodes for each employee
-    final ceo = Node.Id("ceo");
-    final hr = Node.Id("hr");
-    final manager = Node.Id("manager");
-    final it = Node.Id("it");
-    final executive = Node.Id("executive");
-    final amazonManager = Node.Id("amazonManager");
-    final aiDev1 = Node.Id("aiDev1");
-    final projectManager = Node.Id("projectManager");
-    final mobileApp = Node.Id("mobileApp");
-    final aiDev2 = Node.Id("aiDev2");
-    final assistant = Node.Id("assistant");
+    // Create nodes with unique IDs
+    var ceo = Node.Id("ceo");
+    var hr = Node.Id("hr");
+    var ishManager = Node.Id("ishManager");
+    var itManager = Node.Id("itManager");
+
+    var revathi = Node.Id("revathi");
+    var sriVidhya = Node.Id("sriVidhya");
+
+    var vimal = Node.Id("vimal");
+    var gino = Node.Id("gino");
+    var irfan = Node.Id("irfan");
+    var karkavel = Node.Id("karkavel");
 
     // Add nodes to graph
     graph.addNode(ceo);
     graph.addNode(hr);
-    graph.addNode(manager);
-    graph.addNode(it);
-    graph.addNode(executive);
-    graph.addNode(amazonManager);
-    graph.addNode(aiDev1);
-    graph.addNode(projectManager);
-    graph.addNode(mobileApp);
-    graph.addNode(aiDev2);
-    graph.addNode(assistant);
+    graph.addNode(ishManager);
+    graph.addNode(itManager);
+    graph.addNode(revathi);
+    graph.addNode(sriVidhya);
+    graph.addNode(vimal);
+    graph.addNode(gino);
+    graph.addNode(irfan);
+    graph.addNode(karkavel);
 
-    // Create edges (connections)
+    // Add edges to create hierarchy
     graph.addEdge(ceo, hr);
-    graph.addEdge(ceo, manager);
-    graph.addEdge(ceo, it);
+    graph.addEdge(ceo, ishManager);
+    graph.addEdge(ceo, itManager);
 
-    graph.addEdge(manager, executive);
-    graph.addEdge(manager, amazonManager);
+    graph.addEdge(ishManager, revathi);
+    graph.addEdge(ishManager, sriVidhya);
 
-    graph.addEdge(it, aiDev1);
-    graph.addEdge(it, projectManager);
-    graph.addEdge(it, mobileApp);
-    graph.addEdge(it, aiDev2);
+    graph.addEdge(itManager, gino);
+    graph.addEdge(itManager, vimal);
+    graph.addEdge(itManager, irfan);
+    graph.addEdge(itManager, karkavel);
 
-    graph.addEdge(amazonManager, assistant);
-  }
-
-  void setupGraphConfiguration() {
+    // Graph layout settings
     builder
-      ..siblingSeparation = 80.w.toInt()
-      ..levelSeparation = 100.h.toInt()
-      ..subtreeSeparation = 120.w.toInt()
+      ..siblingSeparation = 25
+      ..levelSeparation = 60
+      ..subtreeSeparation = 30
       ..orientation = BuchheimWalkerConfiguration.ORIENTATION_TOP_BOTTOM;
   }
 
-  @override
-  Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      child: Column(
-        children: [
-          KVerticalSpacer(height: 20.h),
-
-          // Graph View Container
-          SizedBox(
-            height: 600.h,
-            child: InteractiveViewer(
-              constrained: false,
-              boundaryMargin: EdgeInsets.all(50.w),
-              minScale: 0.5,
-              maxScale: 2.0,
-              child: GraphView(
-                graph: graph,
-                algorithm: BuchheimWalkerAlgorithm(
-                  builder,
-                  TreeEdgeRenderer(builder),
-                ),
-                paint: Paint()
-                  ..color = AppColors.subTitleColor
-                  ..strokeWidth = 1.5.w
-                  ..style = PaintingStyle.stroke,
-                builder: (Node node) {
-                  return buildEmployeeCard(node.key?.value as String);
-                },
-              ),
-            ),
-          ),
-
-          KVerticalSpacer(height: 20.h),
-        ],
-      ),
-    );
-  }
-
-  Widget buildEmployeeCard(String employeeId) {
-    final employee = getEmployeeData(employeeId);
-
+  Widget _buildEmployeeCard(String name, String role, String imageUrl) {
     return Card(
       elevation: 2,
       shape: RoundedRectangleBorder(
@@ -122,54 +75,20 @@ class _TeamsTreeState extends State<TeamsTree> {
         borderRadius: BorderRadius.circular(16.r),
       ),
       child: Container(
-        width: 120.w,
         padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 12.h),
+        width: 120.w, // Fixed width for consistency
         child: Column(
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            // Person Avatar with Error Handling
-            CircleAvatar(
-              radius: 25.r,
-              backgroundColor: employee['avatarColor'],
-              child: employee['hasImage']
-                  ? ClipOval(
-                      child: Image.network(
-                        employee['imageUrl'],
-                        width: 50.r,
-                        height: 50.r,
-                        fit: BoxFit.cover,
-                        errorBuilder: (context, error, stackTrace) {
-                          // Fallback to icon if image fails to load
-                          return Icon(
-                            Icons.person,
-                            color: Colors.white,
-                            size: 30.sp,
-                          );
-                        },
-                        loadingBuilder: (context, child, loadingProgress) {
-                          if (loadingProgress == null) return child;
-                          return SizedBox(
-                            width: 50.r,
-                            height: 50.r,
-                            child: CircularProgressIndicator(
-                              strokeWidth: 2.w,
-                              valueColor: AlwaysStoppedAnimation<Color>(
-                                Colors.white,
-                              ),
-                            ),
-                          );
-                        },
-                      ),
-                    )
-                  : Icon(Icons.person, color: Colors.white, size: 30.sp),
-            ),
+            // Person Avatar
+            CircleAvatar(backgroundImage: NetworkImage(imageUrl), radius: 25.r),
 
             SizedBox(height: 6.h),
 
             // Person Name
             KText(
-              text: employee['name'],
+              text: name,
               fontWeight: FontWeight.w600,
               fontSize: 10.sp,
               color: AppColors.titleColor,
@@ -180,7 +99,7 @@ class _TeamsTreeState extends State<TeamsTree> {
 
             // Person Role
             KText(
-              text: employee['position'],
+              text: role,
               fontWeight: FontWeight.w600,
               fontSize: 8.sp,
               color: AppColors.greyColor,
@@ -192,98 +111,99 @@ class _TeamsTreeState extends State<TeamsTree> {
     );
   }
 
-  Map<String, dynamic> getEmployeeData(String employeeId) {
-    final employeeData = {
-      'ceo': {
-        'name': 'Krishnakanth ST',
-        'position': 'FOUNDER & CEO',
-        'avatarColor': AppColors.primaryColor,
-        'hasImage': true,
-        'imageUrl':
-            "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-      },
-      'hr': {
-        'name': 'Aysha Begam',
-        'position': 'HR',
-        'avatarColor': Colors.pink[400],
-        'hasImage': true,
-        'imageUrl':
-            "https://images.unsplash.com/photo-1481214110143-ed630356e1bb?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-      },
-      'manager': {
-        'name': 'Ishwarya K',
-        'position': 'ASSISTANT MANAGER - CC & BANKING',
-        'avatarColor': Colors.purple[400],
-        'hasImage': true,
-        'imageUrl':
-            "https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?q=80&w=1471&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-      },
-      'it': {
-        'name': 'Saravanan S',
-        'position': 'INFORMATION TECHNOLOGY',
-        'avatarColor': AppColors.greyColor,
-        'hasImage': false, // Changed to false to avoid network issues
-        'imageUrl': '',
-      },
-      'executive': {
-        'name': 'Revathi',
-        'position': 'SENIOR EXECUTIVE',
-        'avatarColor': AppColors.greyColor,
-        'hasImage': false,
-        'imageUrl': '',
-      },
-      'amazonManager': {
-        'name': 'Sri Vidhya',
-        'position': 'ASSISTANT MANAGER AMAZON',
-        'avatarColor': AppColors.greyColor,
-        'hasImage': false,
-        'imageUrl': '',
-      },
-      'aiDev1': {
-        'name': 'Vimal Raj L',
-        'position': 'AI DEVELOPER',
-        'avatarColor': Colors.pink[400],
-        'hasImage': true,
-        'imageUrl':
-            "https://images.unsplash.com/photo-1499996860823-5214fcc65f8f?q=80&w=766&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-      },
-      'projectManager': {
-        'name': 'Easwarraj B',
-        'position': 'PROJECT MANAGER-IT',
-        'avatarColor': AppColors.greyColor,
-        'hasImage': false,
-        'imageUrl': '',
-      },
-      'mobileApp': {
-        'name': 'Mohamed Irfan',
-        'position': 'MOBILE APP DEVELOPER',
-        'avatarColor': AppColors.greyColor,
-        'hasImage': false,
-        'imageUrl': '',
-      },
-      'aiDev2': {
-        'name': 'Karkuvel Raja',
-        'position': 'AI DEVELOPER',
-        'avatarColor': AppColors.greyColor,
-        'hasImage': false,
-        'imageUrl': '',
-      },
-      'assistant': {
-        'name': 'Assistant',
-        'position': 'ASSISTANT',
-        'avatarColor': AppColors.greyColor,
-        'hasImage': false,
-        'imageUrl': '',
-      },
-    };
+  @override
+  Widget build(BuildContext context) {
+    return SingleChildScrollView(
+      child: Column(
+        children: [
+          KVerticalSpacer(height: 20.h),
 
-    return employeeData[employeeId] ??
-        {
-          'name': 'Unknown',
-          'position': 'Unknown',
-          'avatarColor': AppColors.greyColor,
-          'hasImage': false,
-          'imageUrl': '',
-        };
+          // Graph View Container
+          Container(
+            height: 600.h, // Set appropriate height
+            child: InteractiveViewer(
+              constrained: false,
+              boundaryMargin: EdgeInsets.all(100.w),
+              minScale: 0.3,
+              maxScale: 3.0,
+              child: GraphView(
+                graph: graph,
+                algorithm: BuchheimWalkerAlgorithm(
+                  builder,
+                  TreeEdgeRenderer(builder),
+                ),
+                builder: (Node node) {
+                  // Map node IDs to employee information
+                  switch (node.key?.value) {
+                    case "ceo":
+                      return _buildEmployeeCard(
+                        "Krishnakanth ST",
+                        "FOUNDER & CEO",
+                        "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8YXZhdGFyfGVufDB8fDB8fHww",
+                      );
+                    case "hr":
+                      return _buildEmployeeCard(
+                        "Aysha Begam",
+                        "HR",
+                        "https://images.unsplash.com/photo-1494790108755-2616b9e6d4cc?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.1.0",
+                      );
+                    case "ishManager":
+                      return _buildEmployeeCard(
+                        "Ishwarya K",
+                        "ASSISTANT MANAGER - CC & BANKING",
+                        "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.1.0",
+                      );
+                    case "itManager":
+                      return _buildEmployeeCard(
+                        "Saravanan S",
+                        "INFORMATION TECHNOLOGY",
+                        "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.1.0",
+                      );
+                    case "revathi":
+                      return _buildEmployeeCard(
+                        "Revathi .",
+                        "SENIOR EXECUTIVE",
+                        "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.1.0",
+                      );
+                    case "sriVidhya":
+                      return _buildEmployeeCard(
+                        "Sri Vidhya",
+                        "ASSISTANT MANAGER AMAZON",
+                        "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.1.0",
+                      );
+                    case "vimal":
+                      return _buildEmployeeCard(
+                        "Vimal Raj L",
+                        "AI DEVELOPER",
+                        "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.1.0",
+                      );
+                    case "gino":
+                      return _buildEmployeeCard(
+                        "Gino B",
+                        "PROJECT MANAGER-IT",
+                        "https://images.unsplash.com/photo-1519244703995-f4e0f30006d5?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.1.0",
+                      );
+                    case "irfan":
+                      return _buildEmployeeCard(
+                        "Mohamed Irfan",
+                        "MOBILE APP DEVELOPER",
+                        "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.1.0",
+                      );
+                    case "karkavel":
+                      return _buildEmployeeCard(
+                        "Karkavel Raja",
+                        "AI DEVELOPER",
+                        "https://images.unsplash.com/photo-1551836022-d5d88e9218df?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.1.0",
+                      );
+                    default:
+                      return const SizedBox();
+                  }
+                },
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
   }
 }

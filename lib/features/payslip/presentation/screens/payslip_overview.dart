@@ -175,6 +175,30 @@ class _PayslipOverviewState extends State<PayslipOverview> {
             child: KDataTable(columnTitles: columns, rowData: data),
           ),
 
+          KText(
+            text: "Deduction",
+            fontWeight: FontWeight.w600,
+            fontSize: 14.sp,
+          ),
+
+          // Table
+          SizedBox(
+            height: 200.h,
+            child: KDataTable(columnTitles: columns, rowData: data),
+          ),
+
+          KText(
+            text: "Total Payable for May 2025",
+            fontWeight: FontWeight.w600,
+            fontSize: 14.sp,
+          ),
+
+          // Table
+          SizedBox(
+            height: 200.h,
+            child: KDataTable(columnTitles: columns, rowData: data),
+          ),
+
           KVerticalSpacer(height: 60.h),
         ],
       ),

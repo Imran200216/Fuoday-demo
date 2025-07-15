@@ -20,6 +20,7 @@ import 'package:fuoday/features/notification/presentation/screens/notification_s
 import 'package:fuoday/features/on_boarding/presentation/screens/on_boarding_screen.dart';
 import 'package:fuoday/features/organizations/presentation/screens/organizations_screen.dart';
 import 'package:fuoday/features/payslip/presentation/screens/pay_slip_screen.dart';
+import 'package:fuoday/features/performance/presentation/screens/performance_screen.dart';
 import 'package:fuoday/features/profile/presentation/screens/profile_educational_background_screen.dart';
 import 'package:fuoday/features/profile/presentation/screens/profile_employment_details_screen.dart';
 import 'package:fuoday/features/profile/presentation/screens/profile_on_boarding_screen.dart';
@@ -28,6 +29,7 @@ import 'package:fuoday/features/profile/presentation/screens/profile_professiona
 import 'package:fuoday/features/profile/presentation/screens/profile_screen.dart';
 import 'package:fuoday/features/splash/presentation/screens/splash_screen.dart';
 import 'package:fuoday/features/support/persentation/screens/support_screen.dart';
+import 'package:fuoday/features/team_tree/presentation/screens/team_tree_screen.dart';
 import 'package:fuoday/features/teams/presentation/screens/teams_screen.dart';
 import 'package:fuoday/features/time_tracker/presentation/screens/time_tracker_screen.dart';
 import 'package:fuoday/features/work/presentation/screens/work_screen.dart';
@@ -317,6 +319,24 @@ final GoRouter appRouter = GoRouter(
       name: AppRouteConstants.paySlip,
       builder: (context, state) {
         return PaySlipScreen();
+      },
+    ),
+
+    // Performance Screen
+    GoRoute(
+      path: "/performance",
+      name: AppRouteConstants.performance,
+      builder: (context, state) {
+        return PerformanceScreen();
+      },
+    ),
+
+    // Team Tree Screen
+    GoRoute(
+      path: "/teamTree",
+      name: AppRouteConstants.teamTree,
+      builder: (context, state) {
+        return TeamTreeScreen();
       },
     ),
   ],

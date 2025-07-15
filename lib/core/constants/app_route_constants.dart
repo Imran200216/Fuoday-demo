@@ -77,4 +77,9 @@ class AppRouteConstants {
   // Pay Slip Screen
   static const String paySlip = "playSlip";
 
+  // Performance Screen
+  static const String performance = "performance";
+
+  // Team Tree Screen
+  static const String teamTree = "teamTree";
 }
