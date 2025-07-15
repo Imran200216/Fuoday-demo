@@ -19,6 +19,7 @@ import 'package:fuoday/features/leave_tracker/presentation/screens/leave_tracker
 import 'package:fuoday/features/notification/presentation/screens/notification_screen.dart';
 import 'package:fuoday/features/on_boarding/presentation/screens/on_boarding_screen.dart';
 import 'package:fuoday/features/organizations/presentation/screens/organizations_screen.dart';
+import 'package:fuoday/features/payslip/presentation/screens/pay_slip_screen.dart';
 import 'package:fuoday/features/profile/presentation/screens/profile_educational_background_screen.dart';
 import 'package:fuoday/features/profile/presentation/screens/profile_employment_details_screen.dart';
 import 'package:fuoday/features/profile/presentation/screens/profile_on_boarding_screen.dart';
@@ -28,6 +29,7 @@ import 'package:fuoday/features/profile/presentation/screens/profile_screen.dart
 import 'package:fuoday/features/splash/presentation/screens/splash_screen.dart';
 import 'package:fuoday/features/support/persentation/screens/support_screen.dart';
 import 'package:fuoday/features/teams/presentation/screens/teams_screen.dart';
+import 'package:fuoday/features/time_tracker/presentation/screens/time_tracker_screen.dart';
 import 'package:fuoday/features/work/presentation/screens/work_screen.dart';
 import 'package:go_router/go_router.dart';
 
@@ -297,6 +299,24 @@ final GoRouter appRouter = GoRouter(
       name: AppRouteConstants.support,
       builder: (context, state) {
         return SupportScreen();
+      },
+    ),
+
+    // Time Tracker Screen
+    GoRoute(
+      path: "/timeTracker",
+      name: AppRouteConstants.timeTracker,
+      builder: (context, state) {
+        return TimeTrackerScreen();
+      },
+    ),
+
+    // Play Slip Screen
+    GoRoute(
+      path: "/paySlip",
+      name: AppRouteConstants.paySlip,
+      builder: (context, state) {
+        return PaySlipScreen();
       },
     ),
   ],

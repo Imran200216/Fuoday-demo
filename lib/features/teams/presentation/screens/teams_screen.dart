@@ -159,11 +159,11 @@ class _TeamsScreenState extends State<TeamsScreen> {
                               // Projects
                               TeamsProjects(),
 
-                              // Team List
-                              TeamsList(),
-
                               // Teams Tree
                               TeamsTree(),
+
+                              // Team List
+                              TeamsList(),
                             ],
                           ),
                         ),

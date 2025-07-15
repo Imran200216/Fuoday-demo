@@ -68,6 +68,13 @@ class AppRouteConstants {
       "attendanceEarlyArrivalDetails";
   static const String totalAttendanceView = "totalAttendanceView";
 
-  // support
+  // support Screen
   static const String support = "support";
+
+  // Time Tracker Screen
+  static const String timeTracker = "timeTracker";
+
+  // Pay Slip Screen
+  static const String paySlip = "playSlip";
+
 }

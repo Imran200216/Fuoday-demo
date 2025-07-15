@@ -126,7 +126,12 @@ class _HomeEmployeeScreenState extends State<HomeEmployeeScreen> {
                     // Time Tracker
                     KDrawerListTile(
                       drawerTitle: "Time Tracker",
-                      drawerListTileOnTap: () {},
+                      drawerListTileOnTap: () {
+                        // Time tracker screen
+                        GoRouter.of(
+                          context,
+                        ).pushNamed(AppRouteConstants.timeTracker);
+                      },
                       drawerLeadingIcon: Icons.timelapse,
                     ),
 
@@ -140,7 +145,12 @@ class _HomeEmployeeScreenState extends State<HomeEmployeeScreen> {
                     // Pay Slip
                     KDrawerListTile(
                       drawerTitle: "Pay Slip",
-                      drawerListTileOnTap: () {},
+                      drawerListTileOnTap: () {
+                        // Pay Slip Screen
+                        GoRouter.of(
+                          context,
+                        ).pushNamed(AppRouteConstants.paySlip);
+                      },
                       drawerLeadingIcon: Icons.payment_rounded,
                     ),
 
