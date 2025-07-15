@@ -3,7 +3,10 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:fuoday/commons/widgets/k_text.dart';
 import 'package:fuoday/commons/widgets/k_vertical_spacer.dart';
 import 'package:fuoday/core/themes/app_colors.dart';
+import 'package:go_router/go_router.dart';
 import 'package:graphview/GraphView.dart';
+
+import '../../../../commons/widgets/k_app_bar.dart';
 
 class TeamTreeScreen extends StatefulWidget {
   const TeamTreeScreen({super.key});
@@ -114,10 +117,13 @@ class _TeamTreeScreenState extends State<TeamTreeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Team Structure'),
-        backgroundColor: AppColors.primaryColor,
-        foregroundColor: AppColors.secondaryColor,
+      appBar: KAppBar(
+        title: "Team Tree",
+        centerTitle: true,
+        leadingIcon: Icons.arrow_back,
+        onLeadingIconPress: () {
+          GoRouter.of(context).pop();
+        },
       ),
       body: SingleChildScrollView(
         child: Column(
@@ -151,7 +157,7 @@ class _TeamTreeScreenState extends State<TeamTreeScreen> {
                         return _buildEmployeeCard(
                           "Aysha Begam",
                           "HR",
-                          "https://images.unsplash.com/photo-1494790108755-2616b9e6d4cc?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.1.0",
+                          "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.1.0",
                         );
                       case "ishManager":
                         return _buildEmployeeCard(
@@ -185,7 +191,7 @@ class _TeamTreeScreenState extends State<TeamTreeScreen> {
                         );
                       case "gino":
                         return _buildEmployeeCard(
-                          "Gino B",
+                          "Easwar raj",
                           "PROJECT MANAGER-IT",
                           "https://images.unsplash.com/photo-1519244703995-f4e0f30006d5?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.1.0",
                         );

@@ -113,7 +113,7 @@ class _HomeEmployeeScreenState extends State<HomeEmployeeScreen> {
                           context,
                         ).pushNamed(AppRouteConstants.teamTree);
                       },
-                      drawerLeadingIcon: Icons.straight_rounded,
+                      drawerLeadingIcon: Icons.account_tree_outlined,
                     ),
 
                     Container(

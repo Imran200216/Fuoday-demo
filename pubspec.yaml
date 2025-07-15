@@ -94,6 +94,9 @@ dependencies:
   # flutter rating bar
   flutter_rating_bar: ^4.0.1
 
+  #file_picker:
+  file_picker: ^10.2.0
+
 
 
 dev_dependencies:

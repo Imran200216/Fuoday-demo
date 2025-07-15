@@ -9,8 +9,22 @@ import 'package:fuoday/core/themes/app_colors.dart';
 import 'package:fuoday/features/auth/presentation/widgets/k_auth_text_form_field.dart';
 import 'package:provider/provider.dart';
 
-class PerformanceAuditForm extends StatelessWidget {
+import '../widgets/performance_checkbox.dart';
+
+class PerformanceAuditForm extends StatefulWidget {
   const PerformanceAuditForm({super.key});
+
+  @override
+  State<PerformanceAuditForm> createState() => _PerformanceAuditFormState();
+}
+
+class _PerformanceAuditFormState extends State<PerformanceAuditForm> {
+
+  bool isTechSupportChecked = false;
+  bool isBDSupportChecked = false;
+
+  bool isProcessSuggestionChecked = false;
+  bool isDocumentationsChecked = false;
 
   @override
   Widget build(BuildContext context) {
@@ -216,6 +230,133 @@ class PerformanceAuditForm extends StatelessWidget {
                     dropDownProvider.setValue('clientMeetingsStatus', value),
               );
             },
+          ),
+
+          KText(
+            text: "Cross-Functional Involvement",
+            fontWeight: FontWeight.w600,
+            fontSize: 12.sp,
+          ),
+
+          // Tech Support Checkbox
+          KCheckbox(
+            text: "Tech Support",
+            value: isTechSupportChecked,
+            onChanged: (bool? value) {
+              setState(() {
+                isTechSupportChecked = value ?? false;
+              });
+            },
+          ),
+
+          // BD Support Checkbox
+          KCheckbox(
+            text: "BD Support",
+            value: isBDSupportChecked,
+            onChanged: (bool? value) {
+              setState(() {
+                isBDSupportChecked = value ?? false;
+              });
+            },
+          ),
+
+          //monthly task highlights
+          KAuthTextFormField(
+            hintText: "eg: Closed 3 sprints",
+            suffixIcon: Icons.task_outlined,
+            maxLines: 4,
+            label: "monthly task highlights",
+          ),
+
+          //Personal Highlights
+          KAuthTextFormField(
+            hintText: "eg: Deployed CI/CD pipeline",
+            suffixIcon: Icons.task_outlined,
+            maxLines: 4,
+            label: "Personal Highlights",
+          ),
+
+          //Areas to Improve
+          KAuthTextFormField(
+            hintText: "eg: Time estimation, spring velocity",
+            suffixIcon: Icons.task_outlined,
+            maxLines: 4,
+            label: "Areas to Improve",
+          ),
+
+          KText(
+            text: "Initiative Taken",
+            fontWeight: FontWeight.w600,
+            fontSize: 12.sp,
+          ),
+
+          // Process checkbox
+          KCheckbox(
+            text: "Process Suggestion",
+            value: isBDSupportChecked,
+            onChanged: (bool? value) {
+              setState(() {
+                isBDSupportChecked = value ?? false;
+              });
+            },
+          ),
+
+          // Documentations checkbox
+          KCheckbox(
+            text: "Documentations",
+            value: isBDSupportChecked,
+            onChanged: (bool? value) {
+              setState(() {
+                isBDSupportChecked = value ?? false;
+              });
+            },
+          ),
+
+          //Learning/Certifications Done
+          KAuthTextFormField(
+            hintText: "e.g: AWS DevOps Bootcamp(Udemy)",
+            suffixIcon: Icons.task_outlined,
+            maxLines: 4,
+            label: "Learning/Certifications Done",
+          ),
+
+          //Learning/Certifications Done
+          KAuthTextFormField(
+            hintText: "e.g Need Shared test/stage environment",
+            suffixIcon: Icons.task_outlined,
+            maxLines: 4,
+            label: "Suggestions to Company",
+          ),
+
+          // Title
+          KText(
+            text: "Key Result Areas & Goal Evaluation",
+            fontWeight: FontWeight.w600,
+            fontSize: 14.sp,
+            color: AppColors.primaryColor,
+          ),
+
+          //Learning/Certifications Done
+          KAuthTextFormField(
+            hintText: "e.g ResumeHub deployment by 25th May",
+            suffixIcon: Icons.task_outlined,
+            maxLines: 4,
+            label: "Previous Cycle Goals",
+          ),
+
+          //monthly task highlights
+          KAuthTextFormField(
+            hintText: "eg: 80",
+            suffixIcon: Icons.task_outlined,
+            label: "Goal Achievement %",
+          ),
+
+          //Learning/Certifications Done
+          KAuthTextFormField(
+            hintText: "e.g HR Chatbot, ATS Analyzer",
+            suffixIcon: Icons.task_outlined,
+            maxLines: 4,
+            label: "Projects Worked On",
           ),
         ],
       ),
