@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:fuoday/commons/widgets/k_app_bar.dart';
+import 'package:fuoday/commons/widgets/k_upload_picker_tile.dart';
 import 'package:fuoday/commons/widgets/k_vertical_spacer.dart';
 import 'package:fuoday/core/themes/app_colors.dart';
 import 'package:fuoday/features/auth/presentation/widgets/k_auth_filled_btn.dart';
 import 'package:fuoday/features/auth/presentation/widgets/k_auth_text_form_field.dart';
-import 'package:fuoday/features/profile/presentation/widgets/profile_on_boarding_upload_picker_tile.dart';
 import 'package:go_router/go_router.dart';
 
 class ProfileOnBoardingScreen extends StatelessWidget {
@@ -47,36 +47,41 @@ class ProfileOnBoardingScreen extends StatelessWidget {
               ),
 
               // Photo
-              ProfileOnBoardingUploadPickerTile(
-                title: "Photo",
+              KUploadPickerTile(
+                uploadOnTap: () {},
+                uploadPickerTitle: "Photo",
                 uploadPickerIcon: Icons.upload,
                 description: "Choose a file to upload",
               ),
 
               // PAN
-              ProfileOnBoardingUploadPickerTile(
-                title: "PAN",
+              KUploadPickerTile(
+                uploadOnTap: () {},
+                uploadPickerTitle: "PAN",
                 uploadPickerIcon: Icons.upload,
                 description: "Choose a file to upload",
               ),
 
               // Bank Passbook
-              ProfileOnBoardingUploadPickerTile(
-                title: "Bank Passbook",
+              KUploadPickerTile(
+                uploadOnTap: () {},
+                uploadPickerTitle: "Bank Passbook",
                 uploadPickerIcon: Icons.upload,
                 description: "Choose a file to upload",
               ),
 
               // Pay Slip
-              ProfileOnBoardingUploadPickerTile(
-                title: "Pay Slip",
+              KUploadPickerTile(
+                uploadOnTap: () {},
+                uploadPickerTitle: "Pay Slip",
                 uploadPickerIcon: Icons.upload,
                 description: "Choose a file to upload",
               ),
 
               // Offer Letter
-              ProfileOnBoardingUploadPickerTile(
-                title: "Offer Letter",
+              KUploadPickerTile(
+                uploadOnTap: () {},
+                uploadPickerTitle: "Offer Letter",
                 uploadPickerIcon: Icons.upload,
                 description: "Choose a file to upload",
               ),

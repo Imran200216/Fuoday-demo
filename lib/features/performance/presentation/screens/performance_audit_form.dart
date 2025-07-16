@@ -2,14 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:fuoday/commons/providers/dropdown_provider.dart';
+import 'package:fuoday/commons/widgets/k_checkbox.dart';
 import 'package:fuoday/commons/widgets/k_drop_down_text_form_field.dart';
 import 'package:fuoday/commons/widgets/k_text.dart';
+import 'package:fuoday/commons/widgets/k_upload_picker_tile.dart';
 import 'package:fuoday/commons/widgets/k_vertical_spacer.dart';
 import 'package:fuoday/core/themes/app_colors.dart';
+import 'package:fuoday/features/auth/presentation/widgets/k_auth_filled_btn.dart';
 import 'package:fuoday/features/auth/presentation/widgets/k_auth_text_form_field.dart';
 import 'package:provider/provider.dart';
-
-import '../widgets/performance_checkbox.dart';
 
 class PerformanceAuditForm extends StatefulWidget {
   const PerformanceAuditForm({super.key});
@@ -19,12 +20,68 @@ class PerformanceAuditForm extends StatefulWidget {
 }
 
 class _PerformanceAuditFormState extends State<PerformanceAuditForm> {
+  // Controllers
+  final TextEditingController employeeNameController = TextEditingController();
+  final TextEditingController employeeIdController = TextEditingController();
+  final TextEditingController employeeDesignationController =
+      TextEditingController();
+  final TextEditingController employeeDepartmentController =
+      TextEditingController();
+  final TextEditingController employeeReportingManagerController =
+      TextEditingController();
+  final TextEditingController employeeDateOfJoinController =
+      TextEditingController();
+  final TextEditingController employeeAttendanceController =
+      TextEditingController();
+  final TextEditingController employeeWorkModeController =
+      TextEditingController();
+  final TextEditingController employeeTechnicalSkillsController =
+      TextEditingController();
+  final TextEditingController employeeMonthlyTaskHighlightsController =
+      TextEditingController();
+  final TextEditingController employeePersonalHighlightsController =
+      TextEditingController();
+  final TextEditingController employeeAreasToImproveController =
+      TextEditingController();
+  final TextEditingController employeeLearningAndCertificateDoneController =
+      TextEditingController();
+  final TextEditingController employeeSuggestionsToCompanyController =
+      TextEditingController();
+  final TextEditingController employeePreviousCycleGoalsController =
+      TextEditingController();
+  final TextEditingController employeeGoalAchievementsController =
+      TextEditingController();
+  final TextEditingController employeeProjectWorkedOnController =
+      TextEditingController();
+  final TextEditingController employeeTaskModuleCompletedController =
+      TextEditingController();
+  final TextEditingController employeeFinalRemarksController =
+      TextEditingController();
 
-  bool isTechSupportChecked = false;
-  bool isBDSupportChecked = false;
+  @override
+  void dispose() {
+    employeeNameController.dispose();
+    employeeIdController.dispose();
+    employeeDesignationController.dispose();
+    employeeDepartmentController.dispose();
+    employeeReportingManagerController.dispose();
+    employeeDateOfJoinController.dispose();
+    employeeAttendanceController.dispose();
+    employeeWorkModeController.dispose();
+    employeeTechnicalSkillsController.dispose();
+    employeeMonthlyTaskHighlightsController.dispose();
+    employeePersonalHighlightsController.dispose();
+    employeeAreasToImproveController.dispose();
+    employeeLearningAndCertificateDoneController.dispose();
+    employeeSuggestionsToCompanyController.dispose();
+    employeePreviousCycleGoalsController.dispose();
+    employeeGoalAchievementsController.dispose();
+    employeeProjectWorkedOnController.dispose();
+    employeeTaskModuleCompletedController.dispose();
+    employeeFinalRemarksController.dispose();
 
-  bool isProcessSuggestionChecked = false;
-  bool isDocumentationsChecked = false;
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -241,23 +298,15 @@ class _PerformanceAuditFormState extends State<PerformanceAuditForm> {
           // Tech Support Checkbox
           KCheckbox(
             text: "Tech Support",
-            value: isTechSupportChecked,
-            onChanged: (bool? value) {
-              setState(() {
-                isTechSupportChecked = value ?? false;
-              });
-            },
+            checkboxKey: "isTechSupport",
+            onChanged: (value) {},
           ),
 
           // BD Support Checkbox
           KCheckbox(
             text: "BD Support",
-            value: isBDSupportChecked,
-            onChanged: (bool? value) {
-              setState(() {
-                isBDSupportChecked = value ?? false;
-              });
-            },
+            checkboxKey: "isDBSupport",
+            onChanged: (value) {},
           ),
 
           //monthly task highlights
@@ -293,23 +342,15 @@ class _PerformanceAuditFormState extends State<PerformanceAuditForm> {
           // Process checkbox
           KCheckbox(
             text: "Process Suggestion",
-            value: isBDSupportChecked,
-            onChanged: (bool? value) {
-              setState(() {
-                isBDSupportChecked = value ?? false;
-              });
-            },
+            checkboxKey: "isProcessSuggestion",
+            onChanged: (value) {},
           ),
 
           // Documentations checkbox
           KCheckbox(
             text: "Documentations",
-            value: isBDSupportChecked,
-            onChanged: (bool? value) {
-              setState(() {
-                isBDSupportChecked = value ?? false;
-              });
-            },
+            checkboxKey: "isDocumentations",
+            onChanged: (value) {},
           ),
 
           //Learning/Certifications Done
@@ -351,13 +392,87 @@ class _PerformanceAuditFormState extends State<PerformanceAuditForm> {
             label: "Goal Achievement %",
           ),
 
-          //Learning/Certifications Done
+          // Suggestion to company
           KAuthTextFormField(
-            hintText: "e.g HR Chatbot, ATS Analyzer",
+            hintText: "e.g Need Shared test/stage environment",
             suffixIcon: Icons.task_outlined,
             maxLines: 4,
             label: "Projects Worked On",
           ),
+
+          // Tasks/Module Completed
+          KAuthTextFormField(
+            hintText: "e.g Resume Hub, API Refactor",
+            suffixIcon: Icons.task_outlined,
+            maxLines: 4,
+            label: "Tasks/Module Completed",
+          ),
+
+          // KPI Metrics
+          KUploadPickerTile(
+            uploadOnTap: () {},
+            uploadPickerTitle: "KPI Metrics",
+            uploadPickerIcon: Icons.upload,
+            description: "Upload your KPI Metrics",
+          ),
+
+          // Performance Evidence
+          KUploadPickerTile(
+            uploadOnTap: () {},
+            uploadPickerTitle: "Performance Evidence",
+            uploadPickerIcon: Icons.upload,
+            description: "Upload your Performance Evidence",
+          ),
+
+          KVerticalSpacer(height: 20.h),
+
+          // Title
+          KText(
+            text: "Final Submission & Records",
+            fontWeight: FontWeight.w600,
+            fontSize: 14.sp,
+            color: AppColors.primaryColor,
+          ),
+
+          KVerticalSpacer(height: 6.h),
+
+          // Additional Attachments
+          KUploadPickerTile(
+            uploadOnTap: () {},
+            uploadPickerTitle: "Additional Attachments",
+            uploadPickerIcon: Icons.upload,
+            description: "Upload your Additional Attachments",
+          ),
+
+          // Final Remarks (Optional)
+          KAuthTextFormField(
+            hintText: "Add any other remarks...",
+            suffixIcon: Icons.task_outlined,
+            maxLines: 4,
+            label: "Final Remarks (Optional)",
+          ),
+
+          // I confirm the details shared are accurate
+          KCheckbox(
+            text: "I confirm the details shared are accurate",
+            checkboxKey: "isConfirmationDetails",
+            onChanged: (value) {},
+          ),
+
+          KVerticalSpacer(height: 20.h),
+
+          // Submit
+          KAuthFilledBtn(
+            backgroundColor: AppColors.primaryColor,
+            fontSize: 10.sp,
+            fontWeight: FontWeight.w600,
+            height: 24.h,
+            width: double.infinity,
+            text: "Submit",
+            onPressed: () async {},
+          ),
+
+          KVerticalSpacer(height: 20.h),
         ],
       ),
     );

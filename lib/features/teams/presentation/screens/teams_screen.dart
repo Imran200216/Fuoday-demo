@@ -22,7 +22,7 @@ class _TeamsScreenState extends State<TeamsScreen> {
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
-      length: 4,
+      length: 3,
       child: Scaffold(
         appBar: AppBar(
           centerTitle: true,
@@ -139,7 +139,6 @@ class _TeamsScreenState extends State<TeamsScreen> {
                               // Projects
                               Tab(text: "Projects"),
 
-
                               // Department
                               Tab(text: "Team List"),
                             ],
@@ -155,7 +154,6 @@ class _TeamsScreenState extends State<TeamsScreen> {
 
                               // Projects
                               TeamsProjects(),
-
 
                               // Team List
                               TeamsList(),

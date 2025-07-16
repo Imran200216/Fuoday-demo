@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:fuoday/commons/providers/checkbox_provider.dart';
 import 'package:fuoday/commons/providers/dropdown_provider.dart';
 import 'package:fuoday/core/di/injection.dart';
 import 'package:fuoday/core/router/app_router.dart';
@@ -32,13 +33,15 @@ class MyApp extends StatelessWidget {
 
         // Drop Down Provider
         ChangeNotifierProvider(create: (context) => getIt<DropdownProvider>()),
+
+        // Check Box Provider
+        ChangeNotifierProvider(create: (context) => getIt<CheckboxProvider>()),
       ],
       child: ScreenUtilInit(
         designSize: const Size(360, 690),
         minTextAdapt: true,
         splitScreenMode: true,
         builder: (context, child) {
-
           return MaterialApp.router(
             debugShowCheckedModeBanner: false,
             title: 'Fuoday',
