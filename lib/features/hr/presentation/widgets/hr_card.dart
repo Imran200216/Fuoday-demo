@@ -28,7 +28,6 @@ class HRCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Stack(
       children: [
-        // Card Content
         Container(
           width: 0.4.sw,
           padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 20.h),
