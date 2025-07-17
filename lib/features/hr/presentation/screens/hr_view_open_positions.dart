@@ -9,6 +9,8 @@ class HRViewOpenPositions extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListView.separated(
+      scrollDirection: Axis.vertical,
+      physics: const BouncingScrollPhysics(),
       itemCount: 12,
       separatorBuilder: (context, index) {
         return KVerticalSpacer(height: 12.h);

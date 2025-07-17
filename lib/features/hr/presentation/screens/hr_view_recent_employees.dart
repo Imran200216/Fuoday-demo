@@ -9,6 +9,8 @@ class HRViewRecentEmployees extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListView.separated(
+      scrollDirection: Axis.vertical,
+      physics: const BouncingScrollPhysics(),
       separatorBuilder: (context, index) {
         return KVerticalSpacer(height: 10.h);
       },
