@@ -5,23 +5,17 @@ import 'package:fuoday/commons/widgets/k_vertical_spacer.dart';
 import 'package:fuoday/core/themes/app_colors.dart';
 
 class HRCard extends StatelessWidget {
-  final String hrTotalEmployees;
-  final IconData attendancePercentageIcon;
-  final Color attendancePercentageColor;
-  final Color attendanceIconColor;
-  final String attendanceCount;
-  final IconData attendanceCardIcon;
-  final String attendanceDescription;
+  final String totalEmployeesCount;
+  final String description;
+  final String filterByHR;
+  final IconData hrCardIcon;
 
   const HRCard({
     super.key,
-    required this.hrTotalEmployees,
-    required this.attendancePercentageIcon,
-    required this.attendanceCount,
-    required this.attendanceCardIcon,
-    required this.attendanceDescription,
-    required this.attendanceIconColor,
-    required this.attendancePercentageColor,
+    required this.totalEmployeesCount,
+    required this.description,
+    required this.filterByHR,
+    required this.hrCardIcon,
   });
 
   @override
@@ -45,9 +39,9 @@ class HRCard extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              // Attendance count
+              // EmployeeCount
               KText(
-                text: attendanceCount,
+                text: totalEmployeesCount,
                 fontWeight: FontWeight.w700,
                 fontSize: 16.sp,
                 color: AppColors.titleColor,
@@ -55,9 +49,9 @@ class HRCard extends StatelessWidget {
 
               KVerticalSpacer(height: 8.h),
 
-              // Attendance Description
+              // Description
               KText(
-                text: attendanceDescription,
+                text: description,
                 fontWeight: FontWeight.w500,
                 fontSize: 10.sp,
                 color: AppColors.titleColor,
@@ -70,18 +64,17 @@ class HRCard extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
-                  Icon(
-                    attendancePercentageIcon,
-                    color: attendanceIconColor,
-                    size: 14.w,
+                  CircleAvatar(
+                    backgroundColor: AppColors.primaryColor,
+                    radius: 3.r,
                   ),
 
-                  // Percentage Text
+                  // filter by week
                   KText(
-                    text: hrTotalEmployees,
+                    text: filterByHR,
                     fontWeight: FontWeight.w500,
                     fontSize: 10.sp,
-                    color: attendancePercentageColor,
+                    color: AppColors.greyColor,
                   ),
                 ],
               ),
@@ -95,7 +88,7 @@ class HRCard extends StatelessWidget {
           child: CircleAvatar(
             radius: 14.r,
             backgroundColor: AppColors.secondaryColor,
-            child: Icon(attendanceCardIcon, color: AppColors.primaryColor),
+            child: Icon(hrCardIcon, color: AppColors.primaryColor),
           ),
         ),
       ],
