@@ -5,14 +5,29 @@ import 'package:google_fonts/google_fonts.dart';
 
 class KAuthPasswordTextField extends StatefulWidget {
   final String? hintText;
+  final String? label;
   final TextEditingController? controller;
   final String? Function(String?)? validator;
+  final VoidCallback? onTap;
+  final bool isReadOnly;
+  final bool floatingLabel;
+  final Color? labelColor;
+  final double? labelFontSize;
+  final FontWeight? labelFontWeight;
 
   const KAuthPasswordTextField({
     super.key,
     this.hintText,
+    this.label,
     this.controller,
     this.validator,
+    this.onTap,
+    this.isReadOnly = false,
+    this.floatingLabel =
+        false, // true for floating label, false for above label
+    this.labelColor,
+    this.labelFontSize,
+    this.labelFontWeight,
   });
 
   @override
@@ -30,43 +45,85 @@ class _KAuthPasswordTextFieldState extends State<KAuthPasswordTextField> {
 
   @override
   Widget build(BuildContext context) {
-    return TextFormField(
-      validator: widget.validator,
-      style: GoogleFonts.sora(
-        fontSize: 12.sp,
-        fontWeight: FontWeight.w500,
-        color: AppColors.titleColor,
-      ),
-      controller: widget.controller,
-      obscureText: _obscureText,
-      keyboardType: TextInputType.visiblePassword,
-      decoration: InputDecoration(
-        hintText: widget.hintText ?? 'Password',
-        suffixIcon: IconButton(
-          onPressed: _togglePasswordVisibility,
-          icon: Icon(
-            _obscureText ? Icons.visibility_off : Icons.visibility,
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        // Label above the field (only if label is provided and floatingLabel is false)
+        if (widget.label != null && !widget.floatingLabel) ...[
+          Text(
+            widget.label!,
+            style: GoogleFonts.sora(
+              fontSize: widget.labelFontSize ?? 12.sp,
+              fontWeight: widget.labelFontWeight ?? FontWeight.w600,
+              color: widget.labelColor ?? AppColors.titleColor,
+            ),
+          ),
+          SizedBox(height: 6.h),
+        ],
+
+        // TextFormField
+        TextFormField(
+          onTap: widget.onTap,
+          readOnly: widget.isReadOnly,
+          validator: widget.validator,
+          style: GoogleFonts.sora(
+            fontSize: 12.sp,
+            fontWeight: FontWeight.w500,
             color: AppColors.titleColor,
           ),
+          controller: widget.controller,
+          obscureText: _obscureText,
+          keyboardType: TextInputType.visiblePassword,
+          decoration: InputDecoration(
+            hintText: widget.hintText ?? 'Password',
+            labelText: widget.floatingLabel ? widget.label : null,
+            // floating label
+            labelStyle: widget.floatingLabel
+                ? GoogleFonts.sora(
+                    fontSize: widget.labelFontSize ?? 12.sp,
+                    fontWeight: widget.labelFontWeight ?? FontWeight.w500,
+                    color:
+                        widget.labelColor ??
+                        AppColors.titleColor.withOpacity(0.7),
+                  )
+                : null,
+            floatingLabelStyle: widget.floatingLabel
+                ? GoogleFonts.sora(
+                    fontSize: (widget.labelFontSize ?? 12.sp) + 1,
+                    fontWeight: widget.labelFontWeight ?? FontWeight.w600,
+                    color: widget.labelColor ?? AppColors.primaryColor,
+                  )
+                : null,
+            suffixIcon: IconButton(
+              onPressed: _togglePasswordVisibility,
+              icon: Icon(
+                _obscureText ? Icons.visibility_off : Icons.visibility,
+                color: AppColors.titleColor,
+              ),
+            ),
+            border: const OutlineInputBorder(),
+            enabledBorder: OutlineInputBorder(
+              borderSide: BorderSide(color: AppColors.authUnderlineBorderColor),
+            ),
+            focusedBorder: OutlineInputBorder(
+              borderSide: BorderSide(color: AppColors.primaryColor, width: 2.w),
+            ),
+            errorBorder: OutlineInputBorder(
+              borderSide: BorderSide(
+                color: AppColors.checkOutColor,
+                width: 1.w,
+              ),
+            ),
+            focusedErrorBorder: OutlineInputBorder(
+              borderSide: BorderSide(
+                color: AppColors.checkOutColor,
+                width: 2.w,
+              ),
+            ),
+            errorStyle: GoogleFonts.sora(fontSize: 10.sp, color: Colors.red),
+          ),
         ),
-        border: const UnderlineInputBorder(),
-        enabledBorder: UnderlineInputBorder(
-          borderSide: BorderSide(color: AppColors.authUnderlineBorderColor),
-        ),
-        focusedBorder: UnderlineInputBorder(
-          borderSide: BorderSide(color: Colors.blue, width: 2.w),
-        ),
-        errorBorder: UnderlineInputBorder(
-          borderSide: BorderSide(color: Colors.red, width: 1.w),
-        ),
-        focusedErrorBorder: UnderlineInputBorder(
-          borderSide: BorderSide(color: Colors.red, width: 2.w),
-        ),
-        errorStyle: GoogleFonts.sora(
-          fontSize: 10.sp,
-          color: Colors.red,
-        ),
-      ),
+      ],
     );
   }
 }
