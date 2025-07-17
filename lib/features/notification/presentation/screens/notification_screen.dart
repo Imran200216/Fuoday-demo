@@ -113,7 +113,7 @@ class _NotificationScreenState extends State<NotificationScreen> {
 
                   // HR
                   KDrawerListTile(
-                    drawerTitle: "HR",
+                    drawerTitle: "hr",
                     drawerListTileOnTap: () {},
                     drawerLeadingIcon: Icons.hail_rounded,
                   ),

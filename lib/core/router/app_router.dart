@@ -15,6 +15,7 @@ import 'package:fuoday/features/calendar/presentation/screens/calendar_screen.da
 import 'package:fuoday/features/feeds/presentation/screens/feeds_screen.dart';
 import 'package:fuoday/features/home/presentation/screens/home_employee_screen.dart';
 import 'package:fuoday/features/home/presentation/screens/home_recruiter_screen.dart';
+import 'package:fuoday/features/hr/presentation/screens/hr_screen.dart';
 import 'package:fuoday/features/leave_tracker/presentation/screens/leave_tracker_screen.dart';
 import 'package:fuoday/features/notification/presentation/screens/notification_screen.dart';
 import 'package:fuoday/features/on_boarding/presentation/screens/on_boarding_screen.dart';
@@ -337,6 +338,15 @@ final GoRouter appRouter = GoRouter(
       name: AppRouteConstants.teamTree,
       builder: (context, state) {
         return TeamTreeScreen();
+      },
+    ),
+
+    // Hr screen
+    GoRoute(
+      path: "/hr",
+      name: AppRouteConstants.hr,
+      builder: (context, state) {
+        return HRScreen();
       },
     ),
   ],
