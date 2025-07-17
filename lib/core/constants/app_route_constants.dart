@@ -82,4 +82,7 @@ class AppRouteConstants {
 
   // Team Tree Screen
   static const String teamTree = "teamTree";
+
+  //hr screen
+  static const String hr = "hr";
 }

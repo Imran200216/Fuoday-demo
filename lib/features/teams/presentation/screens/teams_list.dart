@@ -31,7 +31,7 @@ class TeamsList extends StatelessWidget {
         'Name': 'Jane Smith',
         'Location': 'LA',
         'Email Address': 'jane@example.com',
-        'Department': 'HR',
+        'Department': 'hr',
         'Designation': 'Manager',
       },
     ];

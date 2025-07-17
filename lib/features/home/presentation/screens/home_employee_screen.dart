@@ -149,8 +149,13 @@ class _HomeEmployeeScreenState extends State<HomeEmployeeScreen> {
 
                     // HR
                     KDrawerListTile(
-                      drawerTitle: "HR",
-                      drawerListTileOnTap: () {},
+                      drawerTitle: "hr",
+                      drawerListTileOnTap: () {
+                        // Time tracker screen
+                        GoRouter.of(
+                          context,
+                        ).pushNamed(AppRouteConstants.hr);
+                      },
                       drawerLeadingIcon: Icons.hail_rounded,
                     ),
 

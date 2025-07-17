@@ -144,7 +144,7 @@ class _TeamsTreeState extends State<TeamsTree> {
                     case "hr":
                       return _buildEmployeeCard(
                         "Aysha Begam",
-                        "HR",
+                        "hr",
                         "https://images.unsplash.com/photo-1494790108755-2616b9e6d4cc?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.1.0",
                       );
                     case "ishManager":
