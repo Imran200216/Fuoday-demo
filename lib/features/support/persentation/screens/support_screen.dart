@@ -104,7 +104,7 @@ class _SupportScreenState extends State<SupportScreen> {
                               ),
                             ),
 
-                            SizedBox(height: 12.h),
+                            KVerticalSpacer(height: 12.h),
 
                             // Create Ticket
                             KText(
@@ -113,7 +113,7 @@ class _SupportScreenState extends State<SupportScreen> {
                               fontSize: 14.sp,
                             ),
 
-                            SizedBox(height: 20.h),
+                            KVerticalSpacer(height: 20.h),
 
                             // Your KAuthTextFormField widgets...
                             KAuthTextFormField(
@@ -124,7 +124,7 @@ class _SupportScreenState extends State<SupportScreen> {
                               suffixIcon: Icons.date_range,
                             ),
 
-                            SizedBox(height: 10.h),
+                            KVerticalSpacer(height: 10.h),
 
                             // Select Category
                             Consumer<DropdownProvider>(
@@ -139,7 +139,7 @@ class _SupportScreenState extends State<SupportScreen> {
                               },
                             ),
 
-                            SizedBox(height: 10.h),
+                            KVerticalSpacer(height: 10.h),
 
                             // Assign to
                             KAuthTextFormField(
@@ -149,7 +149,7 @@ class _SupportScreenState extends State<SupportScreen> {
                               suffixIcon: Icons.person,
                             ),
 
-                            SizedBox(height: 10.h),
+                            KVerticalSpacer(height: 10.h),
 
                             // User Id
                             KAuthTextFormField(
@@ -159,7 +159,7 @@ class _SupportScreenState extends State<SupportScreen> {
                               suffixIcon: Icons.important_devices,
                             ),
 
-                            SizedBox(height: 10.h),
+                            KVerticalSpacer(height: 10.h),
 
                             // Enter Category
                             KAuthTextFormField(
@@ -169,7 +169,7 @@ class _SupportScreenState extends State<SupportScreen> {
                               suffixIcon: Icons.category_rounded,
                             ),
 
-                            SizedBox(height: 10.h),
+                            KVerticalSpacer(height: 10.h),
 
                             KAuthTextFormField(
                               maxLines: 4,
@@ -179,7 +179,7 @@ class _SupportScreenState extends State<SupportScreen> {
                               suffixIcon: Icons.description,
                             ),
 
-                            SizedBox(height: 30.h),
+                            KVerticalSpacer(height: 30.h),
 
                             // Cancel
                             KAuthFilledBtn(

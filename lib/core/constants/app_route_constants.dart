@@ -85,4 +85,7 @@ class AppRouteConstants {
 
   //hr screen
   static const String hr = "hr";
+
+  // Management Screen
+  static const String management = "management";
 }

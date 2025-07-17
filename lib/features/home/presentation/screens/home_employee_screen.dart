@@ -2,15 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:fuoday/commons/widgets/k_app_%20bar_with_drawer.dart';
 import 'package:fuoday/commons/widgets/k_circular_cache_image.dart';
-import 'package:fuoday/commons/widgets/k_drawer_list_tile.dart';
+import 'package:fuoday/commons/widgets/k_drawer.dart';
 import 'package:fuoday/commons/widgets/k_linear_gradient_bg.dart';
 import 'package:fuoday/commons/widgets/k_text.dart';
 import 'package:fuoday/commons/widgets/k_vertical_spacer.dart';
-import 'package:fuoday/core/constants/app_route_constants.dart';
 import 'package:fuoday/core/themes/app_colors.dart';
 import 'package:fuoday/features/home/presentation/screens/home_employee_activities.dart';
 import 'package:fuoday/features/home/presentation/screens/home_employee_feeds.dart';
-import 'package:go_router/go_router.dart';
 import 'package:stop_watch_timer/stop_watch_timer.dart';
 
 class HomeEmployeeScreen extends StatefulWidget {
@@ -48,177 +46,7 @@ class _HomeEmployeeScreenState extends State<HomeEmployeeScreen> {
           },
           onNotificationPressed: () {},
         ),
-
-        drawer: Drawer(
-          backgroundColor: AppColors.secondaryColor,
-          child: Column(
-            children: [
-              // Profile Header
-              UserAccountsDrawerHeader(
-                decoration: BoxDecoration(color: AppColors.primaryColor),
-                accountName: KText(
-                  text: "Irfan",
-                  color: AppColors.secondaryColor,
-                  fontWeight: FontWeight.w600,
-                  fontSize: 14.sp,
-                ),
-
-                accountEmail: KText(
-                  text: "irfanmohammed@gmail.com",
-                  color: AppColors.secondaryColor,
-                  fontWeight: FontWeight.w500,
-                  fontSize: 12.sp,
-                ),
-
-                currentAccountPicture: KCircularCachedImage(
-                  imageUrl:
-                      "https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=1288&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-                  size: 200.h,
-                ),
-              ),
-
-              // Menu Items
-              Expanded(
-                child: ListView(
-                  scrollDirection: Axis.vertical,
-                  children: [
-                    // Teams
-                    KDrawerListTile(
-                      drawerTitle: "Teams",
-                      drawerListTileOnTap: () {
-                        // Teams Screen
-                        GoRouter.of(context).pushNamed(AppRouteConstants.teams);
-                      },
-                      drawerLeadingIcon: Icons.group,
-                    ),
-
-                    // Organization
-                    KDrawerListTile(
-                      drawerTitle: "Organization",
-                      drawerListTileOnTap: () {
-                        // Organization Screen
-                        GoRouter.of(
-                          context,
-                        ).pushNamed(AppRouteConstants.organizations);
-                      },
-                      drawerLeadingIcon: Icons.location_city,
-                    ),
-
-                    // Team Tree
-                    KDrawerListTile(
-                      drawerTitle: "Team Tree",
-                      drawerListTileOnTap: () {
-                        // Team Tree Screen
-                        GoRouter.of(
-                          context,
-                        ).pushNamed(AppRouteConstants.teamTree);
-                      },
-                      drawerLeadingIcon: Icons.account_tree_outlined,
-                    ),
-
-                    Container(
-                      margin: EdgeInsets.symmetric(horizontal: 40.w),
-                      child: Divider(
-                        color: AppColors.subTitleColor.withOpacity(0.2),
-                      ),
-                    ),
-
-                    // Attendance
-                    KDrawerListTile(
-                      drawerTitle: "Attendance",
-                      drawerListTileOnTap: () {
-                        // Attendance Screen
-                        GoRouter.of(
-                          context,
-                        ).pushNamed(AppRouteConstants.attendance);
-                      },
-                      drawerLeadingIcon: Icons.add_chart,
-                    ),
-
-                    // Time Tracker
-                    KDrawerListTile(
-                      drawerTitle: "Time Tracker",
-                      drawerListTileOnTap: () {
-                        // Time tracker screen
-                        GoRouter.of(
-                          context,
-                        ).pushNamed(AppRouteConstants.timeTracker);
-                      },
-                      drawerLeadingIcon: Icons.timelapse,
-                    ),
-
-                    // HR
-                    KDrawerListTile(
-                      drawerTitle: "hr",
-                      drawerListTileOnTap: () {
-                        // Time tracker screen
-                        GoRouter.of(
-                          context,
-                        ).pushNamed(AppRouteConstants.hr);
-                      },
-                      drawerLeadingIcon: Icons.hail_rounded,
-                    ),
-
-                    // Pay Slip
-                    KDrawerListTile(
-                      drawerTitle: "Pay Slip",
-                      drawerListTileOnTap: () {
-                        // Pay Slip Screen
-                        GoRouter.of(
-                          context,
-                        ).pushNamed(AppRouteConstants.paySlip);
-                      },
-                      drawerLeadingIcon: Icons.payment_rounded,
-                    ),
-
-                    // Performance
-                    KDrawerListTile(
-                      drawerTitle: "Performance",
-                      drawerListTileOnTap: () {
-                        // Performance Screen
-                        GoRouter.of(
-                          context,
-                        ).pushNamed(AppRouteConstants.performance);
-                      },
-                      drawerLeadingIcon: Icons.quick_contacts_dialer,
-                    ),
-
-                    Container(
-                      margin: EdgeInsets.symmetric(horizontal: 40.w),
-                      child: Divider(
-                        color: AppColors.subTitleColor.withOpacity(0.2),
-                      ),
-                    ),
-
-                    // Support
-                    KDrawerListTile(
-                      drawerTitle: "Support",
-                      drawerListTileOnTap: () {
-                        // Support Screen
-                        GoRouter.of(
-                          context,
-                        ).pushNamed(AppRouteConstants.support);
-                      },
-                      drawerLeadingIcon: Icons.support_agent,
-                    ),
-
-                    // Logout
-                    KDrawerListTile(
-                      drawerTitle: "Logout",
-                      drawerListTileOnTap: () {
-                        // Login Page
-                        GoRouter.of(
-                          context,
-                        ).pushReplacementNamed(AppRouteConstants.login);
-                      },
-                      drawerLeadingIcon: Icons.logout,
-                    ),
-                  ],
-                ),
-              ),
-            ],
-          ),
-        ),
+        drawer: KDrawer(),
         body: KLinearGradientBg(
           gradientColor: AppColors.employeeGradientColor,
           child: Padding(

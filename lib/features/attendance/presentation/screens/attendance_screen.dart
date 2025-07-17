@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_expandable_fab/flutter_expandable_fab.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:fuoday/commons/widgets/k_app_bar.dart';
+import 'package:fuoday/commons/widgets/k_horizontal_spacer.dart';
 import 'package:fuoday/commons/widgets/k_vertical_spacer.dart';
 import 'package:fuoday/core/constants/app_route_constants.dart';
 import 'package:fuoday/core/themes/app_colors.dart';
@@ -28,61 +29,69 @@ class AttendanceScreen extends StatelessWidget {
         ),
         floatingActionButtonLocation: ExpandableFab.location,
         floatingActionButton: ExpandableFab(
+          type: ExpandableFabType.up,
+          overlayStyle: ExpandableFabOverlayStyle(
+            color: AppColors.greyColor.withOpacity(0.5),
+          ),
+
           openButtonBuilder: DefaultFloatingActionButtonBuilder(
             child: Icon(Icons.menu, color: AppColors.secondaryColor),
             fabSize: ExpandableFabSize.regular,
             backgroundColor: Theme.of(context).primaryColor,
             foregroundColor: Theme.of(context).colorScheme.onPrimary,
           ),
-
-          distance: 120.0,
+          distance: 50.0.h,
           children: [
             // Punctual Arrivals Details
-            FloatingActionButton.small(
+            _buildFabWithText(
+              context,
+              icon: Icons.access_time_filled,
+              label: "Punctual\nArrivals",
               heroTag: "punctual_arrivals",
               onPressed: () {
-                // Punctual Arrivals Details screen
                 GoRouter.of(context).pushNamed(
                   AppRouteConstants.attendancePunctualArrivalsDetails,
                 );
               },
-              child: Icon(Icons.access_time_filled),
             ),
 
             // Absent Days Details
-            FloatingActionButton.small(
+            _buildFabWithText(
+              context,
+              icon: Icons.person_off,
+              label: "Absent\nDays",
               heroTag: "absent_days",
               onPressed: () {
-                // Absent Days Details Screen
                 GoRouter.of(
                   context,
                 ).pushNamed(AppRouteConstants.attendanceAbsentDetails);
               },
-              child: Icon(Icons.person_off),
             ),
 
             // Late Arrival Details
-            FloatingActionButton.small(
+            _buildFabWithText(
+              context,
+              icon: Icons.schedule,
+              label: "Late\nArrivals",
               heroTag: "late_arrivals",
               onPressed: () {
-                //  Late Arrival Details
                 GoRouter.of(
                   context,
                 ).pushNamed(AppRouteConstants.attendanceLateArrivalDetails);
               },
-              child: Icon(Icons.schedule),
             ),
 
-            // Early  Arrival Details
-            FloatingActionButton.small(
+            // Early Arrival Details
+            _buildFabWithText(
+              context,
+              icon: Icons.drive_eta,
+              label: "Early\nArrivals",
               heroTag: "early_arrivals",
               onPressed: () {
-                //  Early  Arrival Details
                 GoRouter.of(
                   context,
                 ).pushNamed(AppRouteConstants.attendanceEarlyArrivalDetails);
               },
-              child: Icon(Icons.drive_eta),
             ),
           ],
         ),
@@ -137,6 +146,45 @@ class AttendanceScreen extends StatelessWidget {
           ),
         ),
       ),
+    );
+  }
+
+  // Add this helper method to your class
+  Widget _buildFabWithText(
+    BuildContext context, {
+    required IconData icon,
+    required String label,
+    required String heroTag,
+    required VoidCallback onPressed,
+  }) {
+    return Row(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        FloatingActionButton.small(
+          heroTag: heroTag,
+          onPressed: onPressed,
+          backgroundColor: Theme.of(context).primaryColor,
+          foregroundColor: Theme.of(context).colorScheme.onPrimary,
+          child: Icon(icon, size: 20),
+        ),
+        KHorizontalSpacer(width: 4.w),
+        Container(
+          padding: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+          decoration: BoxDecoration(
+            color: Theme.of(context).primaryColor.withOpacity(0.9),
+            borderRadius: BorderRadius.circular(12),
+          ),
+          child: Text(
+            label,
+            style: TextStyle(
+              color: Theme.of(context).colorScheme.onPrimary,
+              fontSize: 10,
+              fontWeight: FontWeight.w500,
+            ),
+            textAlign: TextAlign.center,
+          ),
+        ),
+      ],
     );
   }
 }

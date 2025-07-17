@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:fuoday/commons/widgets/k_app_%20bar_with_drawer.dart';
+import 'package:fuoday/commons/widgets/k_drawer.dart';
 import 'package:fuoday/core/themes/app_colors.dart';
 import 'package:syncfusion_flutter_calendar/calendar.dart';
 
@@ -26,6 +27,7 @@ class _CalendarScreenState extends State<CalendarScreen> {
         onDrawerPressed: _openDrawer,
         onNotificationPressed: () {},
       ),
+      drawer: KDrawer(),
       body: Padding(
         padding: const EdgeInsets.all(12.0),
         child: SfCalendar(

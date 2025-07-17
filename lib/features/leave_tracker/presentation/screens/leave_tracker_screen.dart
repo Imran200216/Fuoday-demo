@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:fuoday/commons/widgets/k_app_%20bar_with_drawer.dart';
+import 'package:fuoday/commons/widgets/k_drawer.dart';
 import 'package:fuoday/commons/widgets/k_tab_bar.dart';
 import 'package:fuoday/commons/widgets/k_vertical_spacer.dart';
 import 'package:fuoday/features/leave_tracker/presentation/screens/leave_balance.dart';
@@ -34,6 +35,7 @@ class _LeaveTrackerScreenState extends State<LeaveTrackerScreen> {
           },
           onNotificationPressed: () {},
         ),
+        drawer: KDrawer(),
 
         body: Container(
           margin: EdgeInsets.symmetric(horizontal: 20.w, vertical: 20.h),

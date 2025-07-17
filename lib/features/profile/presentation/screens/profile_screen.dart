@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:fuoday/commons/widgets/k_app_%20bar_with_drawer.dart';
 import 'package:fuoday/commons/widgets/k_circular_cache_image.dart';
+import 'package:fuoday/commons/widgets/k_drawer.dart';
 import 'package:fuoday/commons/widgets/k_text.dart';
 import 'package:fuoday/commons/widgets/k_vertical_spacer.dart';
 import 'package:fuoday/core/constants/app_route_constants.dart';
@@ -34,6 +35,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
         },
         onNotificationPressed: () {},
       ),
+      drawer: KDrawer(),
 
       body: SingleChildScrollView(
         scrollDirection: Axis.vertical,
