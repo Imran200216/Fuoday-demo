@@ -1,18 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:fuoday/commons/providers/dropdown_provider.dart';
 import 'package:fuoday/commons/widgets/k_checkbox.dart';
 import 'package:fuoday/commons/widgets/k_drop_down_text_form_field.dart';
 import 'package:fuoday/commons/widgets/k_text.dart';
 import 'package:fuoday/commons/widgets/k_upload_picker_tile.dart';
 import 'package:fuoday/commons/widgets/k_vertical_spacer.dart';
 import 'package:fuoday/core/di/injection.dart';
+import 'package:fuoday/core/extensions/provider_extension.dart';
 import 'package:fuoday/core/service/file_picker_service.dart';
 import 'package:fuoday/core/themes/app_colors.dart';
 import 'package:fuoday/features/auth/presentation/widgets/k_auth_filled_btn.dart';
 import 'package:fuoday/features/auth/presentation/widgets/k_auth_text_form_field.dart';
-import 'package:provider/provider.dart';
 
 class PerformanceAuditForm extends StatefulWidget {
   const PerformanceAuditForm({super.key});
@@ -179,15 +178,12 @@ class _PerformanceAuditFormState extends State<PerformanceAuditForm> {
           ),
 
           // Select Category
-          Consumer<DropdownProvider>(
-            builder: (context, dropDownProvider, child) {
-              return KDropdownTextFormField<String>(
-                hintText: "Select Review Period",
-                value: dropDownProvider.getValue('reviewPeriod'),
-                items: ['Q1', 'Q2', 'H1', 'Annual'],
-                onChanged: (value) =>
-                    dropDownProvider.setValue('reviewPeriod', value),
-              );
+          KDropdownTextFormField<String>(
+            hintText: "Select Review Period",
+            value: context.dropDownProviderWatch.getValue('reviewPeriod'),
+            items: ['Q1', 'Q2', 'H1', 'Annual'],
+            onChanged: (value) {
+              context.dropDownProviderRead.setValue('reviewPeriod', value);
             },
           ),
 
@@ -198,16 +194,12 @@ class _PerformanceAuditFormState extends State<PerformanceAuditForm> {
           ),
 
           // Audit Cycle Type
-          Consumer<DropdownProvider>(
-            builder: (context, dropDownProvider, child) {
-              return KDropdownTextFormField<String>(
-                hintText: "Select Audit Cycle Type",
-                value: dropDownProvider.getValue('auditCycleType'),
-                items: ['Quarterly', '6 Months', 'One Year'],
-                onChanged: (value) =>
-                    dropDownProvider.setValue('auditCycleType', value),
-              );
-            },
+          KDropdownTextFormField<String>(
+            hintText: "Select Audit Cycle Type",
+            value: context.dropDownProviderWatch.getValue('auditCycleType'),
+            items: ['Quarterly', '6 Months', 'One Year'],
+            onChanged: (value) =>
+                context.dropDownProviderRead.setValue('auditCycleType', value),
           ),
 
           KVerticalSpacer(height: 20.h),
@@ -263,16 +255,14 @@ class _PerformanceAuditFormState extends State<PerformanceAuditForm> {
           ),
 
           // Daily Standups
-          Consumer<DropdownProvider>(
-            builder: (context, dropDownProvider, child) {
-              return KDropdownTextFormField<String>(
-                hintText: "Select Daily Standup Status",
-                value: dropDownProvider.getValue('dailyStandUpStatus'),
-                items: ['Good', 'Poor', 'Excellent'],
-                onChanged: (value) =>
-                    dropDownProvider.setValue('dailyStandupStatus', value),
-              );
-            },
+          KDropdownTextFormField<String>(
+            hintText: "Select Daily Standup Status",
+            value: context.dropDownProviderWatch.getValue('dailyStandUpStatus'),
+            items: ['Good', 'Poor', 'Excellent'],
+            onChanged: (value) => context.dropDownProviderRead.setValue(
+              'dailyStandupStatus',
+              value,
+            ),
           ),
 
           KText(
@@ -282,16 +272,16 @@ class _PerformanceAuditFormState extends State<PerformanceAuditForm> {
           ),
 
           // Client Meetings
-          Consumer<DropdownProvider>(
-            builder: (context, dropDownProvider, child) {
-              return KDropdownTextFormField<String>(
-                hintText: "Select Client Meetings",
-                value: dropDownProvider.getValue('clientMeetingsStatus'),
-                items: ['Good', 'Poor', 'Excellent'],
-                onChanged: (value) =>
-                    dropDownProvider.setValue('clientMeetingsStatus', value),
-              );
-            },
+          KDropdownTextFormField<String>(
+            hintText: "Select Client Meetings",
+            value: context.dropDownProviderWatch.getValue(
+              'clientMeetingsStatus',
+            ),
+            items: ['Good', 'Poor', 'Excellent'],
+            onChanged: (value) => context.dropDownProviderRead.setValue(
+              'clientMeetingsStatus',
+              value,
+            ),
           ),
 
           KText(

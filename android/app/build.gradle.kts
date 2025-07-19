@@ -6,7 +6,7 @@ plugins {
 }
 
 android {
-    namespace = "com.example.fuoday"
+    namespace = "com.thikse.fuoday"
     compileSdk = flutter.compileSdkVersion
     ndkVersion = "27.0.12077973"
 
@@ -21,13 +21,37 @@ android {
 
     defaultConfig {
         // TODO: Specify your own unique Application ID (https://developer.android.com/studio/build/application-id.html).
-        applicationId = "com.example.fuoday"
+        applicationId = "com.thikse.fuoday"
         // You can update the following values to match your application needs.
         // For more information, see: https://flutter.dev/to/review-gradle-config.
         minSdk = flutter.minSdkVersion
         targetSdk = flutter.targetSdkVersion
         versionCode = flutter.versionCode
         versionName = flutter.versionName
+    }
+
+    // Android Flaors
+    flavorDimensions += "environment"
+    productFlavors {
+        // development
+        create("dev") {
+            dimension = "environment"
+            resValue(
+                type = "string",
+                name = "app_name",
+                value = "Fuoday Dev")
+            applicationIdSuffix = ".dev"
+        }
+
+        // production
+        create("prod") {
+            dimension = "environment"
+            resValue(
+                type = "string",
+                name = "app_name",
+                value = "Fuoday")
+            applicationIdSuffix = ".prod"
+        }
     }
 
     buildTypes {
