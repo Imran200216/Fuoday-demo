@@ -11,6 +11,7 @@ import 'package:fuoday/core/service/hive_storage_service.dart';
 import 'package:fuoday/core/themes/app_colors.dart';
 import 'package:fuoday/features/auth/presentation/providers/sliding_segmented_provider.dart';
 import 'package:fuoday/features/bottom_nav/providers/bottom_nav_provider.dart';
+import 'package:fuoday/features/home/presentation/provider/check_in_provider.dart';
 import 'package:fuoday/features/profile/presentation/providers/profile_edit_provider.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hive_flutter/hive_flutter.dart';
@@ -65,6 +66,9 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(
           create: (context) => getIt<AppFilePickerProvider>(),
         ),
+
+        // Check In Provider
+        ChangeNotifierProvider(create: (context) => getIt<CheckInProvider>()),
       ],
       child: ScreenUtilInit(
         designSize: const Size(360, 690),

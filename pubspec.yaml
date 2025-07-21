@@ -133,8 +133,6 @@ dev_dependencies:
     sdk: flutter
   flutter_lints: ^5.0.0
 
-
-
   # envied generator
   envied_generator: ^1.1.1
 

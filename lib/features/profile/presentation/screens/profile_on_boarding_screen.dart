@@ -5,6 +5,7 @@ import 'package:fuoday/commons/widgets/k_app_bar.dart';
 import 'package:fuoday/commons/widgets/k_snack_bar.dart';
 import 'package:fuoday/commons/widgets/k_upload_picker_tile.dart';
 import 'package:fuoday/commons/widgets/k_vertical_spacer.dart';
+import 'package:fuoday/core/constants/app_route_constants.dart';
 import 'package:fuoday/core/extensions/provider_extension.dart';
 import 'package:fuoday/core/helper/app_logger_helper.dart';
 import 'package:fuoday/core/themes/app_colors.dart';
@@ -107,9 +108,40 @@ class _ProfileOnBoardingScreenState extends State<ProfileOnBoardingScreen> {
 
                 // Photo
                 KUploadPickerTile(
-                  showCancel: context.filePickerProviderWatch.isPicked("Photo"),
+                  showOnlyView: context.filePickerProviderWatch.isPicked(
+                    'photo',
+                  ),
+                  onViewTap: () {
+                    final pickedFile = context.filePickerProviderRead.getFile(
+                      "photo",
+                    );
+                    if (pickedFile == null) return;
+
+                    final filePath = pickedFile.path;
+                    final fileName = pickedFile.name.toLowerCase();
+
+                    if (fileName.endsWith('.pdf')) {
+                      // Pdf Preview Screen
+                      GoRouter.of(context).pushNamed(
+                        AppRouteConstants.pdfPreview,
+                        extra: filePath,
+                      );
+                    } else if (fileName.endsWith('.png') ||
+                        fileName.endsWith('.jpg') ||
+                        fileName.endsWith('.jpeg') ||
+                        fileName.endsWith('.webp')) {
+                      // Image Preview Screen
+                      GoRouter.of(context).pushNamed(
+                        AppRouteConstants.imagePreview,
+                        extra: filePath,
+                      );
+                    } else {
+                      KSnackBar.failure(context, "Unsupported file type");
+                    }
+                  },
+                  showCancel: context.filePickerProviderWatch.isPicked("photo"),
                   onCancelTap: () {
-                    context.filePickerProviderRead.removeFile("Photo");
+                    context.filePickerProviderRead.removeFile("photo");
                     KSnackBar.success(context, "File removed successfully");
                   },
                   uploadOnTap: () async {
@@ -144,6 +176,35 @@ class _ProfileOnBoardingScreenState extends State<ProfileOnBoardingScreen> {
 
                 // PAN
                 KUploadPickerTile(
+                  showOnlyView: context.filePickerProviderWatch.isPicked('PAN'),
+                  onViewTap: () {
+                    final pickedFile = context.filePickerProviderRead.getFile(
+                      "PAN",
+                    );
+                    if (pickedFile == null) return;
+
+                    final filePath = pickedFile.path;
+                    final fileName = pickedFile.name.toLowerCase();
+
+                    if (fileName.endsWith('.pdf')) {
+                      // Pdf Preview Screen
+                      GoRouter.of(context).pushNamed(
+                        AppRouteConstants.pdfPreview,
+                        extra: filePath,
+                      );
+                    } else if (fileName.endsWith('.png') ||
+                        fileName.endsWith('.jpg') ||
+                        fileName.endsWith('.jpeg') ||
+                        fileName.endsWith('.webp')) {
+                      // Image Preview Screen
+                      GoRouter.of(context).pushNamed(
+                        AppRouteConstants.imagePreview,
+                        extra: filePath,
+                      );
+                    } else {
+                      KSnackBar.failure(context, "Unsupported file type");
+                    }
+                  },
                   showCancel: context.filePickerProviderWatch.isPicked("PAN"),
                   onCancelTap: () {
                     context.filePickerProviderRead.removeFile("PAN");
@@ -181,6 +242,38 @@ class _ProfileOnBoardingScreenState extends State<ProfileOnBoardingScreen> {
 
                 // Bank Passbook
                 KUploadPickerTile(
+                  showOnlyView: context.filePickerProviderWatch.isPicked(
+                    "bankPassBook",
+                  ),
+                  onViewTap: () {
+                    final pickedFile = context.filePickerProviderRead.getFile(
+                      "bankPassBook",
+                    );
+                    if (pickedFile == null) return;
+
+                    final filePath = pickedFile.path;
+                    final fileName = pickedFile.name.toLowerCase();
+
+                    if (fileName.endsWith('.pdf')) {
+                      // Pdf Preview Screen
+                      GoRouter.of(context).pushNamed(
+                        AppRouteConstants.pdfPreview,
+                        extra: filePath,
+                      );
+                    } else if (fileName.endsWith('.png') ||
+                        fileName.endsWith('.jpg') ||
+                        fileName.endsWith('.jpeg') ||
+                        fileName.endsWith('.webp')) {
+                      // Image Preview Screen
+                      GoRouter.of(context).pushNamed(
+                        AppRouteConstants.imagePreview,
+                        extra: filePath,
+                      );
+                    } else {
+                      KSnackBar.failure(context, "Unsupported file type");
+                    }
+                  },
+
                   showCancel: context.filePickerProviderWatch.isPicked(
                     "bankPassBook",
                   ),
@@ -221,6 +314,38 @@ class _ProfileOnBoardingScreenState extends State<ProfileOnBoardingScreen> {
 
                 // Pay Slip
                 KUploadPickerTile(
+                  showOnlyView: context.filePickerProviderWatch.isPicked(
+                    "paySlip",
+                  ),
+                  onViewTap: () {
+                    final pickedFile = context.filePickerProviderRead.getFile(
+                      "paySlip",
+                    );
+                    if (pickedFile == null) return;
+
+                    final filePath = pickedFile.path;
+                    final fileName = pickedFile.name.toLowerCase();
+
+                    if (fileName.endsWith('.pdf')) {
+                      // Pdf Preview Screen
+                      GoRouter.of(context).pushNamed(
+                        AppRouteConstants.pdfPreview,
+                        extra: filePath,
+                      );
+                    } else if (fileName.endsWith('.png') ||
+                        fileName.endsWith('.jpg') ||
+                        fileName.endsWith('.jpeg') ||
+                        fileName.endsWith('.webp')) {
+                      // Image Preview Screen
+                      GoRouter.of(context).pushNamed(
+                        AppRouteConstants.imagePreview,
+                        extra: filePath,
+                      );
+                    } else {
+                      KSnackBar.failure(context, "Unsupported file type");
+                    }
+                  },
+
                   showCancel: context.filePickerProviderWatch.isPicked(
                     "paySlip",
                   ),
@@ -260,6 +385,38 @@ class _ProfileOnBoardingScreenState extends State<ProfileOnBoardingScreen> {
 
                 // Offer Letter
                 KUploadPickerTile(
+                  showOnlyView: context.filePickerProviderWatch.isPicked(
+                    "offerLetter",
+                  ),
+                  onViewTap: () {
+                    final pickedFile = context.filePickerProviderRead.getFile(
+                      "offerLetter",
+                    );
+                    if (pickedFile == null) return;
+
+                    final filePath = pickedFile.path;
+                    final fileName = pickedFile.name.toLowerCase();
+
+                    if (fileName.endsWith('.pdf')) {
+                      // Pdf Preview Screen
+                      GoRouter.of(context).pushNamed(
+                        AppRouteConstants.pdfPreview,
+                        extra: filePath,
+                      );
+                    } else if (fileName.endsWith('.png') ||
+                        fileName.endsWith('.jpg') ||
+                        fileName.endsWith('.jpeg') ||
+                        fileName.endsWith('.webp')) {
+                      // Image Preview Screen
+                      GoRouter.of(context).pushNamed(
+                        AppRouteConstants.imagePreview,
+                        extra: filePath,
+                      );
+                    } else {
+                      KSnackBar.failure(context, "Unsupported file type");
+                    }
+                  },
+
                   showCancel: context.filePickerProviderWatch.isPicked(
                     "offerLetter",
                   ),

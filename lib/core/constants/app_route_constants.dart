@@ -88,4 +88,8 @@ class AppRouteConstants {
 
   // Management Screen
   static const String management = "management";
+
+  // Preview Screen
+  static const String imagePreview = "imagePreview";
+  static const String pdfPreview = "pdfPreview";
 }

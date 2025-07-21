@@ -47,6 +47,8 @@ class KSnackBar {
         behavior: SnackBarBehavior.floating,
         duration: const Duration(seconds: 3),
         closeIconColor: AppColors.secondaryColor,
+        showCloseIcon: true,
+        dismissDirection: DismissDirection.down,
       ),
     );
   }

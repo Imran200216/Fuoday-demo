@@ -11,7 +11,9 @@ class KUploadPickerTile extends StatelessWidget {
   final double? spacing;
   final VoidCallback uploadOnTap;
   final VoidCallback? onCancelTap;
+  final VoidCallback? onViewTap;
   final bool showCancel;
+  final bool showOnlyView;
 
   const KUploadPickerTile({
     super.key,
@@ -22,6 +24,8 @@ class KUploadPickerTile extends StatelessWidget {
     required this.uploadOnTap,
     this.onCancelTap,
     this.showCancel = false,
+    this.showOnlyView = false,
+    this.onViewTap,
   });
 
   @override
@@ -84,24 +88,57 @@ class KUploadPickerTile extends StatelessWidget {
           ],
         ),
 
-        if (showCancel)
+        if (showCancel || showOnlyView)
           Positioned(
             top: 0,
             right: 0,
-            child: GestureDetector(
-              onTap: onCancelTap,
-              child: Row(
-                spacing: 1.w,
-                children: [
-                  Icon(Icons.cancel, color: AppColors.greyColor, size: 12.w),
-                  KText(
-                    text: "Cancel",
-                    fontWeight: FontWeight.w500,
-                    color: AppColors.greyColor,
-                    fontSize: 10.sp,
+            child: Row(
+              spacing: 16.w,
+              mainAxisAlignment: MainAxisAlignment.end,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                // View btn
+                GestureDetector(
+                  onTap: onViewTap,
+                  child: Row(
+                    spacing: 1.w,
+                    children: [
+                      Icon(
+                        Icons.remove_red_eye,
+                        color: AppColors.greyColor,
+                        size: 12.w,
+                      ),
+                      KText(
+                        text: "View",
+                        fontWeight: FontWeight.w500,
+                        color: AppColors.greyColor,
+                        fontSize: 10.sp,
+                      ),
+                    ],
                   ),
-                ],
-              ),
+                ),
+
+                // Cancel btn
+                GestureDetector(
+                  onTap: onCancelTap,
+                  child: Row(
+                    spacing: 1.w,
+                    children: [
+                      Icon(
+                        Icons.cancel,
+                        color: AppColors.greyColor,
+                        size: 12.w,
+                      ),
+                      KText(
+                        text: "Cancel",
+                        fontWeight: FontWeight.w500,
+                        color: AppColors.greyColor,
+                        fontSize: 10.sp,
+                      ),
+                    ],
+                  ),
+                ),
+              ],
             ),
           ),
       ],

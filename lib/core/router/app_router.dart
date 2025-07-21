@@ -23,6 +23,8 @@ import 'package:fuoday/features/on_boarding/presentation/screens/on_boarding_scr
 import 'package:fuoday/features/organizations/presentation/screens/organizations_screen.dart';
 import 'package:fuoday/features/payslip/presentation/screens/pay_slip_screen.dart';
 import 'package:fuoday/features/performance/presentation/screens/performance_screen.dart';
+import 'package:fuoday/features/previews/presentation/screens/image_preview_screen.dart';
+import 'package:fuoday/features/previews/presentation/screens/pdf_preview_screen.dart';
 import 'package:fuoday/features/profile/presentation/screens/profile_educational_background_screen.dart';
 import 'package:fuoday/features/profile/presentation/screens/profile_employment_details_screen.dart';
 import 'package:fuoday/features/profile/presentation/screens/profile_on_boarding_screen.dart';
@@ -357,6 +359,28 @@ final GoRouter appRouter = GoRouter(
       name: AppRouteConstants.management,
       builder: (context, state) {
         return ManagementScreen();
+      },
+    ),
+
+    // Pdf Preview Screen
+    GoRoute(
+      path: "/pdfPreview",
+      name: AppRouteConstants.pdfPreview,
+      builder: (context, state) {
+        final filePath = state.extra as String;
+
+        return PdfPreviewScreen(filePath: filePath);
+      },
+    ),
+
+    // Image Preview Screen
+    GoRoute(
+      path: "/imagePreview",
+      name: AppRouteConstants.imagePreview,
+      builder: (context, state) {
+        final filePath = state.extra as String;
+
+        return ImagePreviewScreen(filePath: filePath);
       },
     ),
   ],
