@@ -28,6 +28,8 @@ class KCircularCachedImage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isValidUrl = imageUrl.startsWith('http');
+
     return GestureDetector(
       onTap: onTap,
       child: Container(
@@ -41,12 +43,14 @@ class KCircularCachedImage extends StatelessWidget {
               : null,
         ),
         child: ClipOval(
-          child: CachedNetworkImage(
-            imageUrl: imageUrl,
-            fit: fit,
-            placeholder: (context, url) => _buildPlaceholder(),
-            errorWidget: (context, url, error) => _buildErrorWidget(),
-          ),
+          child: isValidUrl
+              ? CachedNetworkImage(
+                  imageUrl: imageUrl,
+                  fit: fit,
+                  placeholder: (context, url) => _buildPlaceholder(),
+                  errorWidget: (context, url, error) => _buildErrorWidget(),
+                )
+              : _buildPlaceholder(), // fallback to local image
         ),
       ),
     );

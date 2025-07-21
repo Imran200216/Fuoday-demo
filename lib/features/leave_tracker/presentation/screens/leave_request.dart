@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:fuoday/commons/providers/dropdown_provider.dart';
 import 'package:fuoday/commons/widgets/k_drop_down_text_form_field.dart';
 import 'package:fuoday/commons/widgets/k_vertical_spacer.dart';
+import 'package:fuoday/core/extensions/provider_extension.dart';
 import 'package:fuoday/core/themes/app_colors.dart';
 import 'package:fuoday/features/auth/presentation/widgets/k_auth_filled_btn.dart';
 import 'package:fuoday/features/auth/presentation/widgets/k_auth_text_form_field.dart';
-import 'package:provider/provider.dart';
 
 class LeaveRequest extends StatefulWidget {
   const LeaveRequest({super.key});
@@ -91,16 +90,12 @@ class _LeaveRequestState extends State<LeaveRequest> {
           ),
 
           // Type Drop Down TextForm Field
-          Consumer<DropdownProvider>(
-            builder: (context, dropDownProvider, child) {
-              return KDropdownTextFormField<String>(
-                hintText: "Select Type",
-                value: dropDownProvider.getValue('leaveType'),
-                items: ['Sick Leave', 'Periods Leave', 'Casual Leave'],
-                onChanged: (value) =>
-                    dropDownProvider.setValue('leaveType', value),
-              );
-            },
+          KDropdownTextFormField<String>(
+            hintText: "Select Type",
+            value: context.dropDownProviderWatch.getValue('leaveType'),
+            items: ['Sick Leave', 'Periods Leave', 'Casual Leave'],
+            onChanged: (value) =>
+                context.dropDownProviderRead.setValue('leaveType', value),
           ),
 
           // Start Date TextFormField

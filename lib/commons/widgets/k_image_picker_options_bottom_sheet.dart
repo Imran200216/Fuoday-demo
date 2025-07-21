@@ -4,14 +4,14 @@ import 'package:fuoday/commons/widgets/k_vertical_spacer.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:fuoday/core/themes/app_colors.dart';
 
-class KDownloadOptionsBottomSheet extends StatelessWidget {
-  final VoidCallback onPdfTap;
-  final VoidCallback onExcelTap;
+class KImagePickerOptionsBottomSheet extends StatelessWidget {
+  final VoidCallback onCameraTap;
+  final VoidCallback onGalleryTap;
 
-  const KDownloadOptionsBottomSheet({
+  const KImagePickerOptionsBottomSheet({
     super.key,
-    required this.onPdfTap,
-    required this.onExcelTap,
+    required this.onCameraTap,
+    required this.onGalleryTap,
   });
 
   @override
@@ -35,7 +35,7 @@ class KDownloadOptionsBottomSheet extends StatelessWidget {
 
           // Title
           Text(
-            "Download Options",
+            "Pick an Image Options",
             style: GoogleFonts.sora(
               fontSize: 14.sp,
               fontWeight: FontWeight.bold,
@@ -46,16 +46,16 @@ class KDownloadOptionsBottomSheet extends StatelessWidget {
 
           // PDF
           ListTile(
-            leading: const Icon(Icons.picture_as_pdf),
-            title: const Text("Download as PDF"),
-            onTap: onPdfTap,
+            leading: const Icon(Icons.camera),
+            title: const Text("Pick an Image from Camera"),
+            onTap: onCameraTap,
           ),
 
           // Excel
           ListTile(
-            leading: const Icon(Icons.table_chart),
-            title: const Text("Download as Excel"),
-            onTap: onExcelTap,
+            leading: const Icon(Icons.file_copy_rounded),
+            title: const Text("Pick an Image from Gallery"),
+            onTap: onGalleryTap,
           ),
         ],
       ),

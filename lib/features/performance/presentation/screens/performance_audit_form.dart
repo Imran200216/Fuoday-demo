@@ -8,8 +8,8 @@ import 'package:fuoday/commons/widgets/k_upload_picker_tile.dart';
 import 'package:fuoday/commons/widgets/k_vertical_spacer.dart';
 import 'package:fuoday/core/di/injection.dart';
 import 'package:fuoday/core/extensions/provider_extension.dart';
-import 'package:fuoday/core/service/file_picker_service.dart';
 import 'package:fuoday/core/themes/app_colors.dart';
+import 'package:fuoday/core/utils/file_picker.dart';
 import 'package:fuoday/features/auth/presentation/widgets/k_auth_filled_btn.dart';
 import 'package:fuoday/features/auth/presentation/widgets/k_auth_text_form_field.dart';
 
@@ -22,7 +22,7 @@ class PerformanceAuditForm extends StatefulWidget {
 
 class _PerformanceAuditFormState extends State<PerformanceAuditForm> {
   // File Picker Service
-  final filePickerService = getIt<FilePickerService>();
+  final filePickerService = getIt<AppFilePicker>();
 
   // Controllers
   final TextEditingController employeeNameController = TextEditingController();

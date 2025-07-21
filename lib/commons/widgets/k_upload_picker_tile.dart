@@ -10,6 +10,8 @@ class KUploadPickerTile extends StatelessWidget {
   final String description;
   final double? spacing;
   final VoidCallback uploadOnTap;
+  final VoidCallback? onCancelTap;
+  final bool showCancel;
 
   const KUploadPickerTile({
     super.key,
@@ -18,71 +20,90 @@ class KUploadPickerTile extends StatelessWidget {
     required this.description,
     this.spacing,
     required this.uploadOnTap,
+    this.onCancelTap,
+    this.showCancel = false,
   });
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      spacing: spacing ?? 6.h,
-      crossAxisAlignment: CrossAxisAlignment.start,
-      mainAxisAlignment: MainAxisAlignment.center,
+    return Stack(
       children: [
-        // Only show title if it's provided
-        if (uploadPickerTitle != null)
-          KText(
-            text: uploadPickerTitle!,
-            fontWeight: FontWeight.w600,
-            fontSize: 12.sp,
-          ),
-
-        GestureDetector(
-          onTap: () {
-            uploadOnTap();
-          },
-          child: DottedBorder(
-            options: RoundedRectDottedBorderOptions(
-              dashPattern: [5, 5],
-              strokeWidth: 1,
-              color: AppColors.greyColor,
-              radius: Radius.circular(8.r),
-            ),
-            child: Container(
-              height: 80.h,
-              width: double.infinity,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(8.r),
-                gradient: const LinearGradient(
-                  begin: Alignment.topCenter,
-                  end: Alignment.bottomCenter,
-                  colors: AppColors.cardGradientColor,
+        Column(
+          spacing: spacing ?? 6.h,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            if (uploadPickerTitle != null)
+              KText(
+                text: uploadPickerTitle!,
+                fontWeight: FontWeight.w600,
+                fontSize: 12.sp,
+              ),
+            GestureDetector(
+              onTap: uploadOnTap,
+              child: DottedBorder(
+                options: RoundedRectDottedBorderOptions(
+                  dashPattern: [5, 5],
+                  strokeWidth: 1,
+                  color: AppColors.greyColor,
+                  radius: Radius.circular(8.r),
+                ),
+                child: Container(
+                  height: 80.h,
+                  width: double.infinity,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(8.r),
+                    gradient: const LinearGradient(
+                      begin: Alignment.topCenter,
+                      end: Alignment.bottomCenter,
+                      colors: AppColors.cardGradientColor,
+                    ),
+                  ),
+                  child: Center(
+                    child: Column(
+                      spacing: 12.h,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Icon(
+                          uploadPickerIcon,
+                          color: AppColors.greyColor.withOpacity(0.8),
+                          size: 22.h,
+                        ),
+                        KText(
+                          textAlign: TextAlign.center,
+                          color: AppColors.greyColor.withOpacity(0.8),
+                          text: description,
+                          fontWeight: FontWeight.w500,
+                          fontSize: 12.sp,
+                        ),
+                      ],
+                    ),
+                  ),
                 ),
               ),
-              child: Center(
-                child: Column(
-                  spacing: 12.h,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    // Upload Icon
-                    Icon(
-                      uploadPickerIcon,
-                      color: AppColors.greyColor.withOpacity(0.8),
-                      size: 22.h,
-                    ),
-
-                    // description
-                    KText(
-                      color: AppColors.greyColor.withOpacity(0.8),
-                      text: description,
-                      fontWeight: FontWeight.w500,
-                      fontSize: 12.sp,
-                    ),
-                  ],
-                ),
-              ),
             ),
-          ),
+          ],
         ),
+
+        if (showCancel)
+          Positioned(
+            top: 0,
+            right: 0,
+            child: GestureDetector(
+              onTap: onCancelTap,
+              child: Row(
+                spacing: 1.w,
+                children: [
+                  Icon(Icons.cancel, color: AppColors.greyColor, size: 12.w),
+                  KText(
+                    text: "Cancel",
+                    fontWeight: FontWeight.w500,
+                    color: AppColors.greyColor,
+                    fontSize: 10.sp,
+                  ),
+                ],
+              ),
+            ),
+          ),
       ],
     );
   }

@@ -9,6 +9,7 @@ import 'package:fuoday/core/constants/app_route_constants.dart';
 import 'package:fuoday/core/themes/app_colors.dart';
 import 'package:fuoday/features/profile/presentation/widgets/profile_list_tile.dart';
 import 'package:go_router/go_router.dart';
+import 'package:easy_image_viewer/easy_image_viewer.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
@@ -48,9 +49,20 @@ class _ProfileScreenState extends State<ProfileScreen> {
             children: [
               // profile image
               KCircularCachedImage(
+                onTap: () {
+                  showImageViewer(
+                    context,
+                    Image.network(
+                      "https://plus.unsplash.com/premium_photo-1672239496290-5061cfee7ebb?q=80&w=1287&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+                      fit: BoxFit.contain,
+                    ).image,
+                    swipeDismissible: true,
+                    doubleTapZoomable: true,
+                  );
+                },
                 size: 90.h,
                 imageUrl:
-                    "https://images.unsplash.com/photo-1499996860823-5214fcc65f8f?q=80&w=2566&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+                    "https://plus.unsplash.com/premium_photo-1672239496290-5061cfee7ebb?q=80&w=1287&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
               ),
 
               SizedBox(height: 24.h),

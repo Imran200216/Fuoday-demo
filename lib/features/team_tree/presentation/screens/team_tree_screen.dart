@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:fuoday/commons/widgets/k_app_bar.dart';
 import 'package:fuoday/commons/widgets/k_text.dart';
 import 'package:fuoday/commons/widgets/k_vertical_spacer.dart';
 import 'package:fuoday/core/themes/app_colors.dart';
 import 'package:go_router/go_router.dart';
 import 'package:graphview/GraphView.dart';
-
-import '../../../../commons/widgets/k_app_bar.dart';
 
 class TeamTreeScreen extends StatefulWidget {
   const TeamTreeScreen({super.key});
@@ -131,7 +130,7 @@ class _TeamTreeScreenState extends State<TeamTreeScreen> {
             KVerticalSpacer(height: 20.h),
 
             // Graph View Container
-            Container(
+            SizedBox(
               height: 600.h, // Set appropriate height
               child: InteractiveViewer(
                 constrained: false,

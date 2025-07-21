@@ -7,14 +7,15 @@ import 'package:fuoday/commons/widgets/k_text.dart';
 import 'package:fuoday/commons/widgets/k_vertical_spacer.dart';
 import 'package:fuoday/core/constants/app_assets_constants.dart';
 import 'package:fuoday/core/constants/app_route_constants.dart';
+import 'package:fuoday/core/extensions/provider_extension.dart';
+import 'package:fuoday/core/helper/app_logger_helper.dart';
+import 'package:fuoday/core/service/hive_storage_service.dart';
 import 'package:fuoday/core/themes/app_colors.dart';
-import 'package:fuoday/features/auth/presentation/providers/sliding_segmented_provider.dart';
 import 'package:fuoday/features/auth/presentation/widgets/k_auth_filled_btn.dart';
 import 'package:fuoday/features/auth/presentation/widgets/k_auth_password_text_field.dart';
 import 'package:fuoday/features/auth/presentation/widgets/k_auth_text_btn.dart';
 import 'package:fuoday/features/auth/presentation/widgets/k_auth_text_form_field.dart';
 import 'package:go_router/go_router.dart';
-import 'package:provider/provider.dart';
 
 class AuthLoginScreen extends StatefulWidget {
   const AuthLoginScreen({super.key});
@@ -38,9 +39,6 @@ class _AuthLoginScreenState extends State<AuthLoginScreen> {
 
   @override
   Widget build(BuildContext context) {
-    // Provider
-    final slidingProvider = context.watch<SlidingSegmentedProvider>();
-
     return Scaffold(
       resizeToAvoidBottomInset: true,
       body: KLinearGradientBg(
@@ -49,7 +47,7 @@ class _AuthLoginScreenState extends State<AuthLoginScreen> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              SizedBox(height: 40.h),
+              KVerticalSpacer(height: 40.h),
 
               KSvg(
                 svgPath: AppAssetsConstants.splashLogo,
@@ -118,7 +116,10 @@ class _AuthLoginScreenState extends State<AuthLoginScreen> {
                                           children: [
                                             Icon(
                                               Icons.person,
-                                              color: slidingProvider.isRecruiter
+                                              color:
+                                                  context
+                                                      .slidingSegmentProviderWatch
+                                                      .isRecruiter
                                                   ? AppColors.primaryColor
                                                   : AppColors.secondaryColor,
                                             ),
@@ -127,7 +128,10 @@ class _AuthLoginScreenState extends State<AuthLoginScreen> {
                                               text: "Employee",
                                               fontWeight: FontWeight.w600,
                                               fontSize: 12.sp,
-                                              color: slidingProvider.isRecruiter
+                                              color:
+                                                  context
+                                                      .slidingSegmentProviderWatch
+                                                      .isRecruiter
                                                   ? AppColors.primaryColor
                                                   : AppColors.secondaryColor,
                                             ),
@@ -144,7 +148,10 @@ class _AuthLoginScreenState extends State<AuthLoginScreen> {
                                           children: [
                                             Icon(
                                               Icons.person,
-                                              color: slidingProvider.isEmployee
+                                              color:
+                                                  context
+                                                      .slidingSegmentProviderWatch
+                                                      .isEmployee
                                                   ? AppColors.primaryColor
                                                   : AppColors.secondaryColor,
                                             ),
@@ -153,7 +160,10 @@ class _AuthLoginScreenState extends State<AuthLoginScreen> {
                                               text: "Recruiter",
                                               fontWeight: FontWeight.w600,
                                               fontSize: 12.sp,
-                                              color: slidingProvider.isEmployee
+                                              color:
+                                                  context
+                                                      .slidingSegmentProviderWatch
+                                                      .isEmployee
                                                   ? AppColors.primaryColor
                                                   : AppColors.secondaryColor,
                                             ),
@@ -163,10 +173,13 @@ class _AuthLoginScreenState extends State<AuthLoginScreen> {
                                     },
                                     backgroundColor: AppColors.secondaryColor,
                                     thumbColor: AppColors.primaryColor,
-                                    groupValue: slidingProvider.selectedIndex,
+                                    groupValue: context
+                                        .slidingSegmentProviderRead
+                                        .selectedIndex,
                                     onValueChanged: (value) {
                                       if (value != null) {
-                                        slidingProvider.setSelectedIndex(value);
+                                        context.slidingSegmentProviderRead
+                                            .setSelectedIndex(value);
                                       }
                                     },
                                   ),
@@ -198,7 +211,9 @@ class _AuthLoginScreenState extends State<AuthLoginScreen> {
 
                                       KVerticalSpacer(height: 20.h),
 
-                                      if (slidingProvider.isEmployee)
+                                      if (context
+                                          .slidingSegmentProviderWatch
+                                          .isEmployee)
                                         KAuthTextFormField(
                                           controller: employeeIdController,
                                           suffixIcon: Icons.mail_outline,
@@ -207,7 +222,9 @@ class _AuthLoginScreenState extends State<AuthLoginScreen> {
                                         ),
 
                                       // Recruiter TextField
-                                      if (slidingProvider.isRecruiter)
+                                      if (context
+                                          .slidingSegmentProviderWatch
+                                          .isRecruiter)
                                         KAuthTextFormField(
                                           controller: recruiterController,
                                           suffixIcon: Icons.mail_outline,
@@ -249,8 +266,24 @@ class _AuthLoginScreenState extends State<AuthLoginScreen> {
                                         fontSize: 10.sp,
                                         text: "Login",
                                         backgroundColor: AppColors.primaryColor,
-                                        onPressed: slidingProvider.isEmployee
-                                            ? () {
+                                        onPressed:
+                                            context
+                                                .slidingSegmentProviderWatch
+                                                .isEmployee
+                                            ? () async {
+                                                // Set Auth Logged In Status
+                                                await HiveStorageService()
+                                                    .setIsAuthLogged(true);
+
+                                                // Log onboarding status
+                                                final status =
+                                                    HiveStorageService()
+                                                        .isAuthLoggedStatus;
+                                                AppLoggerHelper.logInfo(
+                                                  'Auth Logged In status: $status',
+                                                );
+
+                                                // Employee Bottom Nav screen
                                                 GoRouter.of(
                                                   context,
                                                 ).pushReplacementNamed(

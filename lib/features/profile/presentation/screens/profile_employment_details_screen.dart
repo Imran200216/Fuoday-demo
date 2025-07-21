@@ -4,8 +4,26 @@ import 'package:fuoday/commons/widgets/k_app_bar.dart';
 import 'package:fuoday/features/auth/presentation/widgets/k_auth_text_form_field.dart';
 import 'package:go_router/go_router.dart';
 
-class ProfileEmploymentDetailsScreen extends StatelessWidget {
+class ProfileEmploymentDetailsScreen extends StatefulWidget {
   const ProfileEmploymentDetailsScreen({super.key});
+
+  @override
+  State<ProfileEmploymentDetailsScreen> createState() =>
+      _ProfileEmploymentDetailsScreenState();
+}
+
+class _ProfileEmploymentDetailsScreenState
+    extends State<ProfileEmploymentDetailsScreen> {
+  // form key
+  final formKey = GlobalKey<FormState>();
+
+  // controllers
+  final TextEditingController departmentController = TextEditingController();
+  final TextEditingController jobRoleController = TextEditingController();
+  final TextEditingController dateOfJoinController = TextEditingController();
+  final TextEditingController reportingManagerController =
+      TextEditingController();
+  final TextEditingController employeeIdController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -30,6 +48,7 @@ class ProfileEmploymentDetailsScreen extends StatelessWidget {
             children: [
               // Department
               KAuthTextFormField(
+                controller: departmentController,
                 label: "Department",
                 hintText: "Department",
                 suffixIcon: Icons.person_outline,
@@ -38,6 +57,7 @@ class ProfileEmploymentDetailsScreen extends StatelessWidget {
 
               // Department
               KAuthTextFormField(
+                controller: jobRoleController,
                 label: "Job Role",
                 hintText: "Job Role",
                 suffixIcon: Icons.location_city,
@@ -46,6 +66,7 @@ class ProfileEmploymentDetailsScreen extends StatelessWidget {
 
               // Date of join
               KAuthTextFormField(
+                controller: dateOfJoinController,
                 label: "Date of join",
                 hintText: "Date of join",
                 suffixIcon: Icons.calendar_month_outlined,
@@ -54,6 +75,7 @@ class ProfileEmploymentDetailsScreen extends StatelessWidget {
 
               // Reporting Manager
               KAuthTextFormField(
+                controller: reportingManagerController,
                 label: "Reporting Manager",
                 hintText: "Reporting Manager",
                 suffixIcon: Icons.manage_accounts_rounded,
@@ -62,6 +84,7 @@ class ProfileEmploymentDetailsScreen extends StatelessWidget {
 
               // Reporting Manager
               KAuthTextFormField(
+                controller: employeeIdController,
                 label: "Employee Id",
                 hintText: "Employee Id",
                 suffixIcon: Icons.important_devices,

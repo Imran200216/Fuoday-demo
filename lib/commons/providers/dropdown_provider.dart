@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:injectable/injectable.dart';
 
-@injectable
 class DropdownProvider with ChangeNotifier {
   // Store all dropdown values in a map
   final Map<String, String?> _dropdownValues = {};

@@ -14,5 +14,4 @@ class AppAssetsConstants {
   static const String attendanceImg = "assets/images/svg/attendance-timing.svg";
   static const String sunImg = "assets/images/svg/sun.svg";
 
-  // Icons
 }

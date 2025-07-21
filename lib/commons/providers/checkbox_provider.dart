@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:injectable/injectable.dart';
 
-@injectable
 class CheckboxProvider extends ChangeNotifier {
   final Map<String, bool> _checkboxStates = {};
 

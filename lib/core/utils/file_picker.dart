@@ -1,8 +1,6 @@
 import 'package:file_picker/file_picker.dart';
-import 'package:injectable/injectable.dart';
 
-@lazySingleton
-class FilePickerService {
+class AppFilePicker {
   Future<PlatformFile?> pickFile() async {
     final result = await FilePicker.platform.pickFiles(
       type: FileType.custom,

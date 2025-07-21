@@ -4,10 +4,10 @@ import 'package:fuoday/features/home/presentation/screens/home_employee_screen.d
 import 'package:fuoday/features/leave_tracker/presentation/screens/leave_tracker_screen.dart';
 import 'package:fuoday/features/notification/presentation/screens/notification_screen.dart';
 import 'package:fuoday/features/profile/presentation/screens/profile_screen.dart';
-import 'package:injectable/injectable.dart';
 
 
-@injectable
+
+
 class BottomNavProvider extends ChangeNotifier {
   int _currentIndex = 2;
 

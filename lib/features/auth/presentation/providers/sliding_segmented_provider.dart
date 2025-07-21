@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:injectable/injectable.dart';
 
-@injectable
+
 class SlidingSegmentedProvider extends ChangeNotifier {
   int _selectedIndex = 0;
 
