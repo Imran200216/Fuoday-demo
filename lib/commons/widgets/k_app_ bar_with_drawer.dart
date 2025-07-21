@@ -44,8 +44,7 @@ class KAppBarWithDrawer extends StatelessWidget implements PreferredSizeWidget {
       backgroundColor: backgroundColor ?? AppColors.primaryColor,
       leading: IconButton(
         onPressed: onDrawerPressed ?? () {},
-        icon:
-        Icon(Icons.menu, color: iconColor ?? AppColors.secondaryColor),
+        icon: Icon(Icons.menu, color: iconColor ?? AppColors.secondaryColor),
       ),
       title: showUserInfo
           ? Row(
@@ -60,7 +59,7 @@ class KAppBarWithDrawer extends StatelessWidget implements PreferredSizeWidget {
                 ),
                 Expanded(
                   child: Column(
-                    spacing: 10.w,
+                    spacing: 1.h,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       // Person Name
