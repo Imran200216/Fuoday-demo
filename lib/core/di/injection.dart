@@ -1,5 +1,6 @@
 import 'package:fuoday/commons/providers/checkbox_provider.dart';
 import 'package:fuoday/commons/providers/dropdown_provider.dart';
+import 'package:fuoday/core/providers/app_file_downloader_provider.dart';
 import 'package:fuoday/core/providers/app_file_picker_provider.dart';
 import 'package:fuoday/core/service/hive_storage_service.dart';
 import 'package:fuoday/features/auth/presentation/providers/sliding_segmented_provider.dart';
@@ -36,4 +37,9 @@ void setUpServiceLocator() {
 
   // Check in provider
   getIt.registerFactory<CheckInProvider>(() => CheckInProvider());
+
+  // App File Downloader Provider
+  getIt.registerFactory<AppFileDownloaderProvider>(
+    () => AppFileDownloaderProvider(),
+  );
 }

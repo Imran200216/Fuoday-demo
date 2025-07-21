@@ -6,6 +6,7 @@ import 'package:google_fonts/google_fonts.dart';
 class KAuthFilledBtn extends StatelessWidget {
   final String text;
   final VoidCallback onPressed;
+  final bool isLoading; // external loading control
   final double height;
   final double width;
   final Color backgroundColor;
@@ -18,6 +19,7 @@ class KAuthFilledBtn extends StatelessWidget {
     super.key,
     required this.text,
     required this.onPressed,
+    this.isLoading = false,
     this.height = 48,
     this.width = double.infinity,
     this.backgroundColor = Colors.blue,
@@ -38,19 +40,29 @@ class KAuthFilledBtn extends StatelessWidget {
           shape: RoundedRectangleBorder(borderRadius: borderRadius),
           elevation: 0,
         ),
-        onPressed: () {
-          HapticFeedback.mediumImpact();
-
-          onPressed();
-        },
-        child: Text(
-          text,
-          style: GoogleFonts.sora(
-            color: textColor,
-            fontSize: fontSize.sp,
-            fontWeight: fontWeight,
-          ),
-        ),
+        onPressed: isLoading
+            ? null
+            : () {
+                HapticFeedback.mediumImpact();
+                onPressed();
+              },
+        child: isLoading
+            ? SizedBox(
+                height: 18.h,
+                width: 18.h,
+                child: CircularProgressIndicator(
+                  strokeWidth: 2,
+                  valueColor: AlwaysStoppedAnimation<Color>(textColor),
+                ),
+              )
+            : Text(
+                text,
+                style: GoogleFonts.sora(
+                  color: textColor,
+                  fontSize: fontSize.sp,
+                  fontWeight: fontWeight,
+                ),
+              ),
       ),
     );
   }

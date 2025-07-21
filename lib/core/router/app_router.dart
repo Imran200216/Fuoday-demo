@@ -1,4 +1,5 @@
 import 'package:fuoday/core/constants/app_route_constants.dart';
+import 'package:fuoday/core/models/file_preview_data.dart';
 import 'package:fuoday/features/approval/presentation/screens/approval_screen.dart';
 import 'package:fuoday/features/attendance/presentation/screens/attendance_absent_days_details_screen.dart';
 import 'package:fuoday/features/attendance/presentation/screens/attendance_early_arrivals_details_screen.dart';
@@ -12,6 +13,7 @@ import 'package:fuoday/features/auth/presentation/screens/auth_otp_screen.dart';
 import 'package:fuoday/features/bottom_nav/presentation/employee_bottom_nav.dart';
 import 'package:fuoday/features/bottom_nav/presentation/recruiter_bottom_nav.dart';
 import 'package:fuoday/features/calendar/presentation/screens/calendar_screen.dart';
+import 'package:fuoday/features/demo_download/demo_download_screen.dart';
 import 'package:fuoday/features/feeds/presentation/screens/feeds_screen.dart';
 import 'package:fuoday/features/home/presentation/screens/home_employee_screen.dart';
 import 'package:fuoday/features/home/presentation/screens/home_recruiter_screen.dart';
@@ -41,9 +43,18 @@ import 'package:go_router/go_router.dart';
 
 final GoRouter appRouter = GoRouter(
   // initial route
-  initialLocation: "/splash",
+  initialLocation: "/demoDownload",
 
   routes: [
+    // Demo Screen
+    GoRoute(
+      path: '/demoDownload',
+      name: "demoDownload",
+      builder: (context, state) {
+        return DemoDownloadScreen();
+      },
+    ),
+
     // splash screen
     GoRoute(
       path: "/splash",
@@ -367,9 +378,11 @@ final GoRouter appRouter = GoRouter(
       path: "/pdfPreview",
       name: AppRouteConstants.pdfPreview,
       builder: (context, state) {
-        final filePath = state.extra as String;
-
-        return PdfPreviewScreen(filePath: filePath);
+        final data = state.extra as FilePreviewData;
+        return PdfPreviewScreen(
+          filePath: data.filePath,
+          fileName: data.fileName,
+        );
       },
     ),
 
@@ -378,9 +391,11 @@ final GoRouter appRouter = GoRouter(
       path: "/imagePreview",
       name: AppRouteConstants.imagePreview,
       builder: (context, state) {
-        final filePath = state.extra as String;
-
-        return ImagePreviewScreen(filePath: filePath);
+        final data = state.extra as FilePreviewData;
+        return ImagePreviewScreen(
+          filePath: data.filePath,
+          fileName: data.fileName,
+        );
       },
     ),
   ],

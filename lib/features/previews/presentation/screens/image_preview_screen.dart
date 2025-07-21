@@ -6,14 +6,20 @@ import 'package:easy_image_viewer/easy_image_viewer.dart';
 
 class ImagePreviewScreen extends StatelessWidget {
   final String filePath;
+  final String fileName;
 
-  const ImagePreviewScreen({super.key, required this.filePath});
+  const ImagePreviewScreen({
+    super.key,
+    required this.filePath,
+    required this.fileName,
+  });
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: KAppBar(
         title: "Image Preview",
+        subtitle: fileName,
         centerTitle: true,
         leadingIcon: Icons.arrow_back,
         onLeadingIconPress: () {

@@ -5,7 +5,6 @@ import 'package:fuoday/config/flavors/flavors_config.dart';
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
 
-  //
 
   // Environment Dev
   AppEnvironment.setUpEnv(Environment.development);

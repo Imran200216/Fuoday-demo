@@ -119,6 +119,11 @@ dependencies:
   # permission_handler
   permission_handler: ^12.0.1
 
+  # flutter file downloader
+  flutter_file_downloader: ^2.1.0
+
+
+
 
 
 dependency_overrides:
@@ -147,6 +152,9 @@ flutter:
 
 
   assets:
+    # svg
     - assets/images/svg/
+    # png
     - assets/images/png/
+    # jpg
     - assets/images/jpg/

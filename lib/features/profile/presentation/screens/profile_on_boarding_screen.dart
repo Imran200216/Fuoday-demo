@@ -8,6 +8,7 @@ import 'package:fuoday/commons/widgets/k_vertical_spacer.dart';
 import 'package:fuoday/core/constants/app_route_constants.dart';
 import 'package:fuoday/core/extensions/provider_extension.dart';
 import 'package:fuoday/core/helper/app_logger_helper.dart';
+import 'package:fuoday/core/models/file_preview_data.dart';
 import 'package:fuoday/core/themes/app_colors.dart';
 import 'package:fuoday/core/utils/date_picker.dart';
 import 'package:fuoday/core/validators/app_validators.dart';
@@ -124,7 +125,10 @@ class _ProfileOnBoardingScreenState extends State<ProfileOnBoardingScreen> {
                       // Pdf Preview Screen
                       GoRouter.of(context).pushNamed(
                         AppRouteConstants.pdfPreview,
-                        extra: filePath,
+                        extra: FilePreviewData(
+                          filePath: filePath!,
+                          fileName: fileName,
+                        ),
                       );
                     } else if (fileName.endsWith('.png') ||
                         fileName.endsWith('.jpg') ||
@@ -133,7 +137,10 @@ class _ProfileOnBoardingScreenState extends State<ProfileOnBoardingScreen> {
                       // Image Preview Screen
                       GoRouter.of(context).pushNamed(
                         AppRouteConstants.imagePreview,
-                        extra: filePath,
+                        extra: FilePreviewData(
+                          filePath: filePath!,
+                          fileName: fileName,
+                        ),
                       );
                     } else {
                       KSnackBar.failure(context, "Unsupported file type");
@@ -190,7 +197,10 @@ class _ProfileOnBoardingScreenState extends State<ProfileOnBoardingScreen> {
                       // Pdf Preview Screen
                       GoRouter.of(context).pushNamed(
                         AppRouteConstants.pdfPreview,
-                        extra: filePath,
+                        extra: FilePreviewData(
+                          filePath: filePath!,
+                          fileName: fileName,
+                        ),
                       );
                     } else if (fileName.endsWith('.png') ||
                         fileName.endsWith('.jpg') ||
@@ -199,7 +209,10 @@ class _ProfileOnBoardingScreenState extends State<ProfileOnBoardingScreen> {
                       // Image Preview Screen
                       GoRouter.of(context).pushNamed(
                         AppRouteConstants.imagePreview,
-                        extra: filePath,
+                        extra: FilePreviewData(
+                          filePath: filePath!,
+                          fileName: fileName,
+                        ),
                       );
                     } else {
                       KSnackBar.failure(context, "Unsupported file type");
@@ -258,7 +271,10 @@ class _ProfileOnBoardingScreenState extends State<ProfileOnBoardingScreen> {
                       // Pdf Preview Screen
                       GoRouter.of(context).pushNamed(
                         AppRouteConstants.pdfPreview,
-                        extra: filePath,
+                        extra: FilePreviewData(
+                          filePath: filePath!,
+                          fileName: fileName,
+                        ),
                       );
                     } else if (fileName.endsWith('.png') ||
                         fileName.endsWith('.jpg') ||
@@ -267,7 +283,10 @@ class _ProfileOnBoardingScreenState extends State<ProfileOnBoardingScreen> {
                       // Image Preview Screen
                       GoRouter.of(context).pushNamed(
                         AppRouteConstants.imagePreview,
-                        extra: filePath,
+                        extra: FilePreviewData(
+                          filePath: filePath!,
+                          fileName: fileName,
+                        ),
                       );
                     } else {
                       KSnackBar.failure(context, "Unsupported file type");
@@ -330,7 +349,10 @@ class _ProfileOnBoardingScreenState extends State<ProfileOnBoardingScreen> {
                       // Pdf Preview Screen
                       GoRouter.of(context).pushNamed(
                         AppRouteConstants.pdfPreview,
-                        extra: filePath,
+                        extra: FilePreviewData(
+                          filePath: filePath!,
+                          fileName: fileName,
+                        ),
                       );
                     } else if (fileName.endsWith('.png') ||
                         fileName.endsWith('.jpg') ||
@@ -339,7 +361,10 @@ class _ProfileOnBoardingScreenState extends State<ProfileOnBoardingScreen> {
                       // Image Preview Screen
                       GoRouter.of(context).pushNamed(
                         AppRouteConstants.imagePreview,
-                        extra: filePath,
+                        extra: FilePreviewData(
+                          filePath: filePath!,
+                          fileName: fileName,
+                        ),
                       );
                     } else {
                       KSnackBar.failure(context, "Unsupported file type");
@@ -401,7 +426,10 @@ class _ProfileOnBoardingScreenState extends State<ProfileOnBoardingScreen> {
                       // Pdf Preview Screen
                       GoRouter.of(context).pushNamed(
                         AppRouteConstants.pdfPreview,
-                        extra: filePath,
+                        extra: FilePreviewData(
+                          filePath: filePath!,
+                          fileName: fileName,
+                        ),
                       );
                     } else if (fileName.endsWith('.png') ||
                         fileName.endsWith('.jpg') ||
@@ -410,7 +438,10 @@ class _ProfileOnBoardingScreenState extends State<ProfileOnBoardingScreen> {
                       // Image Preview Screen
                       GoRouter.of(context).pushNamed(
                         AppRouteConstants.imagePreview,
-                        extra: filePath,
+                        extra: FilePreviewData(
+                          filePath: filePath!,
+                          fileName: fileName,
+                        ),
                       );
                     } else {
                       KSnackBar.failure(context, "Unsupported file type");

@@ -5,6 +5,7 @@ import 'package:fuoday/commons/providers/dropdown_provider.dart';
 import 'package:fuoday/config/flavors/flavors_config.dart';
 import 'package:fuoday/core/constants/app_hive_storage_constants.dart';
 import 'package:fuoday/core/di/injection.dart';
+import 'package:fuoday/core/providers/app_file_downloader_provider.dart';
 import 'package:fuoday/core/providers/app_file_picker_provider.dart';
 import 'package:fuoday/core/router/app_router.dart';
 import 'package:fuoday/core/service/hive_storage_service.dart';
@@ -69,6 +70,11 @@ class MyApp extends StatelessWidget {
 
         // Check In Provider
         ChangeNotifierProvider(create: (context) => getIt<CheckInProvider>()),
+
+        // App File Downloader Provider
+        ChangeNotifierProvider(
+          create: (context) => getIt<AppFileDownloaderProvider>(),
+        ),
       ],
       child: ScreenUtilInit(
         designSize: const Size(360, 690),
