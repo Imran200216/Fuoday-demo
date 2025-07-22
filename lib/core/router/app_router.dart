@@ -43,7 +43,7 @@ import 'package:go_router/go_router.dart';
 
 final GoRouter appRouter = GoRouter(
   // initial route
-  initialLocation: "/demoDownload",
+  initialLocation: "/splash",
 
   routes: [
     // Demo Screen
