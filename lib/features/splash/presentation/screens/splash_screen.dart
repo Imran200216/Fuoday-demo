@@ -43,10 +43,13 @@ class _SplashScreenState extends State<SplashScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
-        child: KSvg(
-          height: 100.h,
-          svgPath: AppAssetsConstants.splashLogo,
-          boxFit: BoxFit.cover,
+        child:Center(
+          child: Image.asset(
+            AppAssetsConstants.fuodayLogoImg,
+            height: 200.h,
+            width: 200.w,
+            fit: BoxFit.cover,
+          ),
         ),
       ),
     );
