@@ -3,11 +3,9 @@ import 'package:flutter/material.dart';
 class AppColors {
   // Employee gradient Colors
   static const List<Color> employeeGradientColor = [
-    Color(0xCC500357),
-    Color(0xCC4810C2),
-    Color(0xCC1311B1),
-    Color(0xCC830DF1),
-    Color(0xCC4D0CC5),
+    Color(0xFF000000), // Black
+    Color(0xFF0F84F5), // Bright Blue
+    Color(0xFF000000), // Black
   ];
 
   static const List<Color> cardGradientColor = [
@@ -24,7 +22,19 @@ class AppColors {
   static const Color transparentColor = Colors.transparent;
 
   // Primary Color
-  static const Color primaryColor = Color(0xFF8B5CB7);
+  static const Color primaryColor = Color(0xFF003366);
+
+  //Primary GradientColor
+  static const List<Color> primaryGradientColors = [
+    Color(0xFF000000), // Black
+    Color(0xFF0F84F5), // Bright Blue
+    Color(0xFF000000), // Black
+  ];
+
+  static const Alignment primaryGradientBegin = Alignment.topLeft;
+  static const Alignment primaryGradientEnd = Alignment.bottomRight;
+  static const List<double> primaryGradientStops = [0.02, 0.38, 1.0];
+
 
   // Secondary Color
   static const Color secondaryColor = Colors.white;
