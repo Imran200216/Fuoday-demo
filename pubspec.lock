@@ -289,22 +289,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.5.1"
-  envied:
-    dependency: "direct main"
-    description:
-      name: envied
-      sha256: a4e2b1d0caa479b5d61332ae516518c175a6d09328a35a0bc0a53894cc5d7e4d
-      url: "https://pub.dev"
-    source: hosted
-    version: "1.1.1"
-  envied_generator:
-    dependency: "direct dev"
-    description:
-      name: envied_generator
-      sha256: "894f6c5eb624c60a1ce6f642b6fd7ec68bc3440aa6f1881837aa9acbbeade0c8"
-      url: "https://pub.dev"
-    source: hosted
-    version: "1.1.1"
   equatable:
     dependency: transitive
     description:
@@ -406,6 +390,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "3.4.1"
+  flutter_dotenv:
+    dependency: "direct main"
+    description:
+      name: flutter_dotenv
+      sha256: b7c7be5cd9f6ef7a78429cabd2774d3c4af50e79cb2b7593e3d5d763ef95c61b
+      url: "https://pub.dev"
+    source: hosted
+    version: "5.2.1"
   flutter_expandable_fab:
     dependency: "direct main"
     description:
@@ -426,10 +418,10 @@ packages:
     dependency: "direct dev"
     description:
       name: flutter_lints
-      sha256: "5398f14efa795ffb7a33e9b6a08798b26a180edac4ad7db3f231e40f82ce11e1"
+      sha256: "3105dc8492f6183fb076ccf1f351ac3d60564bff92e20bfc4af9cc1651f4e7e1"
       url: "https://pub.dev"
     source: hosted
-    version: "5.0.0"
+    version: "6.0.0"
   flutter_localizations:
     dependency: transitive
     description: flutter
@@ -753,10 +745,10 @@ packages:
     dependency: transitive
     description:
       name: lints
-      sha256: c35bb79562d980e9a453fc715854e1ed39e24e7d0297a880ef54e17f9874a9d7
+      sha256: a5e2b223cb7c9c8efdc663ef484fdd95bb243bff242ef5b13e26883547fce9a0
       url: "https://pub.dev"
     source: hosted
-    version: "5.1.1"
+    version: "6.0.0"
   logger:
     dependency: "direct main"
     description:
@@ -1029,14 +1021,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.5.0"
-  recase:
-    dependency: transitive
-    description:
-      name: recase
-      sha256: e4eb4ec2dcdee52dcf99cb4ceabaffc631d7424ee55e56f280bc039737f89213
-      url: "https://pub.dev"
-    source: hosted
-    version: "4.1.0"
   rxdart:
     dependency: transitive
     description:

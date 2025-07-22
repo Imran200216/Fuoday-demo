@@ -1,4 +1,7 @@
 class AppAssetsConstants {
+  // Env path
+  static const String env = '.env';
+
   // Images
   static const String splashLogo = "assets/images/svg/splash-logo.svg";
   static const String employeeBgGradient =
@@ -13,5 +16,4 @@ class AppAssetsConstants {
   static const String fuodayLogoImg = "assets/images/png/fuoday-logo.png";
   static const String attendanceImg = "assets/images/svg/attendance-timing.svg";
   static const String sunImg = "assets/images/svg/sun.svg";
-
 }

@@ -6,6 +6,7 @@ import 'package:fuoday/commons/widgets/k_drawer.dart';
 import 'package:fuoday/commons/widgets/k_text.dart';
 import 'package:fuoday/commons/widgets/k_vertical_spacer.dart';
 import 'package:fuoday/core/constants/app_route_constants.dart';
+import 'package:fuoday/core/extensions/provider_extension.dart';
 import 'package:fuoday/core/themes/app_colors.dart';
 import 'package:fuoday/features/profile/presentation/widgets/profile_list_tile.dart';
 import 'package:go_router/go_router.dart';
@@ -30,6 +31,19 @@ class _ProfileScreenState extends State<ProfileScreen> {
     return Scaffold(
       key: _scaffoldKey,
       appBar: KAppBarWithDrawer(
+        userName: context.employeeAuthLoginProviderWatch.authEntity!.data.name,
+        cachedNetworkImageUrl: context
+            .employeeAuthLoginProviderWatch
+            .authEntity!
+            .data
+            .employeeDetails
+            .profilePhoto,
+        userDesignation: context
+            .employeeAuthLoginProviderWatch
+            .authEntity!
+            .data
+            .employeeDetails
+            .designation,
         showUserInfo: true,
         onDrawerPressed: () {
           _openDrawer();
@@ -37,7 +51,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
         onNotificationPressed: () {},
       ),
       drawer: KDrawer(),
-
       body: SingleChildScrollView(
         scrollDirection: Axis.vertical,
         physics: const BouncingScrollPhysics(),
@@ -53,7 +66,12 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   showImageViewer(
                     context,
                     Image.network(
-                      "https://plus.unsplash.com/premium_photo-1672239496290-5061cfee7ebb?q=80&w=1287&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+                      context
+                          .employeeAuthLoginProviderWatch
+                          .authEntity!
+                          .data
+                          .employeeDetails
+                          .profilePhoto,
                       fit: BoxFit.contain,
                     ).image,
                     swipeDismissible: true,
@@ -61,8 +79,12 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   );
                 },
                 size: 90.h,
-                imageUrl:
-                    "https://plus.unsplash.com/premium_photo-1672239496290-5061cfee7ebb?q=80&w=1287&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+                imageUrl: context
+                    .employeeAuthLoginProviderWatch
+                    .authEntity!
+                    .data
+                    .employeeDetails
+                    .profilePhoto,
               ),
 
               SizedBox(height: 24.h),
@@ -88,7 +110,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   children: [
                     // name
                     KText(
-                      text: "Mohammed Irfan",
+                      text: context
+                          .employeeAuthLoginProviderWatch
+                          .authEntity!
+                          .data
+                          .name,
                       fontWeight: FontWeight.w600,
                       fontSize: 14.sp,
                       color: AppColors.titleColor,
@@ -96,9 +122,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
                     KVerticalSpacer(height: 6.h),
 
-                    // emp Id
                     KText(
-                      text: "Employee ID: 1043",
+                      text:
+                          "Employee ID: ${context.employeeAuthLoginProviderWatch.authEntity!.data.empId}",
                       fontWeight: FontWeight.w500,
                       fontSize: 12.sp,
                       color: AppColors.greyColor,

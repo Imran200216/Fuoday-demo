@@ -40,7 +40,6 @@ dependencies:
   hive: ^2.2.3
   hive_flutter: ^1.1.0
 
-
   # flutter secure storage
   flutter_secure_storage: ^9.2.4
 
@@ -101,9 +100,6 @@ dependencies:
   # image viewer
   easy_image_viewer: ^1.5.1
 
-  # envied
-  envied: ^1.1.1
-
   # json serializable
   json_serializable: ^6.10.0
 
@@ -125,6 +121,9 @@ dependencies:
   # open fileX
   open_filex: ^4.7.0
 
+  # flutter_dotenv
+  flutter_dotenv: ^5.2.1
+
 
 
 
@@ -136,19 +135,17 @@ dependency_overrides:
 
 
 
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  flutter_lints: ^5.0.0
-
-  # envied generator
-  envied_generator: ^1.1.1
+  flutter_lints: ^6.0.0
 
   #change_app_package_name:
   change_app_package_name: ^1.5.0
 
   # build runner
-  build_runner: ^2.4.6
+  build_runner: ^2.6.0
 
 flutter:
   uses-material-design: true
@@ -161,3 +158,5 @@ flutter:
     - assets/images/png/
     # jpg
     - assets/images/jpg/
+    # env
+    - .env

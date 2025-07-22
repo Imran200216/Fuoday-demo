@@ -1,4 +1,4 @@
-import 'package:fuoday/config/env/env.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 enum Environment { development, production }
 
@@ -10,17 +10,17 @@ abstract class AppEnvironment {
 
   static Environment get environment => _environment;
 
-  static setUpEnv(Environment environment) {
+  static void setUpEnv(Environment environment) {
     _environment = environment;
 
     switch (environment) {
       case Environment.development:
-        baseUrl = Env.apiDevBaseUrl;
+        baseUrl = dotenv.env['API_DEV_BASE_URL']!;
         environmentName = "DEV";
         break;
 
       case Environment.production:
-        baseUrl = Env.apiProdBaseUrl;
+        baseUrl = dotenv.env['API_PROD_BASE_URL']!;
         environmentName = "PROD";
         break;
     }

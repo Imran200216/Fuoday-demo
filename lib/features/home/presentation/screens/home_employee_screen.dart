@@ -6,6 +6,7 @@ import 'package:fuoday/commons/widgets/k_drawer.dart';
 import 'package:fuoday/commons/widgets/k_linear_gradient_bg.dart';
 import 'package:fuoday/commons/widgets/k_text.dart';
 import 'package:fuoday/commons/widgets/k_vertical_spacer.dart';
+import 'package:fuoday/core/extensions/provider_extension.dart';
 import 'package:fuoday/core/themes/app_colors.dart';
 import 'package:fuoday/features/home/presentation/screens/home_employee_activities.dart';
 import 'package:fuoday/features/home/presentation/screens/home_employee_feeds.dart';
@@ -60,9 +61,14 @@ class _HomeEmployeeScreenState extends State<HomeEmployeeScreen> {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
+                    // User Image
                     KCircularCachedImage(
-                      imageUrl:
-                          "https://plus.unsplash.com/premium_photo-1672239496290-5061cfee7ebb?q=80&w=1287&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+                      imageUrl: context
+                          .employeeAuthLoginProviderWatch
+                          .authEntity!
+                          .data
+                          .employeeDetails
+                          .profilePhoto,
                       size: 80.h,
                     ),
                     Column(
@@ -72,7 +78,11 @@ class _HomeEmployeeScreenState extends State<HomeEmployeeScreen> {
                       children: [
                         // Username
                         KText(
-                          text: "John",
+                          text: context
+                              .employeeAuthLoginProviderWatch
+                              .authEntity!
+                              .data
+                              .name,
                           fontWeight: FontWeight.w600,
                           fontSize: 14.sp,
                           color: AppColors.secondaryColor,
@@ -80,7 +90,8 @@ class _HomeEmployeeScreenState extends State<HomeEmployeeScreen> {
 
                         // Employee Id
                         KText(
-                          text: "Employee Id: 12345",
+                          text:
+                              "Employee Id: ${context.employeeAuthLoginProviderWatch.authEntity!.data.empId}",
                           fontWeight: FontWeight.w500,
                           fontSize: 10.sp,
                           color: AppColors.secondaryColor,

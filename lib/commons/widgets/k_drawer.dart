@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:fuoday/commons/widgets/k_circular_cache_image.dart';
 import 'package:fuoday/commons/widgets/k_drawer_list_tile.dart';
+import 'package:fuoday/commons/widgets/k_snack_bar.dart';
 import 'package:fuoday/commons/widgets/k_text.dart';
 import 'package:fuoday/core/constants/app_route_constants.dart';
+import 'package:fuoday/core/extensions/provider_extension.dart';
 import 'package:fuoday/core/themes/app_colors.dart';
 import 'package:go_router/go_router.dart';
 
@@ -171,7 +173,6 @@ class KDrawer extends StatelessWidget {
                 KDrawerListTile(
                   drawerTitle: "Logout",
                   drawerListTileOnTap: () {
-                    Navigator.pop(context); // Close drawer
                     _showLogoutDialog(context);
                   },
                   drawerLeadingIcon: Icons.logout,
@@ -205,14 +206,30 @@ class KDrawer extends StatelessWidget {
               },
               child: Text("Cancel"),
             ),
+
             TextButton(
-              onPressed: () {
-                Navigator.pop(context); // Close dialog
-                GoRouter.of(
-                  context,
-                ).pushReplacementNamed(AppRouteConstants.login);
+              onPressed: () async {
+                final logoutProvider = context.employeeAuthLogoutProviderRead;
+
+                await logoutProvider.logout();
+
+                // Only navigate if logout was successful (no error)
+                if (logoutProvider.error == null) {
+                  GoRouter.of(
+                    context,
+                  ).pushReplacementNamed(AppRouteConstants.login);
+
+                  KSnackBar.success(context, 'Logout Successfully');
+                } else {
+                  KSnackBar.failure(
+                    context,
+                    'Logout failed: ${logoutProvider.error}',
+                  );
+                }
               },
-              child: Text("Logout"),
+              child: context.employeeAuthLogOutProviderWatch.isLoading
+                  ? const CircularProgressIndicator()
+                  : const Text("Logout"),
             ),
           ],
         );
