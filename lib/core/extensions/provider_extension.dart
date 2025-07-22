@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:fuoday/commons/providers/checkbox_provider.dart';
 import 'package:fuoday/commons/providers/dropdown_provider.dart';
+import 'package:fuoday/core/providers/app_file_downloader_provider.dart';
 import 'package:fuoday/core/providers/app_file_picker_provider.dart';
 import 'package:fuoday/features/auth/presentation/providers/sliding_segmented_provider.dart';
 import 'package:fuoday/features/bottom_nav/providers/bottom_nav_provider.dart';
@@ -49,4 +50,11 @@ extension ProviderExtension on BuildContext {
   CheckInProvider get checkInProviderWatch => watch<CheckInProvider>();
 
   CheckInProvider get checkInProviderRead => read<CheckInProvider>();
+
+  // App File Downloader Provider
+  AppFileDownloaderProvider get appFileDownloaderProviderWatch =>
+      watch<AppFileDownloaderProvider>();
+
+  AppFileDownloaderProvider get appFileDownloaderProviderRead =>
+      read<AppFileDownloaderProvider>();
 }

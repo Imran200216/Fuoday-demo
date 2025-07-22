@@ -122,6 +122,9 @@ dependencies:
   # flutter file downloader
   flutter_file_downloader: ^2.1.0
 
+  # open fileX
+  open_filex: ^4.7.0
+
 
 
 

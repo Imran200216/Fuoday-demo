@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_file_downloader/flutter_file_downloader.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:fuoday/commons/widgets/k_text.dart';
 import 'package:fuoday/commons/widgets/k_vertical_spacer.dart';
-import 'package:fuoday/core/helper/app_logger_helper.dart';
+import 'package:fuoday/core/extensions/provider_extension.dart';
 import 'package:fuoday/core/themes/app_colors.dart';
 import 'package:fuoday/features/auth/presentation/widgets/k_auth_filled_btn.dart';
 import 'package:fuoday/features/auth/presentation/widgets/k_auth_text_form_field.dart';
+import 'package:fuoday/core/helper/app_logger_helper.dart';
 
 class DemoDownloadScreen extends StatefulWidget {
   const DemoDownloadScreen({super.key});
@@ -16,15 +16,12 @@ class DemoDownloadScreen extends StatefulWidget {
 }
 
 class _DemoDownloadScreenState extends State<DemoDownloadScreen> {
-  // Controllers
   final TextEditingController urlController = TextEditingController();
-
-  // Download progress
-  bool _isDownloading = false;
-  double? _progress;
 
   @override
   Widget build(BuildContext context) {
+    final downloader = context.appFileDownloaderProviderWatch;
+
     return Scaffold(
       body: Container(
         margin: EdgeInsets.symmetric(horizontal: 20.w, vertical: 20.h),
@@ -49,44 +46,33 @@ class _DemoDownloadScreenState extends State<DemoDownloadScreen> {
             KVerticalSpacer(height: 20.h),
 
             KAuthFilledBtn(
-              isLoading: _isDownloading,
+              isLoading: downloader.isDownloading,
               text: "Download From Url",
               onPressed: () {
-                setState(() {
-                  _isDownloading = true;
-                });
+                final url = urlController.text.trim();
+                if (url.isEmpty) return;
 
-                FileDownloader.downloadFile(
-                  url: urlController.text.trim(),
-                  onProgress: (fileName, progress) {
-                    setState(() {
-                      _progress = progress;
-                    });
+                final fileName = Uri.parse(url).pathSegments.last;
+
+                context.appFileDownloaderProviderRead.downloadFile(
+                  url: url,
+                  fileName: fileName,
+                  onCompleted: () {
+                    AppLoggerHelper.logInfo("Download complete");
                   },
-                  onDownloadCompleted: (value) {
-                    setState(() {
-                      _isDownloading = false;
-                      _progress = null;
-                    });
-                    AppLoggerHelper.logInfo('path $value');
-                  },
-                  onDownloadError: (errorMessage) {
-                    setState(() {
-                      _isDownloading = false;
-                      _progress = null;
-                    });
-                    print("Download failed: $errorMessage");
+                  onError: (err) {
+                    AppLoggerHelper.logError("Download error: $err");
                   },
                 );
               },
             ),
 
-            if (_progress != null)
+            if (downloader.progress != null)
               Padding(
                 padding: EdgeInsets.only(top: 10.h),
                 child: KText(
                   text:
-                      "Downloading: ${(_progress! * 100).toStringAsFixed(0)}%",
+                      "Downloading: ${(downloader.progress! * 100).toStringAsFixed(0)}%",
                   fontSize: 12.sp,
                   fontWeight: FontWeight.w400,
                   color: AppColors.titleColor,
