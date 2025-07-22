@@ -11,6 +11,8 @@ import 'package:fuoday/features/home/presentation/widgets/k_home_activities_card
 import 'package:fuoday/features/home/presentation/widgets/k_home_activity_alert_dialog_box.dart';
 import 'package:stop_watch_timer/stop_watch_timer.dart';
 
+import '../widgets/k_checkin_button.dart';
+
 class HomeEmployeeActivities extends StatefulWidget {
   const HomeEmployeeActivities({super.key});
 
@@ -123,7 +125,7 @@ class _HomeEmployeeActivitiesState extends State<HomeEmployeeActivities> {
 
                         KVerticalSpacer(height: 8.h),
 
-                        KAuthFilledBtn(
+                        KCheckInButton(
                           text: checkInProvider.isCheckedIn
                               ? "Check Out"
                               : "Check In",
