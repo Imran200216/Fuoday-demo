@@ -41,6 +41,20 @@ class _HomeEmployeeScreenState extends State<HomeEmployeeScreen> {
       child: Scaffold(
         key: _scaffoldKey,
         appBar: KAppBarWithDrawer(
+          userName:
+              context.employeeAuthLoginProviderWatch.authEntity!.data.name,
+          cachedNetworkImageUrl: context
+              .employeeAuthLoginProviderWatch
+              .authEntity!
+              .data
+              .employeeDetails
+              .profilePhoto,
+          userDesignation: context
+              .employeeAuthLoginProviderWatch
+              .authEntity!
+              .data
+              .employeeDetails
+              .designation,
           showUserInfo: false,
           onDrawerPressed: () {
             _openDrawer();

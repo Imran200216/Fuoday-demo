@@ -10,9 +10,9 @@ class KAppBarWithDrawer extends StatelessWidget implements PreferredSizeWidget {
   final Color? backgroundColor;
   final Color? iconColor;
   final VoidCallback onNotificationPressed;
-  final String? userName;
-  final String? cachedNetworkImageUrl;
-  final String? userDesignation;
+  final String userName;
+  final String cachedNetworkImageUrl;
+  final String userDesignation;
   final bool showUserInfo; // New boolean parameter
 
   const KAppBarWithDrawer({
@@ -21,9 +21,9 @@ class KAppBarWithDrawer extends StatelessWidget implements PreferredSizeWidget {
     this.backgroundColor,
     this.iconColor,
     required this.onNotificationPressed,
-    this.userName,
-    this.userDesignation,
-    this.cachedNetworkImageUrl,
+    required this.userName,
+    required this.userDesignation,
+    required this.cachedNetworkImageUrl,
     this.showUserInfo = true, // Default to true
   });
 
@@ -54,7 +54,7 @@ class KAppBarWithDrawer extends StatelessWidget implements PreferredSizeWidget {
               children: [
                 // Cached Image
                 KCircularCachedImage(
-                  imageUrl: cachedNetworkImageUrl ?? "No Image",
+                  imageUrl: cachedNetworkImageUrl,
                   fit: BoxFit.cover,
                 ),
                 Expanded(
@@ -64,14 +64,14 @@ class KAppBarWithDrawer extends StatelessWidget implements PreferredSizeWidget {
                     children: [
                       // Person Name
                       KText(
-                        text: userName ?? "No Username",
+                        text: userName,
                         fontWeight: FontWeight.w600,
                         fontSize: 12.sp,
                         color: AppColors.secondaryColor,
                       ),
                       // Person Designation
                       KText(
-                        text: userDesignation ?? "No UserDesignation",
+                        text: userDesignation,
                         fontWeight: FontWeight.w500,
                         fontSize: 10.sp,
                         color: AppColors.secondaryColor,

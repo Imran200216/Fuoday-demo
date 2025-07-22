@@ -5,9 +5,6 @@ import 'package:fuoday/features/leave_tracker/presentation/screens/leave_tracker
 import 'package:fuoday/features/notification/presentation/screens/notification_screen.dart';
 import 'package:fuoday/features/profile/presentation/screens/profile_screen.dart';
 
-
-
-
 class BottomNavProvider extends ChangeNotifier {
   int _currentIndex = 2;
 

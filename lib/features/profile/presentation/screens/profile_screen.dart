@@ -28,28 +28,21 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final authEntity = context.employeeAuthLoginProviderWatch.authEntity;
+
     return Scaffold(
       key: _scaffoldKey,
-      appBar: KAppBarWithDrawer(
-        userName: context.employeeAuthLoginProviderWatch.authEntity!.data.name,
-        cachedNetworkImageUrl: context
-            .employeeAuthLoginProviderWatch
-            .authEntity!
-            .data
-            .employeeDetails
-            .profilePhoto,
-        userDesignation: context
-            .employeeAuthLoginProviderWatch
-            .authEntity!
-            .data
-            .employeeDetails
-            .designation,
-        showUserInfo: true,
-        onDrawerPressed: () {
-          _openDrawer();
-        },
-        onNotificationPressed: () {},
-      ),
+      appBar: authEntity != null
+          ? KAppBarWithDrawer(
+              userName: authEntity.data.name,
+              cachedNetworkImageUrl:
+                  authEntity.data.employeeDetails.profilePhoto,
+              userDesignation: authEntity.data.employeeDetails.designation,
+              showUserInfo: false,
+              onDrawerPressed: _openDrawer,
+              onNotificationPressed: () {},
+            )
+          : null,
       drawer: KDrawer(),
       body: SingleChildScrollView(
         scrollDirection: Axis.vertical,
