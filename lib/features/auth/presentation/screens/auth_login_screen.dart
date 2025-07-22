@@ -49,11 +49,11 @@ class _AuthLoginScreenState extends State<AuthLoginScreen> {
             children: [
               KVerticalSpacer(height: 40.h),
 
-              KSvg(
-                svgPath: AppAssetsConstants.splashLogo,
-                height: 100.h,
-                width: 100.w,
-                boxFit: BoxFit.cover,
+              Image.asset(
+                AppAssetsConstants.fuodayLogoImg,
+                height: 120.h,
+                width: 120.w,
+                fit: BoxFit.cover,
               ),
 
               Expanded(

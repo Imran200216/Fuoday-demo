@@ -26,11 +26,13 @@ class OnBoardingScreen extends StatelessWidget {
           children: [
             const Spacer(),
 
-            KSvg(
-              svgPath: AppAssetsConstants.splashLogo,
-              height: 140.h,
-              width: 140.w,
-              boxFit: BoxFit.cover,
+            Center(
+              child: Image.asset(
+                AppAssetsConstants.fuodayLogoImg,
+                height: 200.h,
+                width: 200.w,
+                fit: BoxFit.cover,
+              ),
             ),
 
             const Spacer(),
