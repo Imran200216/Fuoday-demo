@@ -17,6 +17,7 @@ import 'package:fuoday/features/home/presentation/provider/check_in_provider.dar
 import 'package:fuoday/features/profile/presentation/providers/profile_edit_provider.dart';
 import 'package:get_it/get_it.dart';
 
+// Get It
 final getIt = GetIt.instance;
 
 void setUpServiceLocator() {
@@ -26,6 +27,7 @@ void setUpServiceLocator() {
 
   // Core Services
   getIt.registerLazySingleton<HiveStorageService>(() => HiveStorageService());
+
   getIt.registerLazySingleton<SecureStorageService>(
     () => SecureStorageService(),
   );

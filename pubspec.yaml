@@ -100,12 +100,6 @@ dependencies:
   # image viewer
   easy_image_viewer: ^1.5.1
 
-  # json serializable
-  json_serializable: ^6.10.0
-
-  # json annotation
-  json_annotation: ^4.9.0
-
   # image picker
   image_picker: ^1.1.2
 

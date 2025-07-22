@@ -23,24 +23,24 @@ class _CalendarScreenState extends State<CalendarScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       key: _scaffoldKey,
-      appBar: KAppBarWithDrawer(
-        userName: context.employeeAuthLoginProviderWatch.authEntity!.data.name,
-        cachedNetworkImageUrl: context
-            .employeeAuthLoginProviderWatch
-            .authEntity!
-            .data
-            .employeeDetails
-            .profilePhoto,
-        userDesignation: context
-            .employeeAuthLoginProviderWatch
-            .authEntity!
-            .data
-            .employeeDetails
-            .designation,
-        showUserInfo: false,
-        onDrawerPressed: _openDrawer,
-        onNotificationPressed: () {},
-      ),
+      // appBar: KAppBarWithDrawer(
+      //   userName: context.employeeAuthLoginProviderWatch.authEntity!.data.name,
+      //   cachedNetworkImageUrl: context
+      //       .employeeAuthLoginProviderWatch
+      //       .authEntity!
+      //       .data
+      //       .employeeDetails
+      //       .profilePhoto,
+      //   userDesignation: context
+      //       .employeeAuthLoginProviderWatch
+      //       .authEntity!
+      //       .data
+      //       .employeeDetails
+      //       .designation,
+      //   showUserInfo: false,
+      //   onDrawerPressed: _openDrawer,
+      //   onNotificationPressed: () {},
+      // ),
       drawer: KDrawer(),
       body: Padding(
         padding: const EdgeInsets.all(12.0),

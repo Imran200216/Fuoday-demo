@@ -10,4 +10,7 @@ class AppHiveStorageConstants {
 
   // Auth Logged In Status
   static const isAuthLoggedInStatus = "isAuthLoggedInStatus";
+
+  // employee Details box
+  static const employeeDetailsBox = "employeeDetailsBox";
 }

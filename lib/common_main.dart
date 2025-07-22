@@ -36,12 +36,13 @@ void commonMain() async {
   // Hive Open Boxes
   await Hive.openBox(AppHiveStorageConstants.authBox);
   await Hive.openBox(AppHiveStorageConstants.onBoardingBox);
-
-  // Init HiveStorageService
-  await HiveStorageService().init();
+  await Hive.openBox(AppHiveStorageConstants.employeeDetailsBox);
 
   // dependency injection
   setUpServiceLocator();
+
+  // Initialize hive service (important!)
+  await getIt<HiveStorageService>().init();
 
   runApp(const MyApp());
 }

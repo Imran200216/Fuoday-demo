@@ -6,6 +6,7 @@ import 'package:fuoday/commons/widgets/k_text.dart';
 import 'package:fuoday/commons/widgets/k_vertical_spacer.dart';
 import 'package:fuoday/core/constants/app_assets_constants.dart';
 import 'package:fuoday/core/constants/app_route_constants.dart';
+import 'package:fuoday/core/di/injection.dart';
 import 'package:fuoday/core/extensions/provider_extension.dart';
 import 'package:fuoday/core/helper/app_logger_helper.dart';
 import 'package:fuoday/core/service/hive_storage_service.dart';
@@ -323,15 +324,53 @@ class _AuthLoginScreenState extends State<AuthLoginScreen> {
 
                                                   if (provider.authEntity !=
                                                       null) {
+                                                    // Set Auth Status
                                                     await HiveStorageService()
                                                         .setIsAuthLogged(true);
                                                     try {
+                                                      // Secure Storage
                                                       await SecureStorageService()
                                                           .saveToken(
-                                                            provider
+                                                            token: provider
                                                                 .authEntity!
                                                                 .token,
                                                           );
+
+                                                      // Hive Storage Details
+                                                      await getIt<
+                                                            HiveStorageService
+                                                          >()
+                                                          .setEmployeeDetails(
+                                                            userName:
+                                                                provider
+                                                                    .authEntity
+                                                                    ?.data
+                                                                    .name ??
+                                                                "NO User Name",
+                                                            role: role,
+                                                            empId:
+                                                                provider
+                                                                    .authEntity
+                                                                    ?.data
+                                                                    .empId ??
+                                                                "No EmpId",
+                                                            email: emailId,
+                                                            designation:
+                                                                provider
+                                                                    .authEntity
+                                                                    ?.data
+                                                                    .employeeDetails
+                                                                    .designation ??
+                                                                "No Emp Designation",
+                                                            profilePhoto:
+                                                                provider
+                                                                    .authEntity
+                                                                    ?.data
+                                                                    .employeeDetails
+                                                                    .profilePhoto ??
+                                                                "No Image Url",
+                                                          );
+
                                                       AppLoggerHelper.logInfo(
                                                         '✅ Token saved to SecureStorage: ${provider.authEntity!.token}',
                                                       );
@@ -400,12 +439,49 @@ class _AuthLoginScreenState extends State<AuthLoginScreen> {
                                                     await HiveStorageService()
                                                         .setIsAuthLogged(true);
                                                     try {
+                                                      // Secure Storage Token
                                                       await SecureStorageService()
                                                           .saveToken(
-                                                            provider
+                                                            token: provider
                                                                 .authEntity!
                                                                 .token,
                                                           );
+
+                                                      // Hive Storage Details
+                                                      await getIt<
+                                                            HiveStorageService
+                                                          >()
+                                                          .setEmployeeDetails(
+                                                            userName:
+                                                                provider
+                                                                    .authEntity
+                                                                    ?.data
+                                                                    .name ??
+                                                                "NO User Name",
+                                                            role: role,
+                                                            empId:
+                                                                provider
+                                                                    .authEntity
+                                                                    ?.data
+                                                                    .empId ??
+                                                                "No EmpId",
+                                                            email: emailId,
+                                                            designation:
+                                                                provider
+                                                                    .authEntity
+                                                                    ?.data
+                                                                    .employeeDetails
+                                                                    .designation ??
+                                                                "No Emp Designation",
+                                                            profilePhoto:
+                                                                provider
+                                                                    .authEntity
+                                                                    ?.data
+                                                                    .employeeDetails
+                                                                    .profilePhoto ??
+                                                                "No Image Url",
+                                                          );
+
                                                       AppLoggerHelper.logInfo(
                                                         '✅ Token saved to SecureStorage: ${provider.authEntity!.token}',
                                                       );

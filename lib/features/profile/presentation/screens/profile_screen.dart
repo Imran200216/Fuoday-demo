@@ -6,7 +6,8 @@ import 'package:fuoday/commons/widgets/k_drawer.dart';
 import 'package:fuoday/commons/widgets/k_text.dart';
 import 'package:fuoday/commons/widgets/k_vertical_spacer.dart';
 import 'package:fuoday/core/constants/app_route_constants.dart';
-import 'package:fuoday/core/extensions/provider_extension.dart';
+import 'package:fuoday/core/di/injection.dart';
+import 'package:fuoday/core/service/hive_storage_service.dart';
 import 'package:fuoday/core/themes/app_colors.dart';
 import 'package:fuoday/features/profile/presentation/widgets/profile_list_tile.dart';
 import 'package:go_router/go_router.dart';
@@ -20,29 +21,36 @@ class ProfileScreen extends StatefulWidget {
 }
 
 class _ProfileScreenState extends State<ProfileScreen> {
+  // Scaffold Key
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
+  // Open Drawer
   void _openDrawer() {
     _scaffoldKey.currentState?.openDrawer();
   }
 
   @override
   Widget build(BuildContext context) {
-    final authEntity = context.employeeAuthLoginProviderWatch.authEntity;
+    // Employee Details
+    final employeeDetails = getIt<HiveStorageService>().employeeDetails;
+
+    final name = employeeDetails?['name'] ?? "No Name";
+    final role = employeeDetails?['role'] ?? "No Role";
+    final empId = employeeDetails?['empId'] ?? "No Employee ID";
+    final email = employeeDetails?['email'] ?? "No Email";
+    final designation = employeeDetails?['designation'] ?? "No Designation";
+    final profilePhoto = employeeDetails?['profilePhoto'] ?? "No Profile Photo";
 
     return Scaffold(
       key: _scaffoldKey,
-      appBar: authEntity != null
-          ? KAppBarWithDrawer(
-              userName: authEntity.data.name,
-              cachedNetworkImageUrl:
-                  authEntity.data.employeeDetails.profilePhoto,
-              userDesignation: authEntity.data.employeeDetails.designation,
-              showUserInfo: false,
-              onDrawerPressed: _openDrawer,
-              onNotificationPressed: () {},
-            )
-          : null,
+      appBar: KAppBarWithDrawer(
+        userName: name,
+        cachedNetworkImageUrl: profilePhoto,
+        userDesignation: designation,
+        showUserInfo: false,
+        onDrawerPressed: _openDrawer,
+        onNotificationPressed: () {},
+      ),
       drawer: KDrawer(),
       body: SingleChildScrollView(
         scrollDirection: Axis.vertical,
@@ -58,26 +66,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 onTap: () {
                   showImageViewer(
                     context,
-                    Image.network(
-                      context
-                          .employeeAuthLoginProviderWatch
-                          .authEntity!
-                          .data
-                          .employeeDetails
-                          .profilePhoto,
-                      fit: BoxFit.contain,
-                    ).image,
+                    Image.network(profilePhoto, fit: BoxFit.contain).image,
                     swipeDismissible: true,
                     doubleTapZoomable: true,
                   );
                 },
                 size: 90.h,
-                imageUrl: context
-                    .employeeAuthLoginProviderWatch
-                    .authEntity!
-                    .data
-                    .employeeDetails
-                    .profilePhoto,
+                imageUrl: profilePhoto,
               ),
 
               SizedBox(height: 24.h),
@@ -103,11 +98,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   children: [
                     // name
                     KText(
-                      text: context
-                          .employeeAuthLoginProviderWatch
-                          .authEntity!
-                          .data
-                          .name,
+                      text: name,
                       fontWeight: FontWeight.w600,
                       fontSize: 14.sp,
                       color: AppColors.titleColor,
@@ -116,8 +107,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     KVerticalSpacer(height: 6.h),
 
                     KText(
-                      text:
-                          "Employee ID: ${context.employeeAuthLoginProviderWatch.authEntity!.data.empId}",
+                      text: "Employee ID: $empId",
                       fontWeight: FontWeight.w500,
                       fontSize: 12.sp,
                       color: AppColors.greyColor,
