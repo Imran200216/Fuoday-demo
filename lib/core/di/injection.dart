@@ -26,7 +26,7 @@ void setUpServiceLocator() {
   getIt.registerFactory<DropdownProvider>(() => DropdownProvider());
 
   // Core Services
-  getIt.registerLazySingleton<HiveStorageService>(() => HiveStorageService());
+  getIt.registerSingleton<HiveStorageService>(HiveStorageService());
 
   getIt.registerLazySingleton<SecureStorageService>(
     () => SecureStorageService(),

@@ -9,5 +9,5 @@ abstract class EmployeeAuthRepository {
   );
 
   // Employee Auth Logout
-  Future<void> employeeAuthLogOut() async {}
+  Future<void> employeeAuthLogOut();
 }

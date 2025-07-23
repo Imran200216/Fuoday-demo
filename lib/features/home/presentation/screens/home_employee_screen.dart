@@ -10,6 +10,7 @@ import 'package:fuoday/commons/widgets/k_vertical_spacer.dart';
 import 'package:fuoday/core/di/injection.dart';
 import 'package:fuoday/core/helper/app_logger_helper.dart';
 import 'package:fuoday/core/service/hive_storage_service.dart';
+import 'package:fuoday/core/service/secure_storage_service.dart';
 import 'package:fuoday/core/themes/app_colors.dart';
 import 'package:fuoday/features/home/presentation/screens/home_employee_activities.dart';
 import 'package:fuoday/features/home/presentation/screens/home_employee_feeds.dart';
@@ -22,132 +23,146 @@ class HomeEmployeeScreen extends StatefulWidget {
 }
 
 class _HomeEmployeeScreenState extends State<HomeEmployeeScreen> {
+  // Scaffold Key
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
-  late String name;
-  late String role;
-  late String empId;
-  late String email;
-  late String designation;
-  late String profilePhoto;
+  // Auth Token
+  String? authToken;
 
-  Future<void> _loadEmployeeDetails() async {
-    final details = getIt<HiveStorageService>().employeeDetails;
+  @override
+  void initState() {
+    loadAuthToken();
+    super.initState();
+  }
 
-    AppLoggerHelper.logInfo("Employee Details (Async): ${details.toString()}");
+  Future<void> loadAuthToken() async {
+    try {
+      // Get Secure Storage Token
+      final secureStorageService = getIt<SecureStorageService>();
+      authToken = await secureStorageService.getToken();
 
-    name = details?['name'] ?? "No Name";
-    role = details?['role'] ?? "No Role";
-    empId = details?['empId'] ?? "No Employee ID";
-    email = details?['email'] ?? "No Email";
-    designation = details?['designation'] ?? "No Designation";
-    profilePhoto = details?['profilePhoto'] ?? "No Profile Photo";
+      // Debug logging
+      AppLoggerHelper.logInfo("Auth Token: $authToken");
+    } catch (e) {
+      AppLoggerHelper.logInfo("Auth Token: $e");
+    }
   }
 
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder(
-      future: _loadEmployeeDetails(),
-      builder: (context, snapshot) {
-        if (snapshot.connectionState != ConnectionState.done) {
-          return const Center(child: CircularProgressIndicator());
-        }
+    // Get employee details from Hive with error handling
+    final hiveService = getIt<HiveStorageService>();
+    final employeeDetails = hiveService.employeeDetails;
 
-        return DefaultTabController(
-          length: 2,
-          child: Scaffold(
-            key: _scaffoldKey,
-            appBar: KAppBarWithDrawer(
-              userName: name,
-              cachedNetworkImageUrl: profilePhoto,
-              userDesignation: designation,
-              showUserInfo: false,
-              onDrawerPressed: () => _scaffoldKey.currentState?.openDrawer(),
-              onNotificationPressed: () {},
-            ),
-            drawer: KDrawer(),
-            body: KLinearGradientBg(
-              gradientColor: AppColors.employeeGradientColor,
-              child: Padding(
-                padding: EdgeInsets.only(top: 20.h),
-                child: Column(
+    // Safe extraction of employee details
+    final name = employeeDetails?['name'] ?? "No Name";
+    final profilePhoto = employeeDetails?['profilePhoto'] ?? "";
+    final empId = employeeDetails?['empId'] ?? "No Employee ID";
+    final designation = employeeDetails?['designation'] ?? "No Designation";
+    final email = employeeDetails?['email'] ?? "No Email";
+
+    // Debugging Logger
+    AppLoggerHelper.logInfo("Employee Details: $employeeDetails");
+    AppLoggerHelper.logInfo(
+      "Has Employee Details: ${hiveService.hasEmployeeDetails}",
+    );
+
+    return DefaultTabController(
+      length: 2,
+      child: Scaffold(
+        key: _scaffoldKey,
+        appBar: KAppBarWithDrawer(
+          userName: name,
+          cachedNetworkImageUrl: profilePhoto,
+          userDesignation: designation,
+          showUserInfo: false,
+          onDrawerPressed: () => _scaffoldKey.currentState?.openDrawer(),
+          onNotificationPressed: () {},
+        ),
+        drawer: KDrawer(
+          userEmail: email,
+          userName: name,
+          profileImageUrl: profilePhoto,
+        ),
+        body: KLinearGradientBg(
+          gradientColor: AppColors.employeeGradientColor,
+          child: Padding(
+            padding: EdgeInsets.only(top: 20.h),
+            child: Column(
+              children: [
+                Row(
+                  spacing: 20.w,
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Row(
-                      spacing: 20.w,
-                      mainAxisAlignment: MainAxisAlignment.center,
+                    KCircularCachedImage(imageUrl: profilePhoto, size: 80.h),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        KCircularCachedImage(
-                          imageUrl: profilePhoto,
-                          size: 80.h,
+                        KText(
+                          text: name,
+                          fontWeight: FontWeight.w600,
+                          fontSize: 14.sp,
+                          color: AppColors.secondaryColor,
                         ),
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            KText(
-                              text: name,
-                              fontWeight: FontWeight.w600,
-                              fontSize: 14.sp,
-                              color: AppColors.secondaryColor,
-                            ),
-                            KText(
-                              text: "Employee Id: $empId",
-                              fontWeight: FontWeight.w500,
-                              fontSize: 10.sp,
-                              color: AppColors.secondaryColor,
-                            ),
-                            KText(
-                              text: "+91-6369476256",
-                              fontWeight: FontWeight.w500,
-                              fontSize: 10.sp,
-                              color: AppColors.secondaryColor,
-                            ),
-                          ],
+                        KText(
+                          text: "Employee Id: $empId",
+                          fontWeight: FontWeight.w500,
+                          fontSize: 10.sp,
+                          color: AppColors.secondaryColor,
+                        ),
+                        KText(
+                          text: email,
+                          fontWeight: FontWeight.w500,
+                          fontSize: 10.sp,
+                          color: AppColors.secondaryColor,
                         ),
                       ],
                     ),
-                    KVerticalSpacer(height: 20.h),
-                    Expanded(
-                      child: Container(
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.only(
-                            topLeft: Radius.circular(20.r),
-                            topRight: Radius.circular(20.r),
-                          ),
-                          color: AppColors.secondaryColor,
-                        ),
-                        child: Column(
-                          children: [
-                            Padding(
-                              padding: EdgeInsets.symmetric(
-                                horizontal: 20.w,
-                                vertical: 20.h,
-                              ),
-                              child: KTabBar(
-                                tabs: [
-                                  Tab(text: "Activity"),
-                                  Tab(text: "Feeds"),
-                                ],
-                              ),
-                            ),
-                            Expanded(
-                              child: TabBarView(
-                                children: [
-                                  HomeEmployeeActivities(),
-                                  HomeEmployeeFeeds(),
-                                ],
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
                   ],
                 ),
-              ),
+
+                KVerticalSpacer(height: 20.h),
+
+                Expanded(
+                  child: Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(20.r),
+                        topRight: Radius.circular(20.r),
+                      ),
+                      color: AppColors.secondaryColor,
+                    ),
+                    child: Column(
+                      children: [
+                        Padding(
+                          padding: EdgeInsets.symmetric(
+                            horizontal: 20.w,
+                            vertical: 20.h,
+                          ),
+                          child: KTabBar(
+                            tabs: [
+                              Tab(text: "Activity"),
+                              Tab(text: "Feeds"),
+                            ],
+                          ),
+                        ),
+                        Expanded(
+                          child: TabBarView(
+                            children: [
+                              HomeEmployeeActivities(),
+                              HomeEmployeeFeeds(),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ],
             ),
           ),
-        );
-      },
+        ),
+      ),
     );
   }
 }

@@ -4,7 +4,8 @@ import 'package:fuoday/commons/widgets/k_app_%20bar_with_drawer.dart';
 import 'package:fuoday/commons/widgets/k_drawer.dart';
 import 'package:fuoday/commons/widgets/k_tab_bar.dart';
 import 'package:fuoday/commons/widgets/k_vertical_spacer.dart';
-import 'package:fuoday/core/extensions/provider_extension.dart';
+import 'package:fuoday/core/di/injection.dart';
+import 'package:fuoday/core/service/hive_storage_service.dart';
 import 'package:fuoday/features/leave_tracker/presentation/screens/leave_balance.dart';
 import 'package:fuoday/features/leave_tracker/presentation/screens/leave_reports.dart';
 import 'package:fuoday/features/leave_tracker/presentation/screens/leave_request.dart';
@@ -25,24 +26,33 @@ class _LeaveTrackerScreenState extends State<LeaveTrackerScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final authEntity = context.employeeAuthLoginProviderWatch.authEntity;
+    // Get employee details from Hive with error handling
+    final hiveService = getIt<HiveStorageService>();
+    final employeeDetails = hiveService.employeeDetails;
+
+    // Safe extraction of employee details
+    final name = employeeDetails?['name'] ?? "No Name";
+    final profilePhoto = employeeDetails?['profilePhoto'] ?? "";
+    final designation = employeeDetails?['designation'] ?? "No Designation";
+    final email = employeeDetails?['email'] ?? "No email";
 
     return DefaultTabController(
       length: 3,
       child: Scaffold(
         key: _scaffoldKey,
-        appBar: authEntity != null
-            ? KAppBarWithDrawer(
-                userName: authEntity.data.name,
-                cachedNetworkImageUrl:
-                    authEntity.data.employeeDetails.profilePhoto,
-                userDesignation: authEntity.data.employeeDetails.designation,
-                showUserInfo: false,
-                onDrawerPressed: _openDrawer,
-                onNotificationPressed: () {},
-              )
-            : null,
-        drawer: KDrawer(),
+        appBar: KAppBarWithDrawer(
+          userName: name,
+          cachedNetworkImageUrl: profilePhoto,
+          userDesignation: designation,
+          showUserInfo: true,
+          onDrawerPressed: _openDrawer,
+          onNotificationPressed: () {},
+        ),
+        drawer: KDrawer(
+          userName: name,
+          userEmail: email,
+          profileImageUrl: profilePhoto,
+        ),
 
         body: Container(
           margin: EdgeInsets.symmetric(horizontal: 20.w, vertical: 20.h),

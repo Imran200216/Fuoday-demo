@@ -16,15 +16,17 @@ class HiveStorageService {
   /// Initialize Hive boxes
   Future<void> init() async {
     try {
-      _authBox = Hive.box(AppHiveStorageConstants.authBox);
-      _onBoardingBox = Hive.box(AppHiveStorageConstants.onBoardingBox);
-      _employeeDetailsBox = Hive.box(
-        AppHiveStorageConstants.employeeDetailsBox,
+      _authBox = await Hive.openBox(AppHiveStorageConstants.authBoxKey);
+      _onBoardingBox = await Hive.openBox(
+        AppHiveStorageConstants.onBoardingBoxKey,
+      );
+      _employeeDetailsBox = await Hive.openBox(
+        AppHiveStorageConstants.employeeDetailsBoxKey,
       );
 
-      AppLoggerHelper.logInfo("Hive boxes initialized successfully.");
+      AppLoggerHelper.logInfo("✅ Hive boxes initialized successfully.");
     } catch (e) {
-      AppLoggerHelper.logError("Failed to initialize Hive boxes: $e");
+      AppLoggerHelper.logError("❌ Failed to initialize Hive boxes: $e");
     }
   }
 
@@ -32,12 +34,6 @@ class HiveStorageService {
   Future<void> setIsAuthLogged(bool value) async {
     await _authBox.put(AppHiveStorageConstants.isAuthLoggedInStatus, value);
     AppLoggerHelper.logInfo("Set isAuthLoggedInStatus to: $value");
-  }
-
-  /// Set OnBoarding status
-  Future<void> setOnBoardingIn(bool value) async {
-    await _onBoardingBox.put(AppHiveStorageConstants.onBoardingInStatus, value);
-    AppLoggerHelper.logInfo("Set onBoardingInStatus to: $value");
   }
 
   /// Get Auth login status
@@ -50,6 +46,12 @@ class HiveStorageService {
     return value;
   }
 
+  /// Set OnBoarding status
+  Future<void> setOnBoardingIn(bool value) async {
+    await _onBoardingBox.put(AppHiveStorageConstants.onBoardingInStatus, value);
+    AppLoggerHelper.logInfo("Set onBoardingInStatus to: $value");
+  }
+
   /// Get OnBoarding status
   bool get isOnBoardingInStatus {
     final value = _onBoardingBox.get(
@@ -60,7 +62,7 @@ class HiveStorageService {
     return value;
   }
 
-  // Set Employee Details
+  /// ✅ Set Employee Details (instance method)
   Future<void> setEmployeeDetails({
     required String role,
     required String empId,
@@ -79,23 +81,68 @@ class HiveStorageService {
     };
 
     await _employeeDetailsBox.put(
-      AppHiveStorageConstants.employeeDetailsBox,
+      AppHiveStorageConstants.employeeDetailsKey,
       employeeData,
     );
-
-    AppLoggerHelper.logInfo("Employee details saved: $employeeData");
+    AppLoggerHelper.logInfo("✅ Employee details saved: $employeeData");
   }
 
-  /// Get Employee Details
-  Map<String, dynamic>? get employeeDetails {
-    final data = _employeeDetailsBox.get(
-      AppHiveStorageConstants.employeeDetailsBox,
+  /// ✅ Static method for compatibility (delegates to instance)
+  static Future<void> setEmployeeDetailsStatic({
+    required String role,
+    required String empId,
+    required String email,
+    required String designation,
+    required String profilePhoto,
+    required String userName,
+  }) async {
+    final instance = HiveStorageService();
+    await instance.setEmployeeDetails(
+      role: role,
+      empId: empId,
+      email: email,
+      designation: designation,
+      profilePhoto: profilePhoto,
+      userName: userName,
     );
-    if (data != null && data is Map<String, dynamic>) {
-      AppLoggerHelper.logInfo("Fetched employee details: $data");
-      return data;
+  }
+
+  /// ✅ Get Employee Details using correct internal key
+  Map<String, dynamic>? get employeeDetails {
+    try {
+      final data = _employeeDetailsBox.get(
+        AppHiveStorageConstants.employeeDetailsKey,
+      );
+
+      if (data != null) {
+        // Handle both Map<String, dynamic> and Map<dynamic, dynamic>
+        final Map<String, dynamic> employeeData = Map<String, dynamic>.from(
+          data,
+        );
+        AppLoggerHelper.logInfo("💡 Fetched employee details: $employeeData");
+        return employeeData;
+      }
+
+      AppLoggerHelper.logError("⛔ No employee details found in box.");
+      return null;
+    } catch (e) {
+      AppLoggerHelper.logError("❌ Error fetching employee details: $e");
+      return null;
     }
-    AppLoggerHelper.logError("No employee details found.");
-    return null;
+  }
+
+  /// ✅ Method to check if employee details exist
+  bool get hasEmployeeDetails {
+    return _employeeDetailsBox.containsKey(
+      AppHiveStorageConstants.employeeDetailsKey,
+    );
+  }
+
+  /// ✅ Method to clear employee details (useful for logout)
+  Future<void> clearEmployeeDetails() async {
+    await _employeeDetailsBox.delete(
+      AppHiveStorageConstants.employeeDetailsKey,
+    );
+    AppLoggerHelper.logInfo("🗑️ Employee details cleared");
   }
 }

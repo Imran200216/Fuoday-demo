@@ -31,13 +31,13 @@ class KDrawer extends StatelessWidget {
           UserAccountsDrawerHeader(
             decoration: BoxDecoration(color: AppColors.primaryColor),
             accountName: KText(
-              text: userName ?? "Irfan",
+              text: userName ?? "No name",
               color: AppColors.secondaryColor,
               fontWeight: FontWeight.w600,
               fontSize: 14.sp,
             ),
             accountEmail: KText(
-              text: userEmail ?? "irfanmohammed@gmail.com",
+              text: userEmail ?? "No email",
               color: AppColors.secondaryColor,
               fontWeight: FontWeight.w500,
               fontSize: 12.sp,

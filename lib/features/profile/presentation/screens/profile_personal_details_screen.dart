@@ -5,8 +5,10 @@ import 'package:fuoday/commons/widgets/k_circular_cache_image.dart';
 import 'package:fuoday/commons/widgets/k_image_picker_options_bottom_sheet.dart';
 import 'package:fuoday/commons/widgets/k_snack_bar.dart';
 import 'package:fuoday/commons/widgets/k_vertical_spacer.dart';
+import 'package:fuoday/core/di/injection.dart';
 import 'package:fuoday/core/extensions/provider_extension.dart';
 import 'package:fuoday/core/helper/app_logger_helper.dart';
+import 'package:fuoday/core/service/hive_storage_service.dart';
 import 'package:fuoday/core/themes/app_colors.dart';
 import 'package:fuoday/core/utils/date_picker.dart';
 import 'package:fuoday/core/utils/image_picker.dart';
@@ -50,6 +52,17 @@ class _ProfilePersonalDetailsScreenState
 
   @override
   Widget build(BuildContext context) {
+    // Get employee details from Hive with error handling
+    final hiveService = getIt<HiveStorageService>();
+    final employeeDetails = hiveService.employeeDetails;
+
+    // Safe extraction of employee details
+    final firstName = employeeDetails?['name'] ?? "No Name";
+    final profilePhoto = employeeDetails?['profilePhoto'] ?? "";
+    final empId = employeeDetails?['empId'] ?? "No Employee ID";
+    final designation = employeeDetails?['designation'] ?? "No Designation";
+    final email = employeeDetails?['email'] ?? "No Email";
+
     return Scaffold(
       appBar: KAppBar(
         title: "Personal Details",
@@ -82,13 +95,11 @@ class _ProfilePersonalDetailsScreenState
                           // Image Viewer
                           AppImageViewer.show(
                             context: context,
-                            imageUrl:
-                                "https://images.unsplash.com/photo-1499996860823-5214fcc65f8f?q=80&w=2566&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+                            imageUrl: profilePhoto,
                           );
                         },
                         size: 90.h,
-                        imageUrl:
-                            "https://images.unsplash.com/photo-1499996860823-5214fcc65f8f?q=80&w=2566&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+                        imageUrl: profilePhoto,
                       ),
 
                       Positioned(

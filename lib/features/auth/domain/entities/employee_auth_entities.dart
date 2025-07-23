@@ -4,7 +4,7 @@ class EmployeeAuthEntity {
   final EmployeeDataEntity data;
   final String token;
 
-  EmployeeAuthEntity({
+  const EmployeeAuthEntity({
     required this.status,
     required this.message,
     required this.data,
@@ -26,7 +26,7 @@ class EmployeeDataEntity {
   final EmployeeDetailsEntity employeeDetails;
   final AdminUserEntity adminUser;
 
-  EmployeeDataEntity({
+  const EmployeeDataEntity({
     required this.id,
     required this.adminUserId,
     required this.name,
@@ -48,7 +48,7 @@ class EmployeeDetailsEntity {
   final String designation;
   final String department;
 
-  EmployeeDetailsEntity({
+  const EmployeeDetailsEntity({
     required this.webUserId,
     required this.profilePhoto,
     required this.designation,
@@ -64,7 +64,7 @@ class AdminUserEntity {
   final String chatLogo;
   final String companyWord;
 
-  AdminUserEntity({
+  const AdminUserEntity({
     required this.id,
     required this.logo,
     required this.brandLogo,

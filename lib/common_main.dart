@@ -34,9 +34,9 @@ void commonMain() async {
   await Hive.initFlutter();
 
   // Hive Open Boxes
-  await Hive.openBox(AppHiveStorageConstants.authBox);
-  await Hive.openBox(AppHiveStorageConstants.onBoardingBox);
-  await Hive.openBox(AppHiveStorageConstants.employeeDetailsBox);
+  await Hive.openBox(AppHiveStorageConstants.authBoxKey);
+  await Hive.openBox(AppHiveStorageConstants.onBoardingBoxKey);
+  await Hive.openBox(AppHiveStorageConstants.employeeDetailsBoxKey);
 
   // dependency injection
   setUpServiceLocator();

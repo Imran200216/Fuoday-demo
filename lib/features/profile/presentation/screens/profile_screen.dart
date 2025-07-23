@@ -31,15 +31,16 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
   @override
   Widget build(BuildContext context) {
-    // Employee Details
-    final employeeDetails = getIt<HiveStorageService>().employeeDetails;
+    // Get employee details from Hive with error handling
+    final hiveService = getIt<HiveStorageService>();
+    final employeeDetails = hiveService.employeeDetails;
 
+    // Safe extraction of employee details
     final name = employeeDetails?['name'] ?? "No Name";
-    final role = employeeDetails?['role'] ?? "No Role";
+    final profilePhoto = employeeDetails?['profilePhoto'] ?? "";
     final empId = employeeDetails?['empId'] ?? "No Employee ID";
-    final email = employeeDetails?['email'] ?? "No Email";
     final designation = employeeDetails?['designation'] ?? "No Designation";
-    final profilePhoto = employeeDetails?['profilePhoto'] ?? "No Profile Photo";
+    final email = employeeDetails?['email'] ?? "No Email";
 
     return Scaffold(
       key: _scaffoldKey,
@@ -51,7 +52,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
         onDrawerPressed: _openDrawer,
         onNotificationPressed: () {},
       ),
-      drawer: KDrawer(),
+      drawer: KDrawer(
+        userName: name,
+        userEmail: email,
+        profileImageUrl: profilePhoto,
+      ),
       body: SingleChildScrollView(
         scrollDirection: Axis.vertical,
         physics: const BouncingScrollPhysics(),
