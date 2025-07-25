@@ -16,6 +16,9 @@ import 'package:fuoday/core/utils/image_viewer.dart';
 import 'package:fuoday/core/validators/app_validators.dart';
 import 'package:fuoday/features/auth/presentation/widgets/k_auth_filled_btn.dart';
 import 'package:fuoday/features/auth/presentation/widgets/k_auth_text_form_field.dart';
+import 'package:fuoday/features/profile/data/datasources/employee_profile_remote_datasource.dart';
+import 'package:fuoday/features/profile/data/repositories/employee_profile_repository_impl.dart';
+import 'package:fuoday/features/profile/domain/usecases/get_employee_profile_usecase.dart';
 import 'package:go_router/go_router.dart';
 
 class ProfilePersonalDetailsScreen extends StatefulWidget {
@@ -30,6 +33,10 @@ class _ProfilePersonalDetailsScreenState
     extends State<ProfilePersonalDetailsScreen> {
   // form key
   final formKey = GlobalKey<FormState>();
+
+  late final GetEmployeeProfileUseCase getEmployeeProfileUseCase;
+  bool isLoading = true;
+
 
   // Controllers
   final TextEditingController firstNameController = TextEditingController();
@@ -48,6 +55,41 @@ class _ProfilePersonalDetailsScreenState
     contactController.dispose();
     addressController.dispose();
     super.dispose();
+  }
+
+  @override
+  void initState() {
+    super.initState();
+
+    // Set up use case from DI
+    getEmployeeProfileUseCase = GetEmployeeProfileUseCase(
+      repository: EmployeeProfileRepositoryImpl(
+        remoteDataSource: EmployeeProfileRemoteDataSource(dio: getIt()),
+      ),
+    );
+
+    fetchEmployeeProfile();
+  }
+
+  Future<void> fetchEmployeeProfile() async {
+    try {
+      final webUserId = getIt<HiveStorageService>().employeeDetails?['webUserId'].toString();
+      final profile = await getEmployeeProfileUseCase.execute(webUserId!);
+
+      setState(() {
+        firstNameController.text = profile.firstName;
+        lastNameController.text = profile.lastName;
+        aboutController.text = profile.about ?? '';
+        dobController.text = profile.dob;
+        contactController.text = profile.contactNumber;
+        addressController.text = profile.address ?? '';
+        isLoading = false;
+      });
+    } catch (e) {
+      AppLoggerHelper.logError("Failed to fetch profile: $e");
+      KSnackBar.failure(context, "Unable to load profile data");
+      setState(() => isLoading = false);
+    }
   }
 
   @override

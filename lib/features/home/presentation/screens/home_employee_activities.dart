@@ -7,8 +7,10 @@ import 'package:fuoday/core/constants/app_assets_constants.dart';
 import 'package:fuoday/core/extensions/provider_extension.dart';
 import 'package:fuoday/core/themes/app_colors.dart';
 import 'package:fuoday/features/auth/presentation/widgets/k_auth_filled_btn.dart';
+import 'package:fuoday/features/home/presentation/provider/check_in_provider.dart';
 import 'package:fuoday/features/home/presentation/widgets/k_home_activities_card.dart';
 import 'package:fuoday/features/home/presentation/widgets/k_home_activity_alert_dialog_box.dart';
+import 'package:provider/provider.dart';
 import 'package:stop_watch_timer/stop_watch_timer.dart';
 
 import '../widgets/k_checkin_button.dart';
@@ -21,8 +23,59 @@ class HomeEmployeeActivities extends StatefulWidget {
 }
 
 class _HomeEmployeeActivitiesState extends State<HomeEmployeeActivities> {
+
+  void _showErrorSnackBar(String message) {
+    if (mounted) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(message),
+          backgroundColor: Colors.red,
+          duration: const Duration(seconds: 3),
+        ),
+      );
+    }
+  }
+
+  void _showSuccessSnackBar(String message) {
+    if (mounted) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(message),
+          backgroundColor: Colors.green,
+          duration: const Duration(seconds: 2),
+        ),
+      );
+    }
+  }
+
+  void _handleCheckInOut(dynamic provider, dynamic checkInProvider) async {
+    try {
+      if (checkInProvider.isCheckedIn) {
+        await provider.handleCheckOut();
+        if (checkInProvider.errorMessage == null) {
+          _showSuccessSnackBar("Successfully checked out!");
+        }
+      } else {
+        await provider.handleCheckIn();
+        if (checkInProvider.errorMessage == null) {
+          _showSuccessSnackBar("Successfully checked in!");
+        }
+      }
+
+      // Show error if any
+      if (checkInProvider.errorMessage != null) {
+        _showErrorSnackBar(checkInProvider.errorMessage!);
+      }
+    } catch (e) {
+      _showErrorSnackBar("An unexpected error occurred");
+    }
+  }
   @override
   Widget build(BuildContext context) {
+    final checkInProvider = context.watch<CheckInProvider>();
+    print('CheckIn Time: ${checkInProvider.checkInTime}');
+    print('CheckOut Time: ${checkInProvider.checkOutTime}');
+    print('Is Checked In: ${checkInProvider.isCheckedIn}');
     return SingleChildScrollView(
       scrollDirection: Axis.vertical,
       child: Container(
@@ -125,34 +178,45 @@ class _HomeEmployeeActivitiesState extends State<HomeEmployeeActivities> {
 
                         KVerticalSpacer(height: 8.h),
 
+                        // Updated Check-In Button with API integration and loading state
                         KCheckInButton(
-                          text: checkInProvider.isCheckedIn
+                          text: checkInProvider.isLoading
+                              ? "Loading..."
+                              : checkInProvider.isCheckedIn
                               ? "Check Out"
                               : "Check In",
                           fontSize: 8.sp,
-                          onPressed: () {
+                          onPressed: checkInProvider.isLoading
+                              ? null // Disable button when loading
+                              : () {
                             final provider = context.checkInProviderRead;
-                            if (checkInProvider.isCheckedIn) {
-                              provider.handleCheckOut();
-                            } else {
-                              provider.handleCheckIn();
-                            }
+                            _handleCheckInOut(provider, checkInProvider);
                           },
-                          backgroundColor: checkInProvider.isCheckedIn
+                          backgroundColor: checkInProvider.isLoading
+                              ? Colors.grey // Grey color when loading
+                              : checkInProvider.isCheckedIn
                               ? AppColors.checkOutColor
                               : AppColors.checkInColor,
                           height: 25.h,
                           width: 100.w,
                         ),
 
+
                         KVerticalSpacer(height: 8.h),
 
-                        KText(
-                          text: "Status : ${checkInProvider.status}",
-                          fontWeight: FontWeight.w500,
-                          fontSize: 10.sp,
-                          color: AppColors.secondaryColor,
-                        ),
+                        // Show loading indicator or status
+                        if (checkInProvider.isLoading)
+                          const CircularProgressIndicator(
+                            valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
+                          )
+                        else
+                          KText(
+                            text: "Status : ${checkInProvider.status}",
+                            fontWeight: FontWeight.w500,
+                            fontSize: 10.sp,
+                            color: AppColors.secondaryColor,
+                          ),
+
 
                         KVerticalSpacer(height: 8.h),
 
@@ -178,7 +242,7 @@ class _HomeEmployeeActivitiesState extends State<HomeEmployeeActivities> {
                                 ),
                                 KText(
                                   text:
-                                      checkInProvider.checkInTime ?? "00:00:00",
+                                  checkInProvider.checkInTime ?? "00:00:00",
                                   fontWeight: FontWeight.w500,
                                   fontSize: 10.sp,
                                   color: AppColors.secondaryColor,
@@ -193,7 +257,7 @@ class _HomeEmployeeActivitiesState extends State<HomeEmployeeActivities> {
                                 ),
                                 KText(
                                   text:
-                                      checkInProvider.checkOutTime ??
+                                  checkInProvider.checkOutTime ??
                                       "00:00:00",
                                   fontWeight: FontWeight.w500,
                                   fontSize: 10.sp,

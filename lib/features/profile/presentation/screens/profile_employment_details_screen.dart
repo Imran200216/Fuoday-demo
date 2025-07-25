@@ -1,7 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:fuoday/commons/widgets/k_app_bar.dart';
+import 'package:fuoday/core/di/injection.dart';
+import 'package:fuoday/core/helper/app_logger_helper.dart';
+import 'package:fuoday/core/service/hive_storage_service.dart';
 import 'package:fuoday/features/auth/presentation/widgets/k_auth_text_form_field.dart';
+import 'package:fuoday/features/profile/domain/entities/employee_profile_entity.dart';
+import 'package:fuoday/features/profile/domain/usecases/get_employee_profile_usecase.dart';
 import 'package:go_router/go_router.dart';
 
 class ProfileEmploymentDetailsScreen extends StatefulWidget {
@@ -16,6 +21,7 @@ class _ProfileEmploymentDetailsScreenState
     extends State<ProfileEmploymentDetailsScreen> {
   // form key
   final formKey = GlobalKey<FormState>();
+  EmployeeProfileEntity? profileData;
 
   // controllers
   final TextEditingController departmentController = TextEditingController();
@@ -24,6 +30,36 @@ class _ProfileEmploymentDetailsScreenState
   final TextEditingController reportingManagerController =
       TextEditingController();
   final TextEditingController employeeIdController = TextEditingController();
+  final getEmployeeProfileUseCase = getIt<GetEmployeeProfileUseCase>();
+
+  @override
+  void initState() {
+    super.initState();
+    fetchEmploymentData();
+  }
+
+  Future<void> fetchEmploymentData() async {
+    try {
+      final userId = getIt<HiveStorageService>().employeeDetails?['webUserId'].toString();
+      final getEmployeeProfileUseCase = getIt<GetEmployeeProfileUseCase>();
+
+      final profile = await getEmployeeProfileUseCase.execute(userId!);
+
+
+      setState(() {
+        profileData = profile;
+        departmentController.text = profile.department;
+        jobRoleController.text = profile.designation;
+        dateOfJoinController.text = profile.dateOfJoining;
+        reportingManagerController.text = profile.reportingManagerName;
+        employeeIdController.text = profile.empId;
+      });
+    } catch (e) {
+      AppLoggerHelper.logError("Employment fetch error: $e");
+    }
+  }
+
+
 
   @override
   Widget build(BuildContext context) {

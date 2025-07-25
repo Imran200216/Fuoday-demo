@@ -4,7 +4,7 @@ import 'package:fuoday/features/auth/domain/entities/employee_auth_entities.dart
 
 class EmployeeDataModel extends EmployeeDataEntity {
   EmployeeDataModel({
-    required super.id,
+    required super.webUserId,
     required super.adminUserId,
     required super.name,
     required super.email,
@@ -20,7 +20,7 @@ class EmployeeDataModel extends EmployeeDataEntity {
 
   factory EmployeeDataModel.fromJson(Map<String, dynamic> json) {
     return EmployeeDataModel(
-      id: json['id'],
+      webUserId: json['web_user_id'],
       adminUserId: json['admin_user_id'],
       name: json['name'],
       email: json['email'],
@@ -37,7 +37,7 @@ class EmployeeDataModel extends EmployeeDataEntity {
 
   Map<String, dynamic> toJson() {
     return {
-      'id': id,
+      'id': webUserId,
       'admin_user_id': adminUserId,
       'name': name,
       'email': email,

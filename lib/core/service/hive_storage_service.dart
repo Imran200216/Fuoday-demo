@@ -70,6 +70,7 @@ class HiveStorageService {
     required String designation,
     required String profilePhoto,
     required String userName,
+    required String webUserId
   }) async {
     final employeeData = {
       "role": role,
@@ -78,6 +79,7 @@ class HiveStorageService {
       "designation": designation,
       "profilePhoto": profilePhoto,
       "name": userName,
+      "web_user_id":webUserId
     };
 
     await _employeeDetailsBox.put(
@@ -95,6 +97,7 @@ class HiveStorageService {
     required String designation,
     required String profilePhoto,
     required String userName,
+    required String webUserId
   }) async {
     final instance = HiveStorageService();
     await instance.setEmployeeDetails(
@@ -104,6 +107,7 @@ class HiveStorageService {
       designation: designation,
       profilePhoto: profilePhoto,
       userName: userName,
+      webUserId: webUserId,
     );
   }
 
