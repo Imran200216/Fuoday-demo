@@ -365,6 +365,7 @@ class _AuthLoginScreenState extends State<AuthLoginScreen> {
                                                                 .employeeDetails
                                                                 .profilePhoto ??
                                                             "No Image Url",
+                                                        webUserId: provider.authEntity!.data.employeeDetails.webUserId.toString(),
                                                       );
 
                                                       AppLoggerHelper.logInfo(
@@ -472,7 +473,7 @@ class _AuthLoginScreenState extends State<AuthLoginScreen> {
                                                                 ?.data
                                                                 .employeeDetails
                                                                 .profilePhoto ??
-                                                            "No Image Url",
+                                                            "No Image Url", webUserId: provider.authEntity!.data.employeeDetails.webUserId.toString(),
                                                       );
 
                                                       AppLoggerHelper.logInfo(

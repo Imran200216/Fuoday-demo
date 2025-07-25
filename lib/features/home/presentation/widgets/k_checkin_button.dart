@@ -5,7 +5,7 @@ import 'package:google_fonts/google_fonts.dart';
 
 class KCheckInButton extends StatefulWidget {
   final String text;
-  final VoidCallback onPressed;
+  final VoidCallback? onPressed;
   final bool isLoading;
   final double height;
   final double width;

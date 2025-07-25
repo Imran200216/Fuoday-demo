@@ -13,7 +13,7 @@ class EmployeeAuthEntity {
 }
 
 class EmployeeDataEntity {
-  final int id;
+  final String? webUserId;
   final int adminUserId;
   final String name;
   final String email;
@@ -27,7 +27,7 @@ class EmployeeDataEntity {
   final AdminUserEntity adminUser;
 
   const EmployeeDataEntity({
-    required this.id,
+    required this.webUserId,
     required this.adminUserId,
     required this.name,
     required this.email,

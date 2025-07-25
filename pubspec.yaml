@@ -118,6 +118,8 @@ dependencies:
   # flutter_dotenv
   flutter_dotenv: ^5.2.1
 
+  #dartx:
+  dartz: ^0.10.1
 
 
 
